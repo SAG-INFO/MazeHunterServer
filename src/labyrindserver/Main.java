@@ -1,7 +1,6 @@
 package labyrindserver;
 
 /**
- * Test
  * @author sreis
  */
 public class Main {
@@ -30,6 +29,6 @@ public class Main {
     }
     
     public int test(){
-        return 2;
+        return 2000;
     }
 }

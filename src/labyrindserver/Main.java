@@ -1,6 +1,7 @@
 package labyrindserver;
 
 /**
+ * Test Test
  * @author sreis
  */
 public class Main {
@@ -26,5 +27,9 @@ public class Main {
     public static void main(String[] args) {
         Main main = new Main();
         main.start();
+    }
+    
+    public int test(){
+        return 2;
     }
 }

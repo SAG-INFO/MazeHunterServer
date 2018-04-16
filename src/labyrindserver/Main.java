@@ -27,8 +27,4 @@ public class Main {
         Main main = new Main();
         main.start();
     }
-    
-    public int test(){
-        return 2000;
-    }
 }

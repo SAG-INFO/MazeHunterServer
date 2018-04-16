@@ -6,4 +6,5 @@ package labyrindserver.networkData;
  */
 public class Connect {
     public String test;
+    public String rere;
 }

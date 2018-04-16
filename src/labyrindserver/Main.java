@@ -1,7 +1,8 @@
 package labyrindserver;
 
 /**
- *
+ * TESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTEST
+ * TEST
  * @author sreis
  */
 public class Main {

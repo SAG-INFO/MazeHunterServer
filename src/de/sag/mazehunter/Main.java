@@ -1,4 +1,4 @@
-package labyrindserver;
+package de.sag.mazehunter;
 
 /**
  * @author sreis

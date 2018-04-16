@@ -1,4 +1,4 @@
-package labyrindserver.networkData;
+package de.sag.mazehunter.networkData;
 
 /**
  *

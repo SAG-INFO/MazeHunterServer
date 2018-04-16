@@ -1,8 +1,8 @@
-package labyrindserver;
+package de.sag.mazehunter;
 
 import com.esotericsoftware.kryonet.Server;
+import de.sag.mazehunter.networkData.Connect;
 import java.io.IOException;
-import labyrindserver.networkData.*;
 
 /**
  *

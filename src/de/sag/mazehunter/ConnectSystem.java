@@ -1,8 +1,8 @@
-package labyrindserver;
+package de.sag.mazehunter;
 
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
-import labyrindserver.networkData.Connect;
+import de.sag.mazehunter.networkData.Connect;
 
 /**
  *

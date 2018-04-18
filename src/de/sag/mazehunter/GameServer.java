@@ -1,8 +1,10 @@
 package de.sag.mazehunter;
 
 import com.esotericsoftware.kryonet.Server;
-import de.sag.mazehunter.networkData.Connect;
+import de.sag.mazehunter.networkData.ConnectResponse;
+import de.sag.mazehunter.utils.Vector2;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  *
@@ -29,6 +31,8 @@ public class GameServer extends Server{
     }
     
     private void registerClasses(){
-        getKryo().register(Connect.class);
+        getKryo().register(Vector2.class);
+        getKryo().register(ArrayList.class);
+        getKryo().register(ConnectResponse.class);
     }
 }

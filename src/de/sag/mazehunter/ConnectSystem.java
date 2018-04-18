@@ -3,7 +3,7 @@ package de.sag.mazehunter;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import static de.sag.mazehunter.Main.MAIN_SINGLETON;
-import de.sag.mazehunter.networkData.Connect;
+import de.sag.mazehunter.networkData.ConnectResponse;
 
 /**
  *
@@ -13,8 +13,8 @@ public class ConnectSystem extends Listener{
 
     @Override
     public void connected(Connection connection) {
-        Connect connect = new Connect();
-//        connect.connectionAccepted = true;
+        ConnectResponse connect = new ConnectResponse();
+        connect.connectionAccepted = true;
         MAIN_SINGLETON.server.sendToAllUDP(connect);
     }
 

@@ -13,6 +13,7 @@ public class ConnectSystem extends Listener{
     @Override
     public void connected(Connection connection) {
         Connect connect = new Connect();
+        connect.connectionAccepted = true;
         Main.server.sendToAllUDP(connect);
     }
 

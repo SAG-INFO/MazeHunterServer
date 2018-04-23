@@ -1,7 +1,6 @@
 package de.sag.mazehunter;
 
 /**
- * TGZFRBHFRUgtrgtg6tr
  * @author sreis
  */
 public class Game {
@@ -11,5 +10,9 @@ public class Game {
     
     public void update(float delta){
         
+    }
+    
+    public int test(){
+        return 4;
     }
 }

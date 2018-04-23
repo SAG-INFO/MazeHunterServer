@@ -12,7 +12,5 @@ public class Game {
         
     }
     
-    public int test(){
-        return 4;
-    }
+
 }

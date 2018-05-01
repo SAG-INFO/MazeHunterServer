@@ -1,7 +1,12 @@
-package de.sag.mazehunter;
+package de.sag.mazehunter.server;
 
 import com.esotericsoftware.kryonet.Server;
-import de.sag.mazehunter.networkData.ConnectResponse;
+import de.sag.mazehunter.server.networkData.ConnectResponse;
+import de.sag.mazehunter.server.networkData.LobbyUpdate;
+import de.sag.mazehunter.server.networkData.MovementRequest;
+import de.sag.mazehunter.server.networkData.PlayerLobby;
+import de.sag.mazehunter.server.networkData.StartGameRequest;
+import de.sag.mazehunter.server.networkData.StartGameResponse;
 import de.sag.mazehunter.utils.Vector2;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,7 +27,6 @@ public class GameServer extends Server{
     
     public void startServer(){
         super.start();
-        super.addListener(new ConnectSystem());
         try {
             super.bind(TCP_PORT, UDP_PORT);
         } catch (IOException ex) {
@@ -31,8 +35,18 @@ public class GameServer extends Server{
     }
     
     private void registerClasses(){
+        //general Stuff
         getKryo().register(Vector2.class);
         getKryo().register(ArrayList.class);
+        
+        //Lobby Stuff
         getKryo().register(ConnectResponse.class);
+        getKryo().register(PlayerLobby.class);
+        getKryo().register(LobbyUpdate.class);
+        getKryo().register(StartGameRequest.class);
+        getKryo().register(StartGameResponse.class);
+        
+        //GameStuff
+        getKryo().register(MovementRequest.class);
     }
 }

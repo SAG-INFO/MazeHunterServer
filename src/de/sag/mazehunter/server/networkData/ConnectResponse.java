@@ -1,4 +1,4 @@
-package de.sag.mazehunter.networkData;
+package de.sag.mazehunter.server.networkData;
 
 /**
  *
@@ -6,4 +6,5 @@ package de.sag.mazehunter.networkData;
  */
 public class ConnectResponse {
     public boolean connectionAccepted;
+    public String msg;
 }

@@ -6,8 +6,6 @@ import de.sag.mazehunter.game.Player;
 import de.sag.mazehunter.lobby.Lobby;
 import de.sag.mazehunter.server.networkData.PlayerLobby;
 import de.sag.mazehunter.server.networkData.StartGameResponse;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Branch Test
@@ -17,14 +15,16 @@ public class Main {
 
     public static Main MAIN_SINGLETON;
     
+    /**maximum framerate. -1 for unlimited FPS.*/
+    private static float FPS_CAP = 60;
+    
     public final GameServer server;
     public Game game; 
     public Lobby lobby; 
     
+    public int state = STATE_LOBBY;
     public static final int STATE_LOBBY = 1;
     public static final int STATE_INGAME = 2;
-    
-    public int state = STATE_LOBBY;
     
     public Main() {
         MAIN_SINGLETON = this;
@@ -43,6 +43,10 @@ public class Main {
         while (true) {
             long time = System.nanoTime();
             float delta_time = ((time - last_time) / 1000000000f);
+            
+            if(FPS_CAP != -1 && delta_time < 1f/FPS_CAP)
+                continue;
+            
             last_time = time;
             update(delta_time);
         }

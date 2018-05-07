@@ -26,9 +26,17 @@ public class InputListener extends Listener{
         }
         if(object instanceof MovementRequest) {
             Main.MAIN_SINGLETON.game.player[index].move(((MovementRequest) object).angle, ((MovementRequest) object).movement);
-        
-        
+            SendMovement(index);
+            
         
         }
+    }
+    
+    
+    public void SendMovement(int index) {
+        
+    
+    
+    
     }
 }

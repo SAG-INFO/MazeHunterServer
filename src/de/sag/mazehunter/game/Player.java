@@ -13,9 +13,12 @@ import de.sag.mazehunter.utils.Vector2;
  * @author g.duennweber
  */
 public class Player {
-    public Vector2 position; 
-    public Vector2 velocity;
+    public final Vector2 position; 
+    public final Vector2 velocity;
     int connectionID;
+    float speed;
+    
+    private final Vector2 tmp = new Vector2();
     
     
     public Player(int id) {
@@ -24,11 +27,23 @@ public class Player {
     velocity = new Vector2();
     velocity.set(0f, 0f);
     connectionID = id;
+    speed = 1;
     }
     
     public void move(int angle, boolean movement) {
+    if(!movement) {
+    velocity.set(0f, 0f);
+    }
+    else {
+        //TODO: Collision
+    velocity.setAngle((float) angle);
+    velocity.setLength(speed);
+    }
     
+    }
+   
     
-    
+    public void update(float delta){
+        this.position.add(tmp.set(velocity).scl(delta));
     }
 }

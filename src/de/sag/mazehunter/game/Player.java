@@ -25,4 +25,6 @@ public class Player {
     velocity.set(0f, 0f);
     connectionID = c.getID();
     }
+    
+//    public void move
 }

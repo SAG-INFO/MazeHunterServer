@@ -26,5 +26,9 @@ public class Player {
     connectionID = c.getID();
     }
     
-//    public void move
+    public void move(int angle, boolean movement) {
+    
+    
+    
+    }
 }

@@ -7,9 +7,16 @@ import de.sag.mazehunter.Main;
  * @author sreis
  */
 public class Game {
+    
+    Player player[];
+    
+    
+    
 
     public Game() {
         Main.MAIN_SINGLETON.server.addListener(new DisconnectListener());
+        Main.MAIN_SINGLETON.server.addListener(new InputListener());
+        player = new Player[4];
     }
     
     public void start(){

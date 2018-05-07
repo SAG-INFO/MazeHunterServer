@@ -7,6 +7,7 @@ package de.sag.mazehunter.game;
 
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
+import de.sag.mazehunter.Main;
 import de.sag.mazehunter.server.networkData.MovementRequest;
 
 /**
@@ -17,8 +18,14 @@ public class InputListener extends Listener{
 
     @Override
     public void received(Connection connection, Object object) {
+        int index = 0;
+        for (int i = 0; i < 4; i++) {
+            if (Main.MAIN_SINGLETON.game.player[i].connectionID == connection.getID()) {
+                index = i;
+            }
+        }
         if(object instanceof MovementRequest) {
-        
+            Main.MAIN_SINGLETON.game.player[index].move(((MovementRequest) object).angle, ((MovementRequest) object).movement);
         
         
         

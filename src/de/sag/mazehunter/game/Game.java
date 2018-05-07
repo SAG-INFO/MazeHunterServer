@@ -11,9 +11,9 @@ public class Game {
     public Player player[];
 
     public Game() {
+        player = new Player[4];
         Main.MAIN_SINGLETON.server.addListener(new DisconnectListener());
         Main.MAIN_SINGLETON.server.addListener(new InputListener());
-        player = new Player[4];
     }
     
     public void start(){

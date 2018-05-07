@@ -6,6 +6,8 @@ import de.sag.mazehunter.game.Player;
 import de.sag.mazehunter.lobby.Lobby;
 import de.sag.mazehunter.server.networkData.PlayerLobby;
 import de.sag.mazehunter.server.networkData.StartGameResponse;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Branch Test
@@ -36,9 +38,13 @@ public class Main {
     public void start(){
         server.startServer();
         
+        long last_time = System.nanoTime();
+
         while (true) {
-            //TODO: deltaTime berechnen
-            update(0);
+            long time = System.nanoTime();
+            float delta_time = ((time - last_time) / 1000000000f);
+            last_time = time;
+            update(delta_time);
         }
     }
     

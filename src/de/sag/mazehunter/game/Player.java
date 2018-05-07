@@ -18,12 +18,12 @@ public class Player {
     int connectionID;
     
     
-    public Player(Connection c) {
+    public Player(int id) {
     position = new Vector2();
     position.set(0f, 0f);
     velocity = new Vector2();
     velocity.set(0f, 0f);
-    connectionID = c.getID();
+    connectionID = id;
     }
     
     public void move(int angle, boolean movement) {

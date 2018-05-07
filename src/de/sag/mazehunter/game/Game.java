@@ -8,10 +8,7 @@ import de.sag.mazehunter.Main;
  */
 public class Game {
     
-    Player player[];
-    
-    
-    
+    public Player player[];
 
     public Game() {
         Main.MAIN_SINGLETON.server.addListener(new DisconnectListener());

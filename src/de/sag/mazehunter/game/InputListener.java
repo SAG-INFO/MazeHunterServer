@@ -34,7 +34,7 @@ public class InputListener extends Listener{
     
     
     public void SendMovement(int index) {
-        
+        Main.MAIN_SINGLETON.game.outputer.sendMovementResponse(Main.MAIN_SINGLETON.game.player[index].position, Main.MAIN_SINGLETON.game.player[index].velocity, index);
     
     
     

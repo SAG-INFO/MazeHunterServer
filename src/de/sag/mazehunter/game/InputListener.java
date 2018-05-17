@@ -18,11 +18,10 @@ public class InputListener extends Listener{
 
     @Override
     public void received(Connection connection, Object object) {
-
         if(object instanceof MovementRequest) {
             Main.MAIN_SINGLETON.game.player[this.getIndex(connection.getID())].move(((MovementRequest) object).angle, ((MovementRequest) object).movement);
+            //System.out.println(((MovementRequest) object).angle);
             SendMovement(connection.getID());
-            
         
         }
     }

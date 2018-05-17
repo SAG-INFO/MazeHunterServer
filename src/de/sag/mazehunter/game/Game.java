@@ -9,7 +9,7 @@ import de.sag.mazehunter.Main;
 public class Game {
     
     public Player player[];
-    Outputer outputer;
+    public Outputer outputer;
 
     public Game() {
         player = new Player[4];

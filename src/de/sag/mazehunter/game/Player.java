@@ -17,7 +17,7 @@ public class Player {
 
     public final Vector2 position;
     public final Vector2 velocity;
-    int connectionID;
+    public int connectionID;
     float speed;
 
     private final Vector2 tmp = new Vector2();

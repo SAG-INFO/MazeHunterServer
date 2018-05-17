@@ -6,6 +6,8 @@
 package de.sag.mazehunter.game;
 
 import de.sag.mazehunter.Main;
+import de.sag.mazehunter.game.abilities.Dash;
+import de.sag.mazehunter.server.networkData.DashResponse;
 import de.sag.mazehunter.server.networkData.MovementResponse;
 import de.sag.mazehunter.utils.Vector2;
 
@@ -17,5 +19,12 @@ public class Outputer {
     public void sendMovementResponse(Vector2 position, Vector2 velocity, int id) {
         MovementResponse mr = new MovementResponse(position, velocity, id);
         Main.MAIN_SINGLETON.server.sendToAllUDP(mr);
+    }
+    
+    public void sendDashResponse(Vector2 position, Vector2 velocity, int id) {
+        MovementResponse mr = new MovementResponse(position, velocity, id);
+        Main.MAIN_SINGLETON.server.sendToAllExceptUDP(id, mr);
+        DashResponse dr = new DashResponse(position, velocity, id, Dash.COOLDOWN);
+        Main.MAIN_SINGLETON.server.sendToUDP(id, dr);
     }
 }

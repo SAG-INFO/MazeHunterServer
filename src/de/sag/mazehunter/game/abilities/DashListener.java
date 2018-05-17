@@ -20,7 +20,7 @@ public class DashListener extends Listener{
 
     @Override
     public void received(Connection connection, Object object) {
-        
+        System.out.println(object);
         if(object instanceof DashRequest) {
             Vector2 tempVelocity = Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].velocity;
             Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].position.add(tempVelocity.setLength(AbilityConfig.DASH_RANGE));
@@ -29,7 +29,7 @@ public class DashListener extends Listener{
     }
     
     public void SendDash(int id) {
-        Main.MAIN_SINGLETON.game.outputer.sendDashResponse(Main.MAIN_SINGLETON.game.player[id].position, Main.MAIN_SINGLETON.game.player[id].velocity, id);
+        Main.MAIN_SINGLETON.game.outputer.sendDashResponse(Main.MAIN_SINGLETON.game.player[getIndex(id)].position, Main.MAIN_SINGLETON.game.player[getIndex(id)].velocity, id);
     }
     
     public int getIndex (int id){

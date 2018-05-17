@@ -21,5 +21,5 @@ public class AbilityConfig {
     
     //Dash cooldown in seconds
     public static int DASH_COOLDOWN = 10;
-    public static int DASH_RANGE = 500;
+    public static int DASH_RANGE = 30;
 }

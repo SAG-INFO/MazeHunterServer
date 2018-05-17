@@ -24,7 +24,7 @@ public class DashListener extends Listener{
         if(object instanceof DashRequest) {
             Vector2 tempVelocity = Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].velocity;
             Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].position.add(tempVelocity.setLength(AbilityConfig.DASH_RANGE));
-            SendDash(connection.getID());
+                SendDash(connection.getID());
         }
     }
     

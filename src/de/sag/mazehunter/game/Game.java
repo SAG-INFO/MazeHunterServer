@@ -21,7 +21,7 @@ public class Game {
     }
     
     public void createAbilityListeners() {
-        DashListener dashListener = new DashListener();
+        Main.MAIN_SINGLETON.server.addListener(new DashListener());
     }
     
     public void start(){

@@ -6,6 +6,7 @@
 package de.sag.mazehunter.game;
 
 import com.esotericsoftware.kryonet.Connection;
+import de.sag.mazehunter.server.networkData.MovementRequest;
 import de.sag.mazehunter.utils.Vector2;
 
 /**
@@ -27,7 +28,7 @@ public class Player {
         velocity = new Vector2();
         velocity.set(0f, 0f);
         connectionID = id;
-        speed = 1;
+        speed = 50;
     }
 
     public void move(int angle, boolean movement) {
@@ -35,8 +36,8 @@ public class Player {
             velocity.set(0f, 0f);
         } else {
             //TODO: Collision
+            velocity.set(speed, 0);
             velocity.setAngle((float) angle);
-            velocity.setLength(speed);
         }
     }
 

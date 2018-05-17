@@ -28,6 +28,7 @@ public class Game {
                 continue;
             player[i].update(delta);
         }
+        
     }
 
     public void exit() {

@@ -18,8 +18,4 @@ public class Outputer {
         MovementResponse mr = new MovementResponse(position, velocity, id);
         Main.MAIN_SINGLETON.server.sendToAllUDP(mr);
     }
-    
-    
-    
-    
 }

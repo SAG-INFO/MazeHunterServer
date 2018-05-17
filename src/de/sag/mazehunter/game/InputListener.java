@@ -18,25 +18,30 @@ public class InputListener extends Listener{
 
     @Override
     public void received(Connection connection, Object object) {
-        int index = 0;
-        for (int i = 0; i < 4; i++) {
-            if (Main.MAIN_SINGLETON.game.player[i].connectionID == connection.getID()) {
-                index = i;
-            }
-        }
+
         if(object instanceof MovementRequest) {
-            Main.MAIN_SINGLETON.game.player[index].move(((MovementRequest) object).angle, ((MovementRequest) object).movement);
-            SendMovement(index);
+            Main.MAIN_SINGLETON.game.player[this.getIndex(connection.getID())].move(((MovementRequest) object).angle, ((MovementRequest) object).movement);
+            SendMovement(connection.getID());
             
         
         }
     }
     
     
-    public void SendMovement(int index) {
-        Main.MAIN_SINGLETON.game.outputer.sendMovementResponse(Main.MAIN_SINGLETON.game.player[index].position, Main.MAIN_SINGLETON.game.player[index].velocity, index);
+    public void SendMovement(int id) {
+        Main.MAIN_SINGLETON.game.outputer.sendMovementResponse(Main.MAIN_SINGLETON.game.player[this.getIndex(id)].position, Main.MAIN_SINGLETON.game.player[this.getIndex(id)].velocity, id);
     
     
     
+    }
+    
+    public int getIndex (int id){
+        int index = 0;
+        for (int i = 0; i < 4; i++) {
+            if (Main.MAIN_SINGLETON.game.player[i].connectionID == id) {
+                index = i;
+            }
+        }
+        return index;
     }
 }

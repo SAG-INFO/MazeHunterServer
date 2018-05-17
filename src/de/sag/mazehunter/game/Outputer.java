@@ -14,8 +14,8 @@ import de.sag.mazehunter.utils.Vector2;
  * @author g.duennweber
  */
 public class Outputer {
-    public void sendMovementResponse(Vector2 position, Vector2 velocity, int index) {
-        MovementResponse mr = new MovementResponse(position, velocity, index);
+    public void sendMovementResponse(Vector2 position, Vector2 velocity, int id) {
+        MovementResponse mr = new MovementResponse(position, velocity, id);
         Main.MAIN_SINGLETON.server.sendToAllUDP(mr);
     }
     

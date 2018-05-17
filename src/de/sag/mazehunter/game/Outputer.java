@@ -22,9 +22,7 @@ public class Outputer {
     }
     
     public void sendDashResponse(Vector2 position, Vector2 velocity, int id) {
-        MovementResponse mr = new MovementResponse(position, velocity, id);
-        Main.MAIN_SINGLETON.server.sendToAllExceptUDP(id, mr);
-        DashResponse dr = new DashResponse(position, velocity, id, AbilityConfig.DASH_COOLDOWN);
-        Main.MAIN_SINGLETON.server.sendToUDP(id, dr);
+        DashResponse dr = new DashResponse(position, velocity, id);
+        Main.MAIN_SINGLETON.server.sendToAllUDP(dr);
     }
 }

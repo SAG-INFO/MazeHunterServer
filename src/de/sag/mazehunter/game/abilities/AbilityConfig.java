@@ -14,7 +14,12 @@ package de.sag.mazehunter.game.abilities;
  * type = "skillshot" eg. damage projectile keybing is leftmouse
  * type = "mobility" eg. dash keybind is SHIFT
  */
-public abstract class Ability {
-    String name;
-    String type;
+public class AbilityConfig {
+    
+    //Dash 
+    public static String type = "mobility";
+    
+    //Dash cooldown in seconds
+    public static int DASH_COOLDOWN = 10;
+    public static int DASH_RANGE = 500;
 }

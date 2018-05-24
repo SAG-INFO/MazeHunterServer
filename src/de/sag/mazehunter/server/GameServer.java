@@ -1,6 +1,8 @@
 package de.sag.mazehunter.server;
 
 import com.esotericsoftware.kryonet.Server;
+import de.sag.mazehunter.server.networkData.AbilityConfigRequest;
+import de.sag.mazehunter.server.networkData.AbilityConfigResponse;
 import de.sag.mazehunter.server.networkData.ConnectResponse;
 import de.sag.mazehunter.server.networkData.DashRequest;
 import de.sag.mazehunter.server.networkData.DashResponse;
@@ -52,6 +54,10 @@ public class GameServer extends Server{
         //GameStuff
         getKryo().register(MovementRequest.class);
         getKryo().register(MovementResponse.class);
+        
+        //Abilities
+        getKryo().register(AbilityConfigRequest.class);
+        getKryo().register(AbilityConfigResponse.class);
         getKryo().register(DashRequest.class);
         getKryo().register(DashResponse.class);
     }

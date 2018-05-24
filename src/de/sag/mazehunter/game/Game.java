@@ -1,6 +1,7 @@
 package de.sag.mazehunter.game;
 
 import de.sag.mazehunter.Main;
+import de.sag.mazehunter.game.abilities.AbilityConfigListener;
 import de.sag.mazehunter.game.abilities.DashListener;
 
 /**
@@ -18,6 +19,7 @@ public class Game {
         outputer = new Outputer();
         createAbilityListeners();
         Main.MAIN_SINGLETON.server.addListener(new InputListener());
+        Main.MAIN_SINGLETON.server.addListener(new AbilityConfigListener());
     }
     
     public void createAbilityListeners() {

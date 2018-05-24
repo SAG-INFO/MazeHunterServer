@@ -6,7 +6,6 @@
 package de.sag.mazehunter.game;
 
 import de.sag.mazehunter.Main;
-import de.sag.mazehunter.game.abilities.AbilityConfig;
 import de.sag.mazehunter.server.networkData.DashResponse;
 import de.sag.mazehunter.server.networkData.MovementResponse;
 import de.sag.mazehunter.utils.Vector2;

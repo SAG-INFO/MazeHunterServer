@@ -1,6 +1,7 @@
 package de.sag.mazehunter.game;
 
 import de.sag.mazehunter.Main;
+import de.sag.mazehunter.game.abilities.DashListener;
 
 /**
  *
@@ -15,7 +16,12 @@ public class Game {
         player = new Player[4];
         Main.MAIN_SINGLETON.server.addListener(new DisconnectListener());
         outputer = new Outputer();
+        createAbilityListeners();
         Main.MAIN_SINGLETON.server.addListener(new InputListener());
+    }
+    
+    public void createAbilityListeners() {
+        Main.MAIN_SINGLETON.server.addListener(new DashListener());
     }
     
     public void start(){
@@ -28,7 +34,6 @@ public class Game {
                 continue;
             player[i].update(delta);
         }
-        
     }
 
     public void exit() {

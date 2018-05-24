@@ -8,9 +8,9 @@ package de.sag.mazehunter.game.abilities;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import de.sag.mazehunter.Main;
-import de.sag.mazehunter.game.Outputer;
 import de.sag.mazehunter.game.Player;
 import de.sag.mazehunter.server.networkData.DashRequest;
+import de.sag.mazehunter.utils.Vector2;
 
 /**
  *
@@ -20,14 +20,16 @@ public class DashListener extends Listener{
 
     @Override
     public void received(Connection connection, Object object) {
+        System.out.println(object);
         if(object instanceof DashRequest) {
-            // Main.MAIN_SINGLETON.game.player[this.getIndex(connection.getID())].move(((DashRequest) object));
-            SendDash(connection.getID());
+            Vector2 tempVelocity = Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].velocity;
+            Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].position.add(tempVelocity.setLength(AbilityConfig.DASH_RANGE));
+                SendDash(connection.getID());
         }
     }
     
     public void SendDash(int id) {
-        //Outputer.sendDashResponse()
+        Main.MAIN_SINGLETON.game.outputer.sendDashResponse(Main.MAIN_SINGLETON.game.player[getIndex(id)].position, Main.MAIN_SINGLETON.game.player[getIndex(id)].velocity, id);
     }
     
     public int getIndex (int id){

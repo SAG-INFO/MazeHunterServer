@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.sag.mazehunter.server.networkData;
+package de.sag.mazehunter.server.networkData.abilities;
 
-import de.sag.mazehunter.game.player.abilities.AbilityConfig;
+import de.sag.mazehunter.game.player.abilities.abilityConfigs.DashConfig;
 
 /**
  *
@@ -13,9 +13,9 @@ import de.sag.mazehunter.game.player.abilities.AbilityConfig;
  */
 public class AbilityConfigResponse {
     
-    public AbilityConfig abilityConfig;
+    public DashConfig abilityConfig;
 
-    public AbilityConfigResponse(AbilityConfig abilityConfig) {
+    public AbilityConfigResponse(DashConfig abilityConfig) {
         this.abilityConfig = abilityConfig;
     }
 

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.sag.mazehunter.server.networkData;
+package de.sag.mazehunter.server.networkData.abilities.dash;
 
 import de.sag.mazehunter.utils.Vector2;
 

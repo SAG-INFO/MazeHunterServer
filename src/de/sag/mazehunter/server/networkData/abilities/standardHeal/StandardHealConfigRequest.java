@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.sag.mazehunter.game.player;
+package de.sag.mazehunter.server.networkData.abilities.standardHeal;
 
 /**
  *
  * @author Karl Huber
  */
-public class PlayerConfig {
-    public static int DEFAULT_SPEED = 50;
-    public static int DEFAULT_HEALTHPOINTS = 100;
+public class StandardHealConfigRequest {
+
+    public StandardHealConfigRequest() {
+    }
 }

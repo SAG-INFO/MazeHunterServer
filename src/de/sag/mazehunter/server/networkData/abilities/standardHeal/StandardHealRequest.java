@@ -3,18 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.sag.mazehunter.game.player.abilities;
+package de.sag.mazehunter.server.networkData.abilities.standardHeal;
 
 /**
  *
  * @author Karl Huber
  */
-public class AbilityConfig {
-    
-    //cooldown in seconds
-    public static int DASH_COOLDOWN = 10;
-    public static int DASH_RANGE = 30;
+public class StandardHealRequest {
 
-    public AbilityConfig() {
+    public StandardHealRequest() {
     }
 }

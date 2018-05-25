@@ -20,6 +20,8 @@ public class Player {
     public int connectionID;
     float speed;
     float movementSpeedFactor;
+    int maxHealth;
+    int currentHealth;
     
     private final Vector2 tmp = new Vector2();
 
@@ -31,7 +33,8 @@ public class Player {
         connectionID = id;
         speed = PlayerConfig.DEFAULT_SPEED;
         movementSpeedFactor = 1.0f;
-        
+        maxHealth = PlayerConfig.DEFAULT_HEALTHPOINTS;
+        currentHealth = maxHealth;
     }
 
     public void move(int angle, boolean movement) {
@@ -40,6 +43,14 @@ public class Player {
         } else {
             //TODO: Collision
             updateVelocity(angle);
+        }
+    }
+    
+    public void heal(int amount) {
+        if (amount + currentHealth > maxHealth) {
+            currentHealth = maxHealth;
+        } else {
+            currentHealth += amount;
         }
     }
     

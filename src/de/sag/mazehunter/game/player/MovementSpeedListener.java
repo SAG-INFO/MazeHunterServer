@@ -3,31 +3,31 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.sag.mazehunter.game;
+package de.sag.mazehunter.game.player;
 
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import de.sag.mazehunter.Main;
-import de.sag.mazehunter.server.networkData.MovementRequest;
+import de.sag.mazehunter.server.networkData.MovementSpeedRequest;
 
 /**
  *
- * @author g.duennweber
+ * @author Karl Huber
  */
-public class InputListener extends Listener{
+public class MovementSpeedListener extends Listener {
 
     @Override
     public void received(Connection connection, Object object) {
-        if(object instanceof MovementRequest) {
-            Main.MAIN_SINGLETON.game.player[this.getIndex(connection.getID())].move(((MovementRequest) object).angle, ((MovementRequest) object).movement);
+        if(object instanceof MovementSpeedRequest) {
+            Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].movementSpeedFactor += ((MovementSpeedRequest) object).change; 
+            Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].speed = Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].movementSpeedFactor*PlayerConfig.DEFAULT_SPEED;
+            Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].updateVelocity((int)Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].velocity.angle());
             SendMovement(connection.getID());
         }
     }
     
-    
     public void SendMovement(int id) {
         Main.MAIN_SINGLETON.game.outputer.sendMovementResponse(Main.MAIN_SINGLETON.game.player[this.getIndex(id)].position, Main.MAIN_SINGLETON.game.player[this.getIndex(id)].velocity, id);
-    
     }
     
     public int getIndex (int id){
@@ -41,3 +41,5 @@ public class InputListener extends Listener{
         return index;
     }
 }
+
+

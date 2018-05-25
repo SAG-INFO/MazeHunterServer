@@ -9,6 +9,7 @@ import de.sag.mazehunter.server.networkData.DashResponse;
 import de.sag.mazehunter.server.networkData.LobbyUpdate;
 import de.sag.mazehunter.server.networkData.MovementRequest;
 import de.sag.mazehunter.server.networkData.MovementResponse;
+import de.sag.mazehunter.server.networkData.MovementSpeedRequest;
 import de.sag.mazehunter.server.networkData.PlayerLobby;
 import de.sag.mazehunter.server.networkData.StartGameRequest;
 import de.sag.mazehunter.server.networkData.StartGameResponse;
@@ -51,11 +52,12 @@ public class GameServer extends Server{
         getKryo().register(StartGameRequest.class);
         getKryo().register(StartGameResponse.class);
         
-        //GameStuff
+        //Movement Stuff
         getKryo().register(MovementRequest.class);
         getKryo().register(MovementResponse.class);
+        getKryo().register(MovementSpeedRequest.class);
         
-        //Abilities
+        //Ability Stuff
         getKryo().register(AbilityConfigRequest.class);
         getKryo().register(AbilityConfigResponse.class);
         getKryo().register(DashRequest.class);

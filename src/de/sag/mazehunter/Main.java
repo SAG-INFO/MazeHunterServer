@@ -2,7 +2,7 @@ package de.sag.mazehunter;
 
 import de.sag.mazehunter.server.GameServer;
 import de.sag.mazehunter.game.Game;
-import de.sag.mazehunter.game.Player;
+import de.sag.mazehunter.game.player.Player;
 import de.sag.mazehunter.lobby.Lobby;
 import de.sag.mazehunter.server.networkData.PlayerLobby;
 import de.sag.mazehunter.server.networkData.StartGameResponse;

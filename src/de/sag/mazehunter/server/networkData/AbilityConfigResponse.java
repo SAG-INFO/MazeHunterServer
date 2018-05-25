@@ -5,7 +5,7 @@
  */
 package de.sag.mazehunter.server.networkData;
 
-import de.sag.mazehunter.game.abilities.AbilityConfig;
+import de.sag.mazehunter.game.player.abilities.AbilityConfig;
 
 /**
  *

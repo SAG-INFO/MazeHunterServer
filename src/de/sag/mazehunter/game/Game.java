@@ -1,8 +1,11 @@
 package de.sag.mazehunter.game;
 
+import de.sag.mazehunter.game.player.MovementListener;
+import de.sag.mazehunter.game.player.Player;
 import de.sag.mazehunter.Main;
-import de.sag.mazehunter.game.abilities.AbilityConfigListener;
-import de.sag.mazehunter.game.abilities.DashListener;
+import de.sag.mazehunter.game.player.MovementSpeedListener;
+import de.sag.mazehunter.game.player.abilities.AbilityConfigListener;
+import de.sag.mazehunter.game.player.abilities.DashListener;
 
 /**
  *
@@ -18,7 +21,8 @@ public class Game {
         Main.MAIN_SINGLETON.server.addListener(new DisconnectListener());
         outputer = new Outputer();
         createAbilityListeners();
-        Main.MAIN_SINGLETON.server.addListener(new InputListener());
+        Main.MAIN_SINGLETON.server.addListener(new MovementListener());
+        Main.MAIN_SINGLETON.server.addListener(new MovementSpeedListener());
         Main.MAIN_SINGLETON.server.addListener(new AbilityConfigListener());
     }
     

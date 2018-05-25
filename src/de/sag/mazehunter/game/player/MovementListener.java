@@ -3,31 +3,31 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.sag.mazehunter.game.abilities;
+package de.sag.mazehunter.game.player;
 
+import de.sag.mazehunter.game.player.Player;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import de.sag.mazehunter.Main;
-import de.sag.mazehunter.game.Player;
-import de.sag.mazehunter.server.networkData.AbilityConfigRequest;
-import de.sag.mazehunter.server.networkData.AbilityConfigResponse;
+import de.sag.mazehunter.server.networkData.MovementRequest;
 
 /**
  *
- * @author Karl Huber
+ * @author g.duennweber
  */
-public class AbilityConfigListener extends Listener {
+public class MovementListener extends Listener{
+
     @Override
     public void received(Connection connection, Object object) {
-        if(object instanceof AbilityConfigRequest) {
-            sendAbilityConfig(connection.getID());
+        if(object instanceof MovementRequest) {
+            Main.MAIN_SINGLETON.game.player[this.getIndex(connection.getID())].move(((MovementRequest) object).angle, ((MovementRequest) object).movement);
+            SendMovement(connection.getID());
         }
     }
     
-    public void sendAbilityConfig(int id) {
-        AbilityConfigResponse acr = new AbilityConfigResponse();
-        acr.abilityConfig = new AbilityConfig();
-        Main.MAIN_SINGLETON.server.sendToUDP(id, acr);
+    
+    public void SendMovement(int id) {
+        Main.MAIN_SINGLETON.game.outputer.sendMovementResponse(Main.MAIN_SINGLETON.game.player[this.getIndex(id)].position, Main.MAIN_SINGLETON.game.player[this.getIndex(id)].velocity, id);
     }
     
     public int getIndex (int id){

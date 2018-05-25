@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.sag.mazehunter.game;
+package de.sag.mazehunter.game.player;
 
 /**
  *
  * @author g.duennweber
  */
-public class Hunter {
+public class Runner{
     
 }

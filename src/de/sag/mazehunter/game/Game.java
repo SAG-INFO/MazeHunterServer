@@ -4,7 +4,6 @@ import de.sag.mazehunter.game.player.MovementListener;
 import de.sag.mazehunter.game.player.Player;
 import de.sag.mazehunter.Main;
 import de.sag.mazehunter.game.player.MovementSpeedListener;
-import de.sag.mazehunter.game.player.abilities.AbilityConfigListener;
 import de.sag.mazehunter.game.player.abilities.DashListener;
 
 /**
@@ -23,7 +22,6 @@ public class Game {
         createAbilityListeners();
         Main.MAIN_SINGLETON.server.addListener(new MovementListener());
         Main.MAIN_SINGLETON.server.addListener(new MovementSpeedListener());
-        Main.MAIN_SINGLETON.server.addListener(new AbilityConfigListener());
     }
     
     public void createAbilityListeners() {

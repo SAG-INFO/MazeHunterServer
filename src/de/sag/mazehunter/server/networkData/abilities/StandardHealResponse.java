@@ -5,20 +5,17 @@
  */
 package de.sag.mazehunter.server.networkData.abilities;
 
-import de.sag.mazehunter.game.player.abilities.abilityConfigs.DashConfig;
-
 /**
  *
  * @author Karl Huber
  */
-public class AbilityConfigResponse {
-    
-    public DashConfig abilityConfig;
+public class StandardHealResponse {
+    int id;
 
-    public AbilityConfigResponse(DashConfig abilityConfig) {
-        this.abilityConfig = abilityConfig;
+    public StandardHealResponse(int id) {
+        this.id = id;
     }
 
-    public AbilityConfigResponse() {
+    public StandardHealResponse() {
     }
 }

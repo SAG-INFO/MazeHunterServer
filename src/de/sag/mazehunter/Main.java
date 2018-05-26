@@ -6,6 +6,7 @@ import de.sag.mazehunter.game.player.Player;
 import de.sag.mazehunter.lobby.Lobby;
 import de.sag.mazehunter.server.networkData.PlayerLobby;
 import de.sag.mazehunter.server.networkData.StartGameResponse;
+import de.sag.mazehunter.server.networkData.configs.PushConfig;
 
 /**
  * Branch Test
@@ -21,6 +22,7 @@ public class Main {
     public final GameServer server;
     public Game game; 
     public Lobby lobby; 
+    public PushConfig abilityConfig;
     
     public int state = STATE_LOBBY;
     public static final int STATE_LOBBY = 1;

@@ -5,8 +5,7 @@
  */
 package de.sag.mazehunter.game.player;
 
-import com.esotericsoftware.kryonet.Connection;
-import de.sag.mazehunter.server.networkData.MovementRequest;
+import de.sag.mazehunter.game.Config;
 import de.sag.mazehunter.utils.Vector2;
 
 /**
@@ -31,9 +30,9 @@ public class Player {
         velocity = new Vector2();
         velocity.set(0f, 0f);
         connectionID = id;
-        speed = PlayerConfig.DEFAULT_SPEED;
+        speed = Config.DEFAULT_SPEED;
         movementSpeedFactor = 1.0f;
-        maxHealth = PlayerConfig.DEFAULT_HEALTHPOINTS;
+        maxHealth = Config.DEFAULT_HEALTHPOINTS;
         currentHealth = maxHealth;
     }
 

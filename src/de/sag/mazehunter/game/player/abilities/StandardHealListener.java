@@ -8,9 +8,9 @@ package de.sag.mazehunter.game.player.abilities;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import de.sag.mazehunter.Main;
+import de.sag.mazehunter.game.Config;
 import de.sag.mazehunter.game.player.Player;
-import de.sag.mazehunter.game.player.abilities.abilityConfigs.StandardHealConfig;
-import de.sag.mazehunter.server.networkData.abilities.standardHeal.StandardHealRequest;
+import de.sag.mazehunter.server.networkData.abilities.StandardHealRequest;
 
 /**
  *
@@ -23,7 +23,7 @@ public class StandardHealListener extends Listener{
         System.out.println(object);
         if(object instanceof StandardHealRequest) {
             SendStandardHealResponse(connection.getID());
-            Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].heal(StandardHealConfig.TOTALHEAL);
+            Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].heal(Config.STANDARDHEAL_TOTALHEAL);
         }
     }
     

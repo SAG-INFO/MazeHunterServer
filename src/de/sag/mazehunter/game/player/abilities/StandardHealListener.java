@@ -11,6 +11,7 @@ import de.sag.mazehunter.Main;
 import de.sag.mazehunter.game.Config;
 import de.sag.mazehunter.game.player.Player;
 import de.sag.mazehunter.server.networkData.abilities.StandardHealRequest;
+import de.sag.mazehunter.server.networkData.abilities.StandardHealResponse;
 
 /**
  *
@@ -28,7 +29,7 @@ public class StandardHealListener extends Listener{
     }
     
     public void SendStandardHealResponse(int id) {
-        
+        Main.MAIN_SINGLETON.server.sendToAllUDP(new StandardHealResponse(id));
     }
     
     public int getIndex (int id){

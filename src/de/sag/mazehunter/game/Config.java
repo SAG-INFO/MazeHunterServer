@@ -33,13 +33,14 @@ public class Config {
     public static final float DASH_COOLDOWN = 6f;
     public static final int DASH_RANGE = 30;
     
-    public static final float STANDARDHEAL_DURATION = 3f;
+    public static final float STANDARDHEAL_DURATION = 2f;
     public static final float STANDARDHEAL_COOLDOWN = 30f;
     public static final int STANDARDHEAL_TOTALHEAL = 75;
     
     public static void pushConfig() {
         PushConfig pc = new PushConfig();
         
+        //dont work for the client yet
         pc.DEFAULT_HEALTHPOINTS = DEFAULT_HEALTHPOINTS;
         pc.DEFAULT_SPEED = DEFAULT_SPEED;
         

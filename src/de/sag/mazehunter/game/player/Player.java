@@ -5,7 +5,9 @@
  */
 package de.sag.mazehunter.game.player;
 
+import de.sag.mazehunter.Main;
 import de.sag.mazehunter.game.Config;
+import de.sag.mazehunter.server.networkData.HealthUpdate;
 import de.sag.mazehunter.utils.Vector2;
 
 /**
@@ -45,12 +47,21 @@ public class Player {
         }
     }
     
-    public void heal(int amount) {
+    /**
+     * 
+     * @param amount positive values for healing and negitve ones for damage
+     */
+    public void changeHealth(int amount) {
         if (amount + currentHealth > maxHealth) {
             currentHealth = maxHealth;
+        } else if (amount + currentHealth < 0) {
+            //TODO death
         } else {
             currentHealth += amount;
         }
+        
+        HealthUpdate hu = new HealthUpdate(amount, connectionID);
+        Main.MAIN_SINGLETON.server.sendToAllUDP(hu);
     }
     
     public void updateVelocity(int angle) {

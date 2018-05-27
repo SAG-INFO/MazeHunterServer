@@ -12,6 +12,8 @@ import de.sag.mazehunter.game.Config;
 import de.sag.mazehunter.game.player.Player;
 import de.sag.mazehunter.server.networkData.abilities.StandardHealRequest;
 import de.sag.mazehunter.server.networkData.abilities.StandardHealResponse;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  *
@@ -23,7 +25,12 @@ public class StandardHealListener extends Listener{
     public void received(Connection connection, Object object) {
         if(object instanceof StandardHealRequest) {
             SendStandardHealResponse(connection.getID());
-            Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].heal(Config.STANDARDHEAL_TOTALHEAL);
+            Timer t = new Timer();
+            t.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].changeHealth(Config.STANDARDHEAL_TOTALHEAL);
+            }}, (long) (Config.STANDARDHEAL_DURATION));
         }
     }
     

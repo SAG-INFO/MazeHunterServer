@@ -7,6 +7,7 @@ import de.sag.mazehunter.server.networkData.configs.PushConfig;
 import de.sag.mazehunter.game.player.MovementSpeedListener;
 import de.sag.mazehunter.game.player.abilities.DashListener;
 import de.sag.mazehunter.game.player.abilities.StandardHealListener;
+import de.sag.mazehunter.server.networkData.HealthUpdate;
 
 /**
  *
@@ -41,6 +42,8 @@ public class Game {
             player[i].update(delta);
         }
     }
+    
+    
 
     public void exit() {
     }

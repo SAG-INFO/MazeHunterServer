@@ -21,7 +21,6 @@ public class StandardHealListener extends Listener{
 
     @Override
     public void received(Connection connection, Object object) {
-        System.out.println(object);
         if(object instanceof StandardHealRequest) {
             SendStandardHealResponse(connection.getID());
             Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].heal(Config.STANDARDHEAL_TOTALHEAL);

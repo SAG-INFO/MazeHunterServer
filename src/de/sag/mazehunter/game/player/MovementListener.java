@@ -29,10 +29,8 @@ public class MovementListener extends Listener{
             Main.MAIN_SINGLETON.game.player[this.getIndex(connection.getID())].move(((MovementRequest) object).angle, ((MovementRequest) object).movement);
             SendMovement(connection.getID());
             if (first) {
-                System.out.println("sends");
                 Config.pushConfig();
                 first = false;
-                System.out.println("sent.");
             }
         }
     }

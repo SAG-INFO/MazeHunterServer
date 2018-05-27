@@ -24,19 +24,18 @@ public class Config {
     public static int DEFAULT_HEALTHPOINTS = 100;
     
     //Ability Stuff
-    public static int BLIZZARD_RADIUS = 100;
-    public static float BLIZZARD_SLOW_DURATION = 3f; 
-    public static float BLIZZARD_SLOW_AMOUNT = 0.5f;
-    public static int BLIZZARD_DAMAGE = 15;
-    public static float BLIZZARD_COOLDOWN = 10f;
+    public static final int BLIZZARD_RADIUS = 100;
+    public static final float BLIZZARD_SLOW_DURATION = 3f; 
+    public static final float BLIZZARD_SLOW_AMOUNT = 0.5f;
+    public static final int BLIZZARD_DAMAGE = 15;
+    public static final float BLIZZARD_COOLDOWN = 10f;
     
-    public static float DASH_COOLDOWN = 6f;
-    public static int DASH_RANGE = 30;
+    public static final float DASH_COOLDOWN = 6f;
+    public static final int DASH_RANGE = 30;
     
-    public static float STANDARDHEAL_DURATION = 3f;
-    public static float STANDARDHEAL_COOLDOWN = 30f;
-    public static int STANDARDHEAL_TOTALHEAL = 75;
-    
+    public static final float STANDARDHEAL_DURATION = 3f;
+    public static final float STANDARDHEAL_COOLDOWN = 30f;
+    public static final int STANDARDHEAL_TOTALHEAL = 75;
     
     public static void pushConfig() {
         PushConfig pc = new PushConfig();
@@ -57,8 +56,6 @@ public class Config {
         pc.STANDARDHEAL_DURATION = STANDARDHEAL_DURATION;
         pc.STANDARDHEAL_TOTALHEAL = STANDARDHEAL_TOTALHEAL;
         
-        
-        System.out.println("now Pushing config");        
         Main.MAIN_SINGLETON.server.sendToAllUDP(pc);
     }
 }

@@ -5,19 +5,19 @@
  */
 package de.sag.mazehunter.game.player.abilities;
 
+import de.sag.mazehunter.game.player.InputListener;
 import com.esotericsoftware.kryonet.Connection;
-import com.esotericsoftware.kryonet.Listener;
 import de.sag.mazehunter.Main;
 import de.sag.mazehunter.game.Config;
-import de.sag.mazehunter.game.player.Player;
 import de.sag.mazehunter.server.networkData.abilities.DashRequest;
+import de.sag.mazehunter.server.networkData.abilities.DashResponse;
 import de.sag.mazehunter.utils.Vector2;
 
 /**
  *
  * @author Karl Huber
  */
-public class DashListener extends Listener{
+public class DashListener extends InputListener{
 
     @Override
     public void received(Connection connection, Object object) {
@@ -27,19 +27,9 @@ public class DashListener extends Listener{
                 SendDashResponse(connection.getID());
         }
     }
-    
+        
     public void SendDashResponse(int id) {
-        Main.MAIN_SINGLETON.game.outputer.sendDashResponse(Main.MAIN_SINGLETON.game.player[getIndex(id)].position, Main.MAIN_SINGLETON.game.player[getIndex(id)].velocity, id);
-    }
-    
-    public int getIndex (int id){
-        int index = 0;
-        for (int i = 0; i < 4; i++) {
-            Player p = Main.MAIN_SINGLETON.game.player[i];
-            if (p!=null && p.connectionID == id) {
-                index = i;
-            }
-        }
-        return index;
+        DashResponse dr = new DashResponse(Main.MAIN_SINGLETON.game.player[getIndex(id)].position, Main.MAIN_SINGLETON.game.player[getIndex(id)].velocity, id);
+        Main.MAIN_SINGLETON.server.sendToAllUDP(dr);
     }
 }

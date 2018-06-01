@@ -5,11 +5,10 @@
  */
 package de.sag.mazehunter.game.player.abilities;
 
+import de.sag.mazehunter.game.player.InputListener;
 import com.esotericsoftware.kryonet.Connection;
-import com.esotericsoftware.kryonet.Listener;
 import de.sag.mazehunter.Main;
 import de.sag.mazehunter.game.Config;
-import de.sag.mazehunter.game.player.Player;
 import de.sag.mazehunter.server.networkData.abilities.StandardHealRequest;
 import de.sag.mazehunter.server.networkData.abilities.StandardHealResponse;
 import java.util.Timer;
@@ -19,7 +18,7 @@ import java.util.TimerTask;
  *
  * @author Karl Huber
  */
-public class StandardHealListener extends Listener{
+public class StandardHealListener extends InputListener{
 
     @Override
     public void received(Connection connection, Object object) {
@@ -36,16 +35,5 @@ public class StandardHealListener extends Listener{
     
     public void SendStandardHealResponse(int id) {
         Main.MAIN_SINGLETON.server.sendToAllUDP(new StandardHealResponse(id));
-    }
-    
-    public int getIndex (int id){
-        int index = 0;
-        for (int i = 0; i < 4; i++) {
-            Player p = Main.MAIN_SINGLETON.game.player[i];
-            if (p!=null && p.connectionID == id) {
-                index = i;
-            }
-        }
-        return index;
     }
 }

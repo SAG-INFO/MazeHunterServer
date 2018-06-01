@@ -16,12 +16,10 @@ import de.sag.mazehunter.server.networkData.HealthUpdate;
 public class Game {
     
     public Player player[];
-    public Outputer outputer;
 
     public Game() {
         player = new Player[4];
         Main.MAIN_SINGLETON.server.addListener(new DisconnectListener());
-        outputer = new Outputer();
         createAbilityListeners();
         Main.MAIN_SINGLETON.server.addListener(new MovementListener());
         Main.MAIN_SINGLETON.server.addListener(new MovementSpeedListener());

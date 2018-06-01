@@ -49,7 +49,7 @@ public class Player {
     
     /**
      * 
-     * @param amount positive values for healing and negitve ones for damage
+     * @param amount positive values for healing and negative ones for damage
      */
     public void changeHealth(int amount) {
         if (amount + currentHealth > maxHealth) {
@@ -60,7 +60,7 @@ public class Player {
             currentHealth += amount;
         }
         
-        HealthUpdate hu = new HealthUpdate(amount, connectionID);
+        HealthUpdate hu = new HealthUpdate(currentHealth, connectionID);
         Main.MAIN_SINGLETON.server.sendToAllUDP(hu);
     }
     

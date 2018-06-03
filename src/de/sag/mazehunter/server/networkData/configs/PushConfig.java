@@ -21,17 +21,20 @@ public class PushConfig {
     public float BLIZZARD_SLOW_DURATION; 
     public float BLIZZARD_SLOW_AMOUNT;
     public int BLIZZARD_DAMAGE;
-    public float BLIZZARD_COOLDOWN;
     
     public float DASH_COOLDOWN;
     public int DASH_RANGE;
     
     public float STANDARDHEAL_DURATION ;
-    public float STANDARDHEAL_COOLDOWN;
     public int STANDARDHEAL_TOTALHEAL;
     
     public int DEFAULT_SPEED;
-    public int DEFAULT_HEALTHPOINTS;
+    
+    public int FIREBALL_DAMAGE;
+    public int FIREBALL_SPEED;
+    public int FIREBALL_SIZE;
+    public int FIREBALL_CHARGES;
+    public float FIREBALL_CD_BETWEEN_USES;
 
     public PushConfig() {
     }

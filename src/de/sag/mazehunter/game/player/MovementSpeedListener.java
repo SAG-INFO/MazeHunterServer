@@ -26,5 +26,3 @@ public class MovementSpeedListener extends InputListener {
         }
     }
 }
-
-

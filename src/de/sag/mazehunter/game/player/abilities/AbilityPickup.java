@@ -8,9 +8,12 @@ import de.sag.mazehunter.utils.Vector2;
  */
 public class AbilityPickup {
     public final Vector2 position;
-    public String name;
+    public final int id;
+    public final String abilityName;
 
-    public AbilityPickup(Vector2 position) {
+    public AbilityPickup(Vector2 position, int id, String name) {
         this.position = new Vector2(position);
+        this.id = id;
+        this.abilityName = name;
     }
 }

@@ -20,7 +20,7 @@ import de.sag.mazehunter.server.networkData.configs.PushConfig;
 public class Config {
     
     //Player Stuff
-    public static int DEFAULT_SPEED = 50;
+    public static int DEFAULT_SPEED = 100;
     public static int DEFAULT_HEALTHPOINTS = 100;
     
     //Ability Stuff

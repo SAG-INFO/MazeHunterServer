@@ -9,7 +9,6 @@ import de.sag.mazehunter.game.player.abilities.DashListener;
 import de.sag.mazehunter.game.player.abilities.PickupManager;
 import de.sag.mazehunter.game.player.abilities.StandardHealListener;
 import de.sag.mazehunter.server.networkData.HealthUpdate;
-import de.sag.mazehunter.utils.Vector2;
 
 /**
  *
@@ -20,7 +19,7 @@ public class Game {
     public Player[] players;
     public Outputer outputer;
 
-    public PickupManager manager;
+    public PickupManager pickupManager;
     
     public Game() {
         players = new Player[4];
@@ -30,8 +29,7 @@ public class Game {
         Main.MAIN_SINGLETON.server.addListener(new MovementListener());
         Main.MAIN_SINGLETON.server.addListener(new MovementSpeedListener());
         
-        manager = new PickupManager();
-        manager.spawnPickup(new Vector2(10, 10), PickupManager.ABILITY_ARROW);
+        pickupManager = new PickupManager();
     }
     
     public void createAbilityListeners() {
@@ -43,6 +41,7 @@ public class Game {
     }
     
     public void update(float delta){
+        pickupManager.update();
         for (int i = 0; i < 4; i++) {
             if(players[i] == null)
                 continue;

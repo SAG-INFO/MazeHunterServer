@@ -34,7 +34,7 @@ public class Player {
         connectionID = id;
         speed = Config.DEFAULT_SPEED;
         movementSpeedFactor = 1.0f;
-        maxHealth = 100;
+        maxHealth = Config.DEFAULT_HEALTHPOINTS;
         currentHealth = maxHealth;
     }
 
@@ -49,7 +49,7 @@ public class Player {
     
     /**
      * 
-     * @param amount positive values for healing and negative ones for damage
+     * @param amount positive values for healing and negitve ones for damage
      */
     public void changeHealth(int amount) {
         if (amount + currentHealth > maxHealth) {
@@ -60,7 +60,7 @@ public class Player {
             currentHealth += amount;
         }
         
-        HealthUpdate hu = new HealthUpdate(currentHealth, connectionID);
+        HealthUpdate hu = new HealthUpdate(amount, connectionID);
         Main.MAIN_SINGLETON.server.sendToAllUDP(hu);
     }
     

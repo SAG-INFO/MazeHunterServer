@@ -5,31 +5,41 @@
  */
 package de.sag.mazehunter.game.player.abilities;
 
-import de.sag.mazehunter.game.player.InputListener;
 import com.esotericsoftware.kryonet.Connection;
+import com.esotericsoftware.kryonet.Listener;
 import de.sag.mazehunter.Main;
 import de.sag.mazehunter.game.Config;
+import de.sag.mazehunter.game.player.Player;
 import de.sag.mazehunter.server.networkData.abilities.DashRequest;
-import de.sag.mazehunter.server.networkData.abilities.DashResponse;
 import de.sag.mazehunter.utils.Vector2;
 
 /**
  *
  * @author Karl Huber
  */
-public class DashListener extends InputListener{
+public class DashListener extends Listener{
 
     @Override
     public void received(Connection connection, Object object) {
         if(object instanceof DashRequest) {
-            Vector2 tempVelocity = Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].velocity;
-            Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].position.add(tempVelocity.setLength(Config.DASH_RANGE));
+            Vector2 tempVelocity = Main.MAIN_SINGLETON.game.players[getIndex(connection.getID())].velocity;
+            Main.MAIN_SINGLETON.game.players[getIndex(connection.getID())].position.add(tempVelocity.setLength(Config.DASH_RANGE));
                 SendDashResponse(connection.getID());
         }
     }
-        
+    
     public void SendDashResponse(int id) {
-        DashResponse dr = new DashResponse(Main.MAIN_SINGLETON.game.player[getIndex(id)].position, Main.MAIN_SINGLETON.game.player[getIndex(id)].velocity, id);
-        Main.MAIN_SINGLETON.server.sendToAllUDP(dr);
+        Main.MAIN_SINGLETON.game.outputer.sendDashResponse(Main.MAIN_SINGLETON.game.players[getIndex(id)].position, Main.MAIN_SINGLETON.game.players[getIndex(id)].velocity, id);
+    }
+    
+    public int getIndex (int id){
+        int index = 0;
+        for (int i = 0; i < 4; i++) {
+            Player p = Main.MAIN_SINGLETON.game.players[i];
+            if (p!=null && p.connectionID == id) {
+                index = i;
+            }
+        }
+        return index;
     }
 }

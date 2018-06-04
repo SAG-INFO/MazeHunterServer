@@ -73,7 +73,7 @@ public class Main {
 
         int i = 0;
         for (PlayerLobby player : lobby.players) {
-            game.player[i] = new Player(player.id);
+            game.players[i] = new Player(player.id);
             i++;
         }
         

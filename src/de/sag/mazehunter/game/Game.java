@@ -6,8 +6,10 @@ import de.sag.mazehunter.Main;
 import de.sag.mazehunter.server.networkData.configs.PushConfig;
 import de.sag.mazehunter.game.player.MovementSpeedListener;
 import de.sag.mazehunter.game.player.abilities.DashListener;
+import de.sag.mazehunter.game.player.abilities.PickupManager;
 import de.sag.mazehunter.game.player.abilities.StandardHealListener;
 import de.sag.mazehunter.server.networkData.HealthUpdate;
+import de.sag.mazehunter.utils.Vector2;
 
 /**
  *
@@ -15,14 +17,21 @@ import de.sag.mazehunter.server.networkData.HealthUpdate;
  */
 public class Game {
     
-    public Player player[];
+    public Player[] players;
+    public Outputer outputer;
 
+    public PickupManager manager;
+    
     public Game() {
-        player = new Player[4];
+        players = new Player[4];
         Main.MAIN_SINGLETON.server.addListener(new DisconnectListener());
+        outputer = new Outputer();
         createAbilityListeners();
         Main.MAIN_SINGLETON.server.addListener(new MovementListener());
         Main.MAIN_SINGLETON.server.addListener(new MovementSpeedListener());
+        
+        manager = new PickupManager();
+        manager.spawnPickup(new Vector2(10, 10), PickupManager.ABILITY_ARROW);
     }
     
     public void createAbilityListeners() {
@@ -35,14 +44,21 @@ public class Game {
     
     public void update(float delta){
         for (int i = 0; i < 4; i++) {
-            if(player[i] == null)
+            if(players[i] == null)
                 continue;
-            player[i].update(delta);
+            players[i].update(delta);
         }
     }
     
-    
-
     public void exit() {
+    }
+    
+    public Player getPlayer(int connectionID){
+        for (Player player : players) {
+            if(player != null && player.connectionID == connectionID)
+                return player;
+        }
+        
+        throw new RuntimeException("Player with ConnectionID "+connectionID+" not found :/");
     }
 }

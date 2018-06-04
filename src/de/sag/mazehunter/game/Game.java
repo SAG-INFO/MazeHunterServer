@@ -5,8 +5,8 @@ import de.sag.mazehunter.game.player.Player;
 import de.sag.mazehunter.Main;
 import de.sag.mazehunter.server.networkData.configs.PushConfig;
 import de.sag.mazehunter.game.player.MovementSpeedListener;
-import de.sag.mazehunter.game.player.abilities.DashListener;
-import de.sag.mazehunter.game.player.abilities.StandardHealListener;
+import de.sag.mazehunter.game.player.abilities.Mobility.MobilityListener;
+import de.sag.mazehunter.game.player.abilities.Utility.standardHeal.StandardHealListener;
 import de.sag.mazehunter.server.networkData.HealthUpdate;
 
 /**
@@ -26,7 +26,7 @@ public class Game {
     }
     
     public void createAbilityListeners() {
-        Main.MAIN_SINGLETON.server.addListener(new DashListener());
+        Main.MAIN_SINGLETON.server.addListener(new MobilityListener());
         Main.MAIN_SINGLETON.server.addListener(new StandardHealListener());
     }
     

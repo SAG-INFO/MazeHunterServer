@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.sag.mazehunter.game.player.abilities;
+package de.sag.mazehunter.game.player.abilities.Utility;
 
 import com.esotericsoftware.kryonet.Connection;
 import de.sag.mazehunter.Main;
@@ -17,15 +17,14 @@ import de.sag.mazehunter.utils.Vector2;
  *
  * @author Karl Huber
  */
-public class FireballListener extends InputListener{
-
+public class UtilityListener extends InputListener {
+    
     @Override
     public void received(Connection connection, Object object) {
         if(object instanceof DashRequest) {
         }
     }
         
-    public void SendFireballResponse(int id) {
-        Main.MAIN_SINGLETON.server.sendToAllUDP(null);
+    public void Send(int id) {
     }
 }

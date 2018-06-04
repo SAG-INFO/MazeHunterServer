@@ -7,6 +7,9 @@ package de.sag.mazehunter.game.player;
 
 import de.sag.mazehunter.Main;
 import de.sag.mazehunter.game.Config;
+import de.sag.mazehunter.game.player.abilities.Attack.AttackPickup;
+import de.sag.mazehunter.game.player.abilities.Attack.Fireball;
+import de.sag.mazehunter.game.player.abilities.Utility.standardHeal.StandardHeal;
 import de.sag.mazehunter.server.networkData.HealthUpdate;
 import de.sag.mazehunter.utils.Vector2;
 
@@ -23,6 +26,8 @@ public class Player {
     float movementSpeedFactor;
     int maxHealth;
     int currentHealth;
+    public AttackPickup attackAbility;
+    public AttackPickup utilityAbility;
     
     private final Vector2 tmp = new Vector2();
 
@@ -36,6 +41,8 @@ public class Player {
         movementSpeedFactor = 1.0f;
         maxHealth = 100;
         currentHealth = maxHealth;
+        attackAbility = null;
+        utilityAbility = null;
     }
 
     public void move(int angle, boolean movement) {

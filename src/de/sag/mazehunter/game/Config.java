@@ -41,7 +41,7 @@ public class Config {
     
     public static final int FIREBALL_DAMAGE = 25;
     public static final int FIREBALL_SPEED = 75;
-    public static final int FIREBALL_SIZE = 25;
+    public static final int FIREBALL_RADIUS = 25;
     public static final int FIREBALL_CHARGES = 3;
     public static final float FIREBALL_SPAWNRATE = 1.0f;
     public static final float FIREBALL_CD_BETWEEN_USES = 1.0f;
@@ -64,7 +64,7 @@ public class Config {
         
         pc.FIREBALL_CHARGES = FIREBALL_CHARGES;
         pc.FIREBALL_DAMAGE = FIREBALL_DAMAGE;
-        pc.FIREBALL_SIZE = FIREBALL_SIZE;
+        pc.FIREBALL_SIZE = FIREBALL_RADIUS;
         pc.FIREBALL_SPEED = FIREBALL_SPEED;
         pc.FIREBALL_CD_BETWEEN_USES = FIREBALL_CD_BETWEEN_USES;
         

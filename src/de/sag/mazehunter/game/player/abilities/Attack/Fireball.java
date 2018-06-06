@@ -11,6 +11,8 @@ import de.sag.mazehunter.game.player.abilities.Attack.projectiles.FireballProjec
 import de.sag.mazehunter.server.networkData.abilities.FireballResponse;
 import de.sag.mazehunter.utils.Vector2;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  *
@@ -24,36 +26,44 @@ public class Fireball extends AttackPickup {
     public boolean canUse;
     
     public ArrayList<FireballProjectile> fireballs;
-    private static final Fireball FIREBALL_ABILITY = new Fireball();
     
     @Override
     public void use(int id, float angle) {
+        
+        if (!canUse) {
+            return;
+        }
         
         int index = getIndex(id);
         
         charge--;
         if (charge == 0) {
             Main.MAIN_SINGLETON.game.player[index].attackAbility = null;
+            return;
         }
         
         Vector2 fVelocity = new Vector2(Config.FIREBALL_SPEED, 0);
         fVelocity.setAngle(angle);
         
         fireballs.add(new FireballProjectile(fVelocity, Main.MAIN_SINGLETON.game.player[index].position, Config.FIREBALL_RADIUS));
-        Main.MAIN_SINGLETON.server.sendToAllUDP(new FireballResponse(id, Main.MAIN_SINGLETON.game.player[index].position, fVelocity));
+        Main.MAIN_SINGLETON.server.sendToAllUDP(new FireballResponse(id, fVelocity));
+        
+        startCooldown(index);
     }
         
-    @Override
-    public boolean collect(int id) {
-        if (Main.MAIN_SINGLETON.game.player[getIndex(id)].attackAbility != null) {
-            return false;
-        } else {
-            Main.MAIN_SINGLETON.game.player[getIndex(id)].attackAbility = FIREBALL_ABILITY;
-            charge = Config.FIREBALL_CHARGES;
-        }
-        return true; 
+    public void startCooldown(int index) {
+        canUse = false;
+        Timer t = new Timer();
+            t.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                canUse = true;
+            }}, (long) (Config.FIREBALL_CD_BETWEEN_USES));
     }
 
     public Fireball() {
+        charge = Config.FIREBALL_CHARGES;
+        canUse = true;
+        fireballs = new ArrayList<>();
     }
 }

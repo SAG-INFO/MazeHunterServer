@@ -13,13 +13,5 @@ import de.sag.mazehunter.game.player.Player;
  * @author Karl Huber
  */
 public class Pickup extends Ability {
-    
-     /**
-     *
-     * @param id id of the player collecting the pickup
-     * @return true if he collects the Ability, false if he already has one
-     */
-    public boolean collect(int id) {
-        return false;
-    }
+
 }

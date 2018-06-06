@@ -42,7 +42,9 @@ public class Config {
     public static final int FIREBALL_DAMAGE = 25;
     public static final int FIREBALL_SPEED = 75;
     public static final int FIREBALL_RADIUS = 25;
-    public static final int FIREBALL_CHARGES = 3;
+    
+    //set super high for testing
+    public static final int FIREBALL_CHARGES = 300;
     public static final float FIREBALL_SPAWNRATE = 1.0f;
     public static final float FIREBALL_CD_BETWEEN_USES = 1.0f;
     

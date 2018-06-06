@@ -25,5 +25,5 @@ public class Ability {
         return index;
     }
     
-    public void sendResponse(int id) {}
+    public void use(int id) {}
 }

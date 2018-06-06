@@ -8,6 +8,7 @@ package de.sag.mazehunter.game.player;
 import com.esotericsoftware.kryonet.Connection;
 import de.sag.mazehunter.Main;
 import de.sag.mazehunter.game.Config;
+import de.sag.mazehunter.game.player.abilities.Attack.PickupCollector;
 import de.sag.mazehunter.server.networkData.MovementRequest;
 
 /**
@@ -28,6 +29,9 @@ public class MovementListener extends InputListener{
             sendMovementResponse(Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].position, Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].velocity,connection.getID());
             if (first) {
                 Config.pushConfig();
+                
+                //testzzz
+                Main.MAIN_SINGLETON.game.pickupCollector.collectFireball(connection.getID());
                 first = false;
             }
         }

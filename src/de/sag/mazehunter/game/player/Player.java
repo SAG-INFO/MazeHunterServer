@@ -11,7 +11,7 @@ import de.sag.mazehunter.server.networkData.HealthUpdate;
 import de.sag.mazehunter.utils.Vector2;
 
 /**
- *
+ * @author maxim.schoening
  * @author g.duennweber
  */
 public class Player {

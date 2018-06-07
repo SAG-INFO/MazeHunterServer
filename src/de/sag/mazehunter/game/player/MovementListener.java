@@ -9,14 +9,15 @@ import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import de.sag.mazehunter.Main;
 import de.sag.mazehunter.game.Config;
-import de.sag.mazehunter.game.player.abilities.Attack.PickupCollector;
+import de.sag.mazehunter.game.player.abilities.FACTORY;
 import de.sag.mazehunter.server.networkData.MovementRequest;
+import de.sag.mazehunter.utils.Vector2;
 
 /**
  *
  * @author g.duennweber
  */
-public class MovementListener extends Listener{
+public class MovementListener extends InputListener{
     
     /*sending the configs from startGame() causes the client to disconnect.
     This is an alternative where the first movement input triggers the server 
@@ -28,29 +29,11 @@ public class MovementListener extends Listener{
     public void received(Connection connection, Object object) {
         if(object instanceof MovementRequest) {
             Main.MAIN_SINGLETON.game.player[this.getIndex(connection.getID())].move(((MovementRequest) object).angle, ((MovementRequest) object).movement);
-            SendMovement(connection.getID());
+            sendMovementResponse(Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].position, Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].velocity, connection.getID());
             if (first) {
                 Config.pushConfig();
-                
-                //testzzz
-                Main.MAIN_SINGLETON.game.pickupCollector.collectFireball(connection.getID());
                 first = false;
             }
         }
-    }
-    
-    public void SendMovement(int id) {
-        Main.MAIN_SINGLETON.game.outputer.sendMovementResponse(Main.MAIN_SINGLETON.game.player[this.getIndex(id)].position, Main.MAIN_SINGLETON.game.player[this.getIndex(id)].velocity, id);
-    }
-    
-    public int getIndex (int id){
-        int index = 0;
-        for (int i = 0; i < 4; i++) {
-            Player p = Main.MAIN_SINGLETON.game.player[i];
-            if (p!=null && p.connectionID == id) {
-                index = i;
-            }
-        }
-        return index;
     }
 }

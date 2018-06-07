@@ -57,9 +57,13 @@ public class PickupManager {
     }
     
     private void equipAbility(Player player, AbilityPickup pickup) {
-        disposePickup(pickup);
+        String name = pickup.abilityName;
+        
         EquipAbility ea = new EquipAbility();
-        ea.abilityName = pickup.abilityName;
+        ea.abilityName = name;
+        
+        //add new if statement here for every new pickup ability
+        if (name.equals("Fireball") && Main.MAIN_SINGLETON.game.abilityFACTORY.collectFireball(player.connectionID)) {disposePickup(pickup);}
         Main.MAIN_SINGLETON.server.sendToAllTCP(ea);
     }
 
@@ -78,7 +82,7 @@ public class PickupManager {
             @Override
             public void run() {
                 if (pickups.size() <= 5) {
-                    String name = Math.random()<0.5f?"teleport":"arrow";
+                    String name = Math.random()<0.5f?"Fireball":"arrow";
                     spawnPickup(new Vector2((float) Math.random() * 400, (float) Math.random() * 400), name);
                 }
             }

@@ -41,7 +41,7 @@ public class Player {
         connectionID = id;
         speed = Config.DEFAULT_SPEED;
         movementSpeedFactor = 1.0f;
-        maxHealth = Config.DEFAULT_HEALTHPOINTS;
+        maxHealth = 100;
         currentHealth = maxHealth;
         attackAbility = null;
         mobilityAbility = new Dash(); // maybe the player will be able to choose one at some point ..

@@ -7,6 +7,9 @@ package de.sag.mazehunter.game.player;
 
 import de.sag.mazehunter.Main;
 import de.sag.mazehunter.game.Config;
+import de.sag.mazehunter.game.player.abilities.Attack.AttackPickup;
+import de.sag.mazehunter.game.player.abilities.Mobility.Dash;
+import de.sag.mazehunter.game.player.abilities.PermanentAbility;
 import de.sag.mazehunter.server.networkData.HealthUpdate;
 import de.sag.mazehunter.utils.Vector2;
 
@@ -24,8 +27,12 @@ public class Player {
     int maxHealth;
     int currentHealth;
     
+    public AttackPickup attackAbility;
+    public PermanentAbility mobilityAbility;
+    // public UtilityPickup utilityAbility;
+    
     private final Vector2 tmp = new Vector2();
-
+    
     public Player(int id) {
         position = new Vector2();
         position.set(0f, 0f);
@@ -36,6 +43,8 @@ public class Player {
         movementSpeedFactor = 1.0f;
         maxHealth = Config.DEFAULT_HEALTHPOINTS;
         currentHealth = maxHealth;
+        attackAbility = null;
+        mobilityAbility = new Dash(); // maybe the player will be able to choose one at some point ..
     }
 
     public void move(int angle, boolean movement) {

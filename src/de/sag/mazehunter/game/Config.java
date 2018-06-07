@@ -11,7 +11,7 @@ import de.sag.mazehunter.server.networkData.configs.PushConfig;
 /**
  *
  * @author Karl Huber
- * duration/cooldown always in seconds
+ * duration/cooldown in seconds/milliseconds
  * 
  * damage and heal always int (eg. no 10.5 HP possible)
  * 
@@ -20,8 +20,11 @@ import de.sag.mazehunter.server.networkData.configs.PushConfig;
 public class Config {
     
     //Player Stuff
-    public static int DEFAULT_SPEED = 100;
-    public static int DEFAULT_HEALTHPOINTS = 100;
+    public static int DEFAULT_SPEED = 50;
+    
+    //permanent ability Stuff
+    public static final float DASH_COOLDOWN = 4000;
+    public static final int DASH_RANGE = 30;
     
     //Ability Stuff
     public static final int BLIZZARD_RADIUS = 100;
@@ -33,9 +36,14 @@ public class Config {
     public static final float DASH_COOLDOWN = 6f;
     public static final int DASH_RANGE = 30;
     
-    public static final float STANDARDHEAL_DURATION = 2f;
-    public static final float STANDARDHEAL_COOLDOWN = 30f;
-    public static final int STANDARDHEAL_TOTALHEAL = 75;
+    public static final int FIREBALL_DAMAGE = 25;
+    public static final int FIREBALL_SPEED = 75;
+    public static final int FIREBALL_RADIUS = 25;
+    
+    //set super high for testing
+    public static final int FIREBALL_CHARGES = 300;
+    public static final float FIREBALL_SPAWNRATE = 1.0f;
+    public static final float FIREBALL_CD_BETWEEN_USES = 500;
     
     public static void pushConfig() {
         PushConfig pc = new PushConfig();
@@ -56,7 +64,7 @@ public class Config {
         pc.STANDARDHEAL_COOLDOWN = STANDARDHEAL_COOLDOWN;
         pc.STANDARDHEAL_DURATION = STANDARDHEAL_DURATION;
         pc.STANDARDHEAL_TOTALHEAL = STANDARDHEAL_TOTALHEAL;
-        
+
         Main.MAIN_SINGLETON.server.sendToAllUDP(pc);
     }
 }

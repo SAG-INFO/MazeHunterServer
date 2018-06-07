@@ -10,13 +10,16 @@ import de.sag.mazehunter.server.networkData.MovementSpeedRequest;
 import de.sag.mazehunter.server.networkData.PlayerLobby;
 import de.sag.mazehunter.server.networkData.StartGameRequest;
 import de.sag.mazehunter.server.networkData.StartGameResponse;
-import de.sag.mazehunter.server.networkData.abilities.DashRequest;
+import de.sag.mazehunter.server.networkData.abilities.AttackRequest;
+import de.sag.mazehunter.server.networkData.abilities.MobilityRequest;
 import de.sag.mazehunter.server.networkData.abilities.DashResponse;
 import de.sag.mazehunter.server.networkData.abilities.DisposePickup;
 import de.sag.mazehunter.server.networkData.abilities.EquipAbility;
 import de.sag.mazehunter.server.networkData.abilities.SpawnPickup;
 import de.sag.mazehunter.server.networkData.abilities.StandardHealRequest;
+import de.sag.mazehunter.server.networkData.abilities.FireballResponse;
 import de.sag.mazehunter.server.networkData.abilities.StandardHealResponse;
+import de.sag.mazehunter.server.networkData.abilities.UtilityRequest;
 import de.sag.mazehunter.server.networkData.configs.PushConfig;
 import de.sag.mazehunter.utils.Vector2;
 import java.io.IOException;
@@ -67,13 +70,12 @@ public class GameServer extends Server{
         
         //Ability Stuff
         getKryo().register(HealthUpdate.class);
+        getKryo().register(AttackRequest.class);
+        getKryo().register(UtilityRequest.class);
+        getKryo().register(MobilityRequest.class);
         
-        //Dash
-        getKryo().register(DashRequest.class);
+        //AbilityResponses
         getKryo().register(DashResponse.class);
-
-        //StandardHeal
-        getKryo().register(StandardHealRequest.class);
         getKryo().register(StandardHealResponse.class);
         
         //Blizzard
@@ -82,5 +84,7 @@ public class GameServer extends Server{
         getKryo().register(SpawnPickup.class);
         getKryo().register(DisposePickup.class);
         getKryo().register(EquipAbility.class);
+        getKryo().register(FireballResponse.class);
+
     }
 }

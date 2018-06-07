@@ -3,14 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.sag.mazehunter.server.networkData.abilities;
+package de.sag.mazehunter.game.player.abilities;
+
+import de.sag.mazehunter.Main;
+import de.sag.mazehunter.game.player.Player;
 
 /**
  *
- * @author karl.huber
+ * @author Karl Huber
  */
-public class DashRequest {
+public class Pickup extends Ability {
 
-    public DashRequest() {
-    }
 }

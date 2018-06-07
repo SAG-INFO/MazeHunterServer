@@ -45,7 +45,7 @@ public class PickupManager {
     }
 
     public void update() {
-        for (Player player : Main.MAIN_SINGLETON.game.players) {
+        for (Player player : Main.MAIN_SINGLETON.game.player) {
             if(player == null)
                 continue;
             

@@ -16,13 +16,13 @@ import de.sag.mazehunter.server.networkData.HealthUpdate;
  */
 public class Game {
     
-    public Player[] players;
+    public Player[] player;
     public Outputer outputer;
 
     public PickupManager pickupManager;
     
     public Game() {
-        players = new Player[4];
+        player = new Player[4];
         Main.MAIN_SINGLETON.server.addListener(new DisconnectListener());
         outputer = new Outputer();
         createAbilityListeners();
@@ -43,9 +43,9 @@ public class Game {
     public void update(float delta){
         pickupManager.update();
         for (int i = 0; i < 4; i++) {
-            if(players[i] == null)
+            if(player[i] == null)
                 continue;
-            players[i].update(delta);
+            player[i].update(delta);
         }
     }
     
@@ -53,7 +53,7 @@ public class Game {
     }
     
     public Player getPlayer(int connectionID){
-        for (Player player : players) {
+        for (Player player : player) {
             if(player != null && player.connectionID == connectionID)
                 return player;
         }

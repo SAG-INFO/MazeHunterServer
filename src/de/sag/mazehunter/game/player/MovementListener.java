@@ -26,7 +26,7 @@ public class MovementListener extends Listener{
     @Override
     public void received(Connection connection, Object object) {
         if(object instanceof MovementRequest) {
-            Main.MAIN_SINGLETON.game.players[this.getIndex(connection.getID())].move(((MovementRequest) object).angle, ((MovementRequest) object).movement);
+            Main.MAIN_SINGLETON.game.player[this.getIndex(connection.getID())].move(((MovementRequest) object).angle, ((MovementRequest) object).movement);
             SendMovement(connection.getID());
             if (first) {
                 Config.pushConfig();
@@ -36,13 +36,13 @@ public class MovementListener extends Listener{
     }
     
     public void SendMovement(int id) {
-        Main.MAIN_SINGLETON.game.outputer.sendMovementResponse(Main.MAIN_SINGLETON.game.players[this.getIndex(id)].position, Main.MAIN_SINGLETON.game.players[this.getIndex(id)].velocity, id);
+        Main.MAIN_SINGLETON.game.outputer.sendMovementResponse(Main.MAIN_SINGLETON.game.player[this.getIndex(id)].position, Main.MAIN_SINGLETON.game.player[this.getIndex(id)].velocity, id);
     }
     
     public int getIndex (int id){
         int index = 0;
         for (int i = 0; i < 4; i++) {
-            Player p = Main.MAIN_SINGLETON.game.players[i];
+            Player p = Main.MAIN_SINGLETON.game.player[i];
             if (p!=null && p.connectionID == id) {
                 index = i;
             }

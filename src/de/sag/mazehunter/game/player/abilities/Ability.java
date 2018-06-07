@@ -15,14 +15,13 @@ import de.sag.mazehunter.game.player.Player;
 public class Ability {
     
     public int getIndex (int id){
-        int index = 0;
         for (int i = 0; i < 4; i++) {
             Player p = Main.MAIN_SINGLETON.game.player[i];
             if (p!=null && p.connectionID == id) {
-                index = i;
+                return i;
             }
         }
-        return index;
+        return -1;
     }
     
     public void use(int id) {}

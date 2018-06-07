@@ -11,7 +11,7 @@ import de.sag.mazehunter.server.networkData.configs.PushConfig;
 /**
  *
  * @author Karl Huber
- * duration/cooldown always in seconds
+ * duration/cooldown in seconds/milliseconds
  * 
  * damage and heal always int (eg. no 10.5 HP possible)
  * 
@@ -25,7 +25,7 @@ public class Config {
     public static int DEFAULT_SPEED = 50;
     
     //permanent ability Stuff
-    public static final float DASH_COOLDOWN = 6f;
+    public static final float DASH_COOLDOWN = 4000;
     public static final int DASH_RANGE = 30;
     
     //pickups
@@ -46,7 +46,7 @@ public class Config {
     //set super high for testing
     public static final int FIREBALL_CHARGES = 300;
     public static final float FIREBALL_SPAWNRATE = 1.0f;
-    public static final float FIREBALL_CD_BETWEEN_USES = 1.0f;
+    public static final float FIREBALL_CD_BETWEEN_USES = 500;
     
     public static void pushConfig() {
         PushConfig pc = new PushConfig();

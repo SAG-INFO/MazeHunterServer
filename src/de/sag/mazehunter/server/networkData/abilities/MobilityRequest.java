@@ -9,8 +9,8 @@ package de.sag.mazehunter.server.networkData.abilities;
  *
  * @author karl.huber
  */
-public class DashRequest {
+public class MobilityRequest {
 
-    public DashRequest() {
+    public MobilityRequest() {
     }
 }

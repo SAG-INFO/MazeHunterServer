@@ -11,7 +11,7 @@ import de.sag.mazehunter.server.networkData.PlayerLobby;
 import de.sag.mazehunter.server.networkData.StartGameRequest;
 import de.sag.mazehunter.server.networkData.StartGameResponse;
 import de.sag.mazehunter.server.networkData.abilities.AttackRequest;
-import de.sag.mazehunter.server.networkData.abilities.DashRequest;
+import de.sag.mazehunter.server.networkData.abilities.MobilityRequest;
 import de.sag.mazehunter.server.networkData.abilities.DashResponse;
 import de.sag.mazehunter.server.networkData.abilities.FireballResponse;
 import de.sag.mazehunter.server.networkData.abilities.StandardHealResponse;
@@ -68,14 +68,11 @@ public class GameServer extends Server{
         getKryo().register(HealthUpdate.class);
         getKryo().register(AttackRequest.class);
         getKryo().register(UtilityRequest.class);
+        getKryo().register(MobilityRequest.class);
         
-        getKryo().register(DashRequest.class);
+        //AbilityResponses
         getKryo().register(DashResponse.class);
-        
         getKryo().register(StandardHealResponse.class);
-        
         getKryo().register(FireballResponse.class);
-        
-        //Blizzard
     }
 }

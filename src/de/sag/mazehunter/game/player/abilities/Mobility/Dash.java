@@ -19,31 +19,35 @@ import java.util.TimerTask;
  */
 public class Dash extends PermanentAbility {
     
-    public boolean canUse;
+    public boolean canUse = true;
     
     @Override
     public void use(int id) {
-        Vector2 tempVelocity = Main.MAIN_SINGLETON.game.player[getIndex(id)].velocity;
-        Main.MAIN_SINGLETON.game.player[getIndex(id)].position.add(tempVelocity.setLength(Config.DASH_RANGE));
+        if (canUse) {
+            startCooldown();
         
-        DashResponse dr = new DashResponse(Main.MAIN_SINGLETON.game.player[getIndex(id)].position, Main.MAIN_SINGLETON.game.player[getIndex(id)].velocity, id);
-        Main.MAIN_SINGLETON.server.sendToAllUDP(dr);
+            int index = getIndex(id);
         
-        startCooldown();
+            Vector2 tempVelocity = Main.MAIN_SINGLETON.game.player[index].velocity;
+            Main.MAIN_SINGLETON.game.player[index].position.add(tempVelocity.setLength(Config.DASH_RANGE));
+        
+            DashResponse dr = new DashResponse(Main.MAIN_SINGLETON.game.player[index].position, Main.MAIN_SINGLETON.game.player[index].velocity, id);
+            Main.MAIN_SINGLETON.server.sendToAllUDP(dr);
+        }
     }
     
     @Override
     public void startCooldown() {
+        
         canUse = false;
+        
         Timer t = new Timer();
-            t.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                canUse = true;
-            }}, (long) (Config.DASH_COOLDOWN));
+        t.schedule(new TimerTask() {@Override
+            public void run() {
+            canUse = true;
+        }}, (long) Config.DASH_COOLDOWN);
     }
 
     public Dash() {
-        canUse = true;
     }
 }

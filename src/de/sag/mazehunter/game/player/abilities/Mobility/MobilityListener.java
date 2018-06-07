@@ -9,7 +9,7 @@ import de.sag.mazehunter.game.player.InputListener;
 import com.esotericsoftware.kryonet.Connection;
 import de.sag.mazehunter.Main;
 import de.sag.mazehunter.game.Config;
-import de.sag.mazehunter.server.networkData.abilities.DashRequest;
+import de.sag.mazehunter.server.networkData.abilities.MobilityRequest;
 import de.sag.mazehunter.server.networkData.abilities.DashResponse;
 import de.sag.mazehunter.utils.Vector2;
 
@@ -21,7 +21,7 @@ public class MobilityListener extends InputListener{
 
     @Override
     public void received(Connection connection, Object object) {
-        if(object instanceof DashRequest) {
+        if(object instanceof MobilityRequest) {
             Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].mobilityAbility.use(connection.getID());
         }
     }

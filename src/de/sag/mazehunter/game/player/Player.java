@@ -111,14 +111,61 @@ public class Player {
     int myTileY = world.myBlock;
     int[][] myNeighbours = new int[8][4];
     int[][] myNeighbours = world.getMyNeighbours.clone();
-    
+    collisionDistanceX = 10000.0f;
+    collisionDistanceY = 10000.0f;
     switch(this.velocity.angle()) {
         case 0: 
             if(!world.IsTileOpen(myNeighbours[0][0], myNeighbours[0][1], myNeighbours[0][2], myNeighbours[0][3]))
                 collisionDistanceX = getTilePosition(myNeighbours[0][0], myNeighbours[0][2], 'r') - this.position.x;
+            break;
         case 45:
             if(!world.IsTileOpen(myNeighbours[0][0], myNeighbours[0][1], myNeighbours[0][2], myNeighbours[0][3]))
-                collisionDistanceX = getTilePosition(myNeighbours[0][0], myNeighbours[0][2], 'r') - this.position.x;        
+                collisionDistanceX = getTilePosition(myNeighbours[0][0], myNeighbours[0][2], 'r') - this.position.x;  
+            if(!world.IsTileOpen(myNeighbours[1][0], myNeighbours[1][1], myNeighbours[1][2], myNeighbours[1][3]))
+                collisionDistanceX = getTilePosition(myNeighbours[1][0], myNeighbours[1][2], 'r') - this.position.x;
+                collisionDistanceY = getTilePosition(myNeighbours[1][1], myNeighbours[1][3], 'o') - this.position.y;
+            if(!world.IsTileOpen(myNeighbours[2][0], myNeighbours[2][1], myNeighbours[2][2], myNeighbours[2][3]))
+                collisionDistanceY = getTilePosition(myNeighbours[2][1], myNeighbours[2][3], 'o') - this.position.y;
+            break;
+        case 90:
+            if(!world.IsTileOpen(myNeighbours[2][0], myNeighbours[2][1], myNeighbours[2][2], myNeighbours[2][3]))
+                collisionDistanceY = getTilePosition(myNeighbours[2][1], myNeighbours[2][3], 'o') - this.position.y;
+            break;
+        case 135:
+            if(!world.IsTileOpen(myNeighbours[2][0], myNeighbours[2][1], myNeighbours[2][2], myNeighbours[2][3]))
+                collisionDistanceY = getTilePosition(myNeighbours[2][1], myNeighbours[2][3], 'o') - this.position.y;  
+            if(!world.IsTileOpen(myNeighbours[3][0], myNeighbours[3][1], myNeighbours[3][2], myNeighbours[3][3]))
+                collisionDistanceY = getTilePosition(myNeighbours[3][1], myNeighbours[3][3], 'o') - this.position.y;
+                collisionDistanceX = getTilePosition(myNeighbours[3][0], myNeighbours[3][2], 'l') - this.position.x;
+            if(!world.IsTileOpen(myNeighbours[4][0], myNeighbours[4][1], myNeighbours[4][2], myNeighbours[4][3]))
+                collisionDistanceX = getTilePosition(myNeighbours[4][0], myNeighbours[4][2], 'l') - this.position.x;
+            break;
+        case 180:
+            if(!world.IsTileOpen(myNeighbours[4][0], myNeighbours[4][1], myNeighbours[4][2], myNeighbours[4][3]))
+                collisionDistanceX = getTilePosition(myNeighbours[4][0], myNeighbours[4][2], 'l') - this.position.x;
+            break;
+        case 225:
+            if(!world.IsTileOpen(myNeighbours[4][0], myNeighbours[4][1], myNeighbours[4][2], myNeighbours[4][3]))
+                collisionDistanceX = getTilePosition(myNeighbours[4][0], myNeighbours[4][2], 'l') - this.position.x;  
+            if(!world.IsTileOpen(myNeighbours[5][0], myNeighbours[5][1], myNeighbours[5][2], myNeighbours[5][3]))
+                collisionDistanceX = getTilePosition(myNeighbours[5][0], myNeighbours[5][2], 'l') - this.position.x;
+                collisionDistanceY = getTilePosition(myNeighbours[5][1], myNeighbours[5][3], 'u') - this.position.y;
+            if(!world.IsTileOpen(myNeighbours[6][0], myNeighbours[6][1], myNeighbours[6][2], myNeighbours[6][3]))
+                collisionDistanceY = getTilePosition(myNeighbours[6][1], myNeighbours[6][3], 'u') - this.position.y;
+            break;
+        case 270:
+            if(!world.IsTileOpen(myNeighbours[6][0], myNeighbours[6][1], myNeighbours[6][2], myNeighbours[6][3]))
+                collisionDistanceY = getTilePosition(myNeighbours[6][1], myNeighbours[6][3], 'u') - this.position.y;
+            break;
+        case 315:
+            if(!world.IsTileOpen(myNeighbours[6][0], myNeighbours[6][1], myNeighbours[6][2], myNeighbours[6][3]))
+                collisionDistanceY = getTilePosition(myNeighbours[6][1], myNeighbours[6][3], 'u') - this.position.y;  
+            if(!world.IsTileOpen(myNeighbours[7][0], myNeighbours[7][1], myNeighbours[7][2], myNeighbours[7][3]))
+                collisionDistanceY = getTilePosition(myNeighbours[7][1], myNeighbours[7][3], 'u') - this.position.y;
+                collisionDistanceX = getTilePosition(myNeighbours[7][0], myNeighbours[7][2], 'r') - this.position.x;
+            if(!world.IsTileOpen(myNeighbours[0][0], myNeighbours[0][1], myNeighbours[0][2], myNeighbours[0][3]))
+                collisionDistanceX = getTilePosition(myNeighbours[0][0], myNeighbours[0][2], 'r') - this.position.x;
+            break;
     }
     }
     

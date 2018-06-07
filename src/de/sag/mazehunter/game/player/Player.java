@@ -23,6 +23,7 @@ public class Player {
     float movementSpeedFactor;
     int maxHealth;
     int currentHealth;
+    float CollisionDistance;
     
     private final Vector2 tmp = new Vector2();
 
@@ -71,5 +72,9 @@ public class Player {
 
     public void update(float delta) {
         this.position.add(tmp.set(velocity).scl(delta));
+    }
+    
+    public void calcCD() {
+        System.out.println("gftrgtrgotrgjotrjogtrjiogpftrhjiogfthio");
     }
 }

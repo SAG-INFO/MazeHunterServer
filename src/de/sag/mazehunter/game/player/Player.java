@@ -103,4 +103,65 @@ public class Player {
         collisionDistanceX = 1;
         collisionDistanceY =1;
     }*/
+    
+    public void calcCD() {
+    int myBlockX = world.myBlock;
+    int myTileX = world.myBlock;
+    int myBlockY = world.myBlock;
+    int myTileY = world.myBlock;
+    int[][] myNeighbours = new int[8][4];
+    int[][] myNeighbours = world.getMyNeighbours.clone();
+    
+    switch(this.velocity.angle()) {
+        case 0: 
+            if(!world.IsTileOpen(myNeighbours[0][0], myNeighbours[0][1], myNeighbours[0][2], myNeighbours[0][3]))
+                collisionDistanceX = getTilePosition(myNeighbours[0][0], myNeighbours[0][2], 'r') - this.position.x;
+        case 45:
+            if(!world.IsTileOpen(myNeighbours[0][0], myNeighbours[0][1], myNeighbours[0][2], myNeighbours[0][3]))
+                collisionDistanceX = getTilePosition(myNeighbours[0][0], myNeighbours[0][2], 'r') - this.position.x;        
+    }
+    }
+    
+    public float getTilePosition(int block, int tile, char side){ //char "schauen"
+        float tp = -1;
+        switch(side){
+            case 'r':  
+                /*if(tile == 0)
+                    tp = 0;
+                else if(tile == 1)
+                    tp = world.ecke;
+                else if (tile == 2)
+                    tp = world.ecke + world.center;
+                tp += block * world.blockbreite;
+                break;*/
+            case 'o':
+                if(tile == 0)
+                    tp = 0;
+                else if(tile == 1)
+                    tp = world.ecke;
+                else if (tile == 2)
+                    tp = world.ecke + world.center;
+                tp += block * world.blockbreite;
+                break;
+            case 'l':
+                /*if(tile == 0)
+                    tp = world.ecke;
+                else if(tile == 1)
+                    tp = world.ecke + world.center;
+                else if (tile == 2)
+                    tp = world.ecke + world.center + world.ecke;
+                tp += block * world.blockbreite;
+                break;*/
+            case 'u':
+                if(tile == 0)
+                    tp = world.ecke;
+                else if(tile == 1)
+                    tp = world.ecke + world.center;
+                else if (tile == 2)
+                    tp = world.ecke + world.center + world.ecke;
+                tp += block * world.blockbreite;
+                break;
+        }
+        return tp;
+    }
 }

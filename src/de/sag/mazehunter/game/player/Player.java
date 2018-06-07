@@ -95,21 +95,24 @@ public class Player {
     }
     
  
-    /*
+    
     public void calcCD() {
     int myBlockX = world.myBlock;
     int myTileX = world.myBlock;
     int myBlockY = world.myBlock;
     int myTileY = world.myBlock;
     int[][] myNeighbours = new int[8][4];
-    int[][] myNeighbours = world.getMyNeighbours.clone();
+    myNeighbours = world.getMyNeighbours.clone();
     collisionDistanceX = 10000.0f;
     collisionDistanceY = 10000.0f;
-    switch(this.velocity.angle()) {
+    switch((int)this.velocity.angle()) {
+        case 359:
+        case 360:
         case 0: 
             if(!world.IsTileOpen(myNeighbours[0][0], myNeighbours[0][1], myNeighbours[0][2], myNeighbours[0][3]))
                 collisionDistanceX = getTilePosition(myNeighbours[0][0], myNeighbours[0][2], 'r') - this.position.x;
             break;
+        case 44:
         case 45:
             if(!world.IsTileOpen(myNeighbours[0][0], myNeighbours[0][1], myNeighbours[0][2], myNeighbours[0][3]))
                 collisionDistanceX = getTilePosition(myNeighbours[0][0], myNeighbours[0][2], 'r') - this.position.x;  
@@ -119,10 +122,12 @@ public class Player {
             if(!world.IsTileOpen(myNeighbours[2][0], myNeighbours[2][1], myNeighbours[2][2], myNeighbours[2][3]))
                 collisionDistanceY = getTilePosition(myNeighbours[2][1], myNeighbours[2][3], 'o') - this.position.y;
             break;
+        case 89:
         case 90:
             if(!world.IsTileOpen(myNeighbours[2][0], myNeighbours[2][1], myNeighbours[2][2], myNeighbours[2][3]))
                 collisionDistanceY = getTilePosition(myNeighbours[2][1], myNeighbours[2][3], 'o') - this.position.y;
             break;
+        case 134:
         case 135:
             if(!world.IsTileOpen(myNeighbours[2][0], myNeighbours[2][1], myNeighbours[2][2], myNeighbours[2][3]))
                 collisionDistanceY = getTilePosition(myNeighbours[2][1], myNeighbours[2][3], 'o') - this.position.y;  
@@ -132,10 +137,12 @@ public class Player {
             if(!world.IsTileOpen(myNeighbours[4][0], myNeighbours[4][1], myNeighbours[4][2], myNeighbours[4][3]))
                 collisionDistanceX = getTilePosition(myNeighbours[4][0], myNeighbours[4][2], 'l') - this.position.x;
             break;
+        case 179:
         case 180:
             if(!world.IsTileOpen(myNeighbours[4][0], myNeighbours[4][1], myNeighbours[4][2], myNeighbours[4][3]))
                 collisionDistanceX = getTilePosition(myNeighbours[4][0], myNeighbours[4][2], 'l') - this.position.x;
             break;
+        case 224:
         case 225:
             if(!world.IsTileOpen(myNeighbours[4][0], myNeighbours[4][1], myNeighbours[4][2], myNeighbours[4][3]))
                 collisionDistanceX = getTilePosition(myNeighbours[4][0], myNeighbours[4][2], 'l') - this.position.x;  
@@ -145,10 +152,12 @@ public class Player {
             if(!world.IsTileOpen(myNeighbours[6][0], myNeighbours[6][1], myNeighbours[6][2], myNeighbours[6][3]))
                 collisionDistanceY = getTilePosition(myNeighbours[6][1], myNeighbours[6][3], 'u') - this.position.y;
             break;
+        case 269:
         case 270:
             if(!world.IsTileOpen(myNeighbours[6][0], myNeighbours[6][1], myNeighbours[6][2], myNeighbours[6][3]))
                 collisionDistanceY = getTilePosition(myNeighbours[6][1], myNeighbours[6][3], 'u') - this.position.y;
             break;
+        case 314:
         case 315:
             if(!world.IsTileOpen(myNeighbours[6][0], myNeighbours[6][1], myNeighbours[6][2], myNeighbours[6][3]))
                 collisionDistanceY = getTilePosition(myNeighbours[6][1], myNeighbours[6][3], 'u') - this.position.y;  
@@ -159,9 +168,9 @@ public class Player {
                 collisionDistanceX = getTilePosition(myNeighbours[0][0], myNeighbours[0][2], 'r') - this.position.x;
             break;
     }
-    */
     
-    /*public float getTilePosition(int block, int tile, char side){ //char "schauen"
+    
+    public float getTilePosition(int block, int tile, char side){ //char "schauen"
         float tp = -1;
         switch(side){
             case 'r':  
@@ -172,7 +181,7 @@ public class Player {
                 else if (tile == 2)
                     tp = world.ecke + world.center;
                 tp += block * world.blockbreite;
-                break;*-/
+                break;*/
             case 'o':
                 if(tile == 0)
                     tp = 0;
@@ -190,7 +199,7 @@ public class Player {
                 else if (tile == 2)
                     tp = world.ecke + world.center + world.ecke;
                 tp += block * world.blockbreite;
-                break;*-/
+                break;*/
             case 'u':
                 if(tile == 0)
                     tp = world.ecke;
@@ -202,5 +211,5 @@ public class Player {
                 break;
         }
         return tp;
-    }*/
+    }
 }

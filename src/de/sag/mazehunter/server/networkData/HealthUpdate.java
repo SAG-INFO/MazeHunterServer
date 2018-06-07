@@ -10,11 +10,11 @@ package de.sag.mazehunter.server.networkData;
  * @author Karl Huber
  */
 public class HealthUpdate {
-    public int newHP;
+    public int change;
     public int id;
 
-    public HealthUpdate(int newHP, int id) {
-        this.newHP = newHP;
+    public HealthUpdate(int change, int id) {
+        this.change = change;
         this.id = id;
     }
 

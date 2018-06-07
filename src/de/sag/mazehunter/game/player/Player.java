@@ -23,7 +23,8 @@ public class Player {
     float movementSpeedFactor;
     int maxHealth;
     int currentHealth;
-    float CollisionDistance;
+    float collisionDistanceX;
+    float collisionDistanceY;
     
     private final Vector2 tmp = new Vector2();
 
@@ -37,6 +38,8 @@ public class Player {
         movementSpeedFactor = 1.0f;
         maxHealth = 100;
         currentHealth = maxHealth;
+        collisionDistanceX = 0f;
+        collisionDistanceY = 0f;
     }
 
     public void move(int angle, boolean movement) {
@@ -74,7 +77,30 @@ public class Player {
         this.position.add(tmp.set(velocity).scl(delta));
     }
     
-    public void calcCD() {
-        System.out.println("gftrgtrgotrgjotrjogtrjiogpftrhjiogfthio");
-    }
+    /*public void calcCD() {
+        int myBlockX = 1 + (int)(position.x/3/*world.blocklength/);
+        float InsidemyTileX = (position.x) - (myBlockX * 3/*world.blocklength/);
+        int myTileX = 0;
+        if(InsidemyTileX < 1 /*wolrd.eckelength/)
+            myTileX = 1;
+                    else if(InsidemyTileX < 1 /*wolrd.eckelength/ + 1 /*world.centerlength/)
+                        myTileX = 2;
+                                else
+                                    myTileX = 3;
+        
+        
+        int myBlockY = 1 + (int)(position.y/3/*world.blocklength/);
+        float InsidemyTileX = (position.y) - (myBlockX * 3/*world.blocklength/);
+        int myTileX = 0;
+        if(InsidemyTileX < 1 /*wolrd.eckelength/)
+            myTileX = 1;
+                    else if(InsidemyTileX < 1 /*wolrd.eckelength/ + 1 /*world.centerlength/)
+                        myTileX = 2;
+                                else
+                                    myTileX = 3;
+        
+        
+        collisionDistanceX = 1;
+        collisionDistanceY =1;
+    }*/
 }

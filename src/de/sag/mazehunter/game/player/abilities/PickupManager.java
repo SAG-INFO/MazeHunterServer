@@ -2,9 +2,9 @@ package de.sag.mazehunter.game.player.abilities;
 
 import de.sag.mazehunter.Main;
 import de.sag.mazehunter.game.player.Player;
-import de.sag.mazehunter.server.networkData.abilities.DisposePickup;
-import de.sag.mazehunter.server.networkData.abilities.EquipAbility;
-import de.sag.mazehunter.server.networkData.abilities.SpawnPickup;
+import de.sag.mazehunter.server.networkData.abilities.pickups.DisposePickup;
+import de.sag.mazehunter.server.networkData.abilities.pickups.EquipAbility;
+import de.sag.mazehunter.server.networkData.abilities.pickups.SpawnPickup;
 import de.sag.mazehunter.utils.Vector2;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -58,13 +58,22 @@ public class PickupManager {
     
     private void equipAbility(Player player, AbilityPickup pickup) {
         String name = pickup.abilityName;
-        
-        EquipAbility ea = new EquipAbility();
-        ea.abilityName = name;
+        String type = "";
         
         //add new if statement here for every new pickup ability
-        if (name.equals("Fireball") && Main.MAIN_SINGLETON.game.abilityFACTORY.collectFireball(player.connectionID)) {disposePickup(pickup);}
-        Main.MAIN_SINGLETON.server.sendToAllTCP(ea);
+        //attack
+        if (name.equals("Fireball") && Main.MAIN_SINGLETON.game.abilityFACTORY.collectFireball(player.connectionID)) {disposePickup(pickup); type = "attack";}
+        
+        //utility
+        if (name.equals("StandardHeal") && Main.MAIN_SINGLETON.game.abilityFACTORY.collectStandardHeal(player.connectionID)) {disposePickup(pickup); type = "utility";}
+        
+        if (!type.equals("")) {
+            EquipAbility ea = new EquipAbility();
+            ea.abilityName = name;
+            ea.type = type;
+            ea.id = player.connectionID;
+            Main.MAIN_SINGLETON.server.sendToAllTCP(ea);
+        }
     }
 
     private void disposePickup(AbilityPickup pickup) {
@@ -82,7 +91,7 @@ public class PickupManager {
             @Override
             public void run() {
                 if (pickups.size() <= 5) {
-                    String name = Math.random()<0.5f?"Fireball":"arrow";
+                    String name = Math.random()<0.5f?"Fireball":"StandardHeal";
                     spawnPickup(new Vector2((float) Math.random() * 400, (float) Math.random() * 400), name);
                 }
             }

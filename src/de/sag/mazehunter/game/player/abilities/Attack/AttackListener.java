@@ -8,7 +8,7 @@ package de.sag.mazehunter.game.player.abilities.Attack;
 import com.esotericsoftware.kryonet.Connection;
 import de.sag.mazehunter.Main;
 import de.sag.mazehunter.game.player.InputListener;
-import de.sag.mazehunter.server.networkData.abilities.AttackRequest;
+import de.sag.mazehunter.server.networkData.abilities.requests.AttackRequest;
 
 /**
  *
@@ -20,7 +20,11 @@ public class AttackListener extends InputListener {
     public void received(Connection connection, Object object) {
         if(object instanceof AttackRequest) {
             System.out.println("Request received");
+            if(Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].attackAbility != null) {
             Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].attackAbility.use(connection.getID(),((AttackRequest) object).angle);
+            } else {
+                System.out.println("no attack ability :(");
+            }
         }
     }
 }

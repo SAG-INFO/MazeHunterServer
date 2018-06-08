@@ -7,11 +7,8 @@ package de.sag.mazehunter.game.player.abilities.Utility;
 
 import com.esotericsoftware.kryonet.Connection;
 import de.sag.mazehunter.Main;
-import de.sag.mazehunter.game.Config;
 import de.sag.mazehunter.game.player.InputListener;
-import de.sag.mazehunter.server.networkData.abilities.MobilityRequest;
-import de.sag.mazehunter.server.networkData.abilities.DashResponse;
-import de.sag.mazehunter.utils.Vector2;
+import de.sag.mazehunter.server.networkData.abilities.requests.UtilityRequest;
 
 /**
  *
@@ -21,10 +18,13 @@ public class UtilityListener extends InputListener {
     
     @Override
     public void received(Connection connection, Object object) {
-        if(object instanceof MobilityRequest) {
+        if(object instanceof UtilityRequest) {
+            System.out.println("utility request received");
+            if(Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].utilityAbility != null) {
+            Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].utilityAbility.use(connection.getID());
+            } else {
+                System.out.println("no utility ability :(");
+            }
         }
-    }
-        
-    public void Send(int id) {
     }
 }

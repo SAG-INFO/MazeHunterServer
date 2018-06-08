@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.sag.mazehunter.game.player.abilities.Utility.standardHeal;
+package de.sag.mazehunter.game.player.abilities.Utility;
 
-import de.sag.mazehunter.game.player.abilities.Attack.AttackPickup;
+import de.sag.mazehunter.game.player.abilities.Ability;
 
 /**
  *
  * @author Karl Huber
  */
-public class StandardHeal extends AttackPickup {
+public class UtilityPickup extends Ability{
     
 }

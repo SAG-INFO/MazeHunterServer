@@ -9,8 +9,8 @@ import de.sag.mazehunter.game.player.InputListener;
 import com.esotericsoftware.kryonet.Connection;
 import de.sag.mazehunter.Main;
 import de.sag.mazehunter.game.Config;
-import de.sag.mazehunter.server.networkData.abilities.MobilityRequest;
-import de.sag.mazehunter.server.networkData.abilities.DashResponse;
+import de.sag.mazehunter.server.networkData.abilities.requests.MobilityRequest;
+import de.sag.mazehunter.server.networkData.abilities.responses.DashResponse;
 import de.sag.mazehunter.utils.Vector2;
 
 /**

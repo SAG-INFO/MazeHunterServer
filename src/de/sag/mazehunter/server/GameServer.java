@@ -10,15 +10,16 @@ import de.sag.mazehunter.server.networkData.MovementSpeedRequest;
 import de.sag.mazehunter.server.networkData.PlayerLobby;
 import de.sag.mazehunter.server.networkData.StartGameRequest;
 import de.sag.mazehunter.server.networkData.StartGameResponse;
-import de.sag.mazehunter.server.networkData.abilities.AttackRequest;
-import de.sag.mazehunter.server.networkData.abilities.MobilityRequest;
-import de.sag.mazehunter.server.networkData.abilities.DashResponse;
-import de.sag.mazehunter.server.networkData.abilities.DisposePickup;
-import de.sag.mazehunter.server.networkData.abilities.EquipAbility;
-import de.sag.mazehunter.server.networkData.abilities.SpawnPickup;
-import de.sag.mazehunter.server.networkData.abilities.FireballResponse;
-import de.sag.mazehunter.server.networkData.abilities.StandardHealResponse;
-import de.sag.mazehunter.server.networkData.abilities.UtilityRequest;
+import de.sag.mazehunter.server.networkData.abilities.requests.AttackRequest;
+import de.sag.mazehunter.server.networkData.abilities.requests.MobilityRequest;
+import de.sag.mazehunter.server.networkData.abilities.responses.DashResponse;
+import de.sag.mazehunter.server.networkData.abilities.pickups.DisposePickup;
+import de.sag.mazehunter.server.networkData.abilities.pickups.EquipAbility;
+import de.sag.mazehunter.server.networkData.abilities.pickups.SpawnPickup;
+import de.sag.mazehunter.server.networkData.abilities.projectiles.DisposeProjectile;
+import de.sag.mazehunter.server.networkData.abilities.responses.FireballResponse;
+import de.sag.mazehunter.server.networkData.abilities.responses.StandardHealResponse;
+import de.sag.mazehunter.server.networkData.abilities.requests.UtilityRequest;
 import de.sag.mazehunter.server.networkData.configs.PushConfig;
 import de.sag.mazehunter.utils.Vector2;
 import java.io.IOException;
@@ -69,6 +70,8 @@ public class GameServer extends Server{
         
         //Ability Stuff
         getKryo().register(HealthUpdate.class);
+        
+        //Ability Requests
         getKryo().register(AttackRequest.class);
         getKryo().register(UtilityRequest.class);
         getKryo().register(MobilityRequest.class);
@@ -77,6 +80,9 @@ public class GameServer extends Server{
         getKryo().register(DashResponse.class);
         getKryo().register(StandardHealResponse.class);
         getKryo().register(FireballResponse.class);
+        
+        //Projectiles
+        getKryo().register(DisposeProjectile.class);
         
         //Pickups
         getKryo().register(SpawnPickup.class);

@@ -3,14 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.sag.mazehunter.server.networkData.abilities;
+package de.sag.mazehunter.server.networkData.abilities.projectiles;
 
 /**
  *
- * @author karl.huber
+ * @author Karl Huber
  */
-public class MobilityRequest {
-
-    public MobilityRequest() {
-    }
+public class DisposeProjectile {
+    public int id;
 }

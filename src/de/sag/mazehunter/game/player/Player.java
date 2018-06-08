@@ -10,6 +10,7 @@ import de.sag.mazehunter.game.Config;
 import de.sag.mazehunter.game.player.abilities.Attack.AttackPickup;
 import de.sag.mazehunter.game.player.abilities.Mobility.Dash;
 import de.sag.mazehunter.game.player.abilities.PermanentAbility;
+import de.sag.mazehunter.game.player.abilities.Utility.UtilityPickup;
 import de.sag.mazehunter.server.networkData.HealthUpdate;
 import de.sag.mazehunter.utils.Vector2;
 
@@ -29,7 +30,7 @@ public class Player {
     
     public AttackPickup attackAbility;
     public PermanentAbility mobilityAbility;
-    // public UtilityPickup utilityAbility;
+    public UtilityPickup utilityAbility;
     
     private final Vector2 tmp = new Vector2();
     
@@ -44,6 +45,7 @@ public class Player {
         maxHealth = 100;
         currentHealth = maxHealth;
         attackAbility = null;
+        utilityAbility = null;
         mobilityAbility = new Dash(); // maybe the player will be able to choose one at some point ..
     }
 
@@ -70,7 +72,7 @@ public class Player {
         }
         
         HealthUpdate hu = new HealthUpdate(amount, connectionID);
-        Main.MAIN_SINGLETON.server.sendToAllUDP(hu);
+        Main.MAIN_SINGLETON.server.sendToAllTCP(hu);
     }
     
     public void updateVelocity(int angle) {

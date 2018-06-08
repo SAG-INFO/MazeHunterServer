@@ -8,7 +8,7 @@ package de.sag.mazehunter.game.player.abilities.Mobility;
 import de.sag.mazehunter.Main;
 import de.sag.mazehunter.game.Config;
 import de.sag.mazehunter.game.player.abilities.PermanentAbility;
-import de.sag.mazehunter.server.networkData.abilities.DashResponse;
+import de.sag.mazehunter.server.networkData.abilities.responses.DashResponse;
 import de.sag.mazehunter.utils.Vector2;
 import java.util.Timer;
 import java.util.TimerTask;

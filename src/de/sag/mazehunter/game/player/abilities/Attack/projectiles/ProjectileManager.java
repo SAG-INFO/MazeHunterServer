@@ -5,16 +5,20 @@
  */
 package de.sag.mazehunter.game.player.abilities.Attack.projectiles;
 
-import de.sag.mazehunter.utils.Vector2;
-
-
 /**
  *
  * @author Karl Huber
  */
-public class FireballProjectile extends Projectile {
+public class ProjectileManager {
     
-    public FireballProjectile(Vector2 velocity, Vector2 position, float radius, int id) {
-        super(velocity, position, radius, id);
+    private int projectileID;
+    
+    public int getNewProjectileID() {
+        projectileID++;
+        return projectileID;
+    }
+    
+    public void disposeProjectile(Projectile projectile) {
+        
     }
 }

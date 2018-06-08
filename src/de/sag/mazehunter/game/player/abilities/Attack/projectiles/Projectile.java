@@ -16,6 +16,7 @@ public abstract class Projectile {
     Vector2 velocity;
     Vector2 position;
     float radius;
+    int id;
     
     public void dispose() {}
     
@@ -26,10 +27,11 @@ public abstract class Projectile {
         this.position.add(tmp.set(velocity).scl(delta));
     }
 
-    public Projectile(Vector2 velocity, Vector2 position, float radius) {
+    public Projectile(Vector2 velocity, Vector2 position, float radius, int id) {
         this.velocity = velocity;
         this.position = position;
         this.radius = radius;
+        this.id = id;
     }
 }
 

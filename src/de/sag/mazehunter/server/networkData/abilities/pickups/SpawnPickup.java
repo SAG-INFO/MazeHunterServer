@@ -1,4 +1,4 @@
-package de.sag.mazehunter.server.networkData.abilities;
+package de.sag.mazehunter.server.networkData.abilities.pickups;
 
 import de.sag.mazehunter.utils.Vector2;
 

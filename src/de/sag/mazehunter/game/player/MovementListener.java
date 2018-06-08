@@ -6,12 +6,9 @@
 package de.sag.mazehunter.game.player;
 
 import com.esotericsoftware.kryonet.Connection;
-import com.esotericsoftware.kryonet.Listener;
 import de.sag.mazehunter.Main;
 import de.sag.mazehunter.game.Config;
-import de.sag.mazehunter.game.player.abilities.FACTORY;
 import de.sag.mazehunter.server.networkData.MovementRequest;
-import de.sag.mazehunter.utils.Vector2;
 
 /**
  *

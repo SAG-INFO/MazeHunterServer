@@ -5,15 +5,13 @@
  */
 package de.sag.mazehunter.game.player.abilities.Attack;
 
-import de.sag.mazehunter.Main;
-import de.sag.mazehunter.game.player.Player;
-import de.sag.mazehunter.game.player.abilities.Pickup;
+import de.sag.mazehunter.game.player.abilities.Ability;
 
 /**
  *
  * @author Karl Huber
  */
-public class AttackPickup extends Pickup{
+public class AttackPickup extends Ability{
     
     public void use(int id, float angle) {}
     

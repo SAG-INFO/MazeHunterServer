@@ -38,18 +38,6 @@ public class GameTest {
     }
 
     /**
-     * Test of createAbilityListeners method, of class Game.
-     */
-    @Test
-    public void testCreateAbilityListeners() {
-        System.out.println("createAbilityListeners");
-        Game instance = new Game();
-        instance.createAbilityListeners();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
      * Test of start method, of class Game.
      */
     @Test

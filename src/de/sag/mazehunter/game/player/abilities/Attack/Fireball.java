@@ -8,10 +8,8 @@ package de.sag.mazehunter.game.player.abilities.Attack;
 import de.sag.mazehunter.Main;
 import de.sag.mazehunter.game.Config;
 import de.sag.mazehunter.game.player.abilities.Attack.projectiles.FireballProjectile;
-import de.sag.mazehunter.game.player.abilities.Attack.projectiles.ProjectileManager;
 import de.sag.mazehunter.server.networkData.abilities.responses.FireballResponse;
 import de.sag.mazehunter.utils.Vector2;
-import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -26,8 +24,6 @@ public class Fireball extends AttackPickup {
     public int charge;
     public boolean canUse;
     
-    public ArrayList<FireballProjectile> fireballs;
-    
     @Override
     public void use(int id, float angle) {
         
@@ -36,14 +32,13 @@ public class Fireball extends AttackPickup {
         }
         
         int index = getIndex(id);
-        
-        
+        int projectileID = Main.MAIN_SINGLETON.game.projectileManager.getNewProjectileID();
         
         Vector2 fVelocity = new Vector2(Config.FIREBALL_SPEED, 0);
         fVelocity.setAngle(angle);
         
-        fireballs.add(new FireballProjectile(fVelocity, Main.MAIN_SINGLETON.game.player[index].position, Config.FIREBALL_RADIUS, Main.MAIN_SINGLETON.game.projectileManager.getNewProjectileID()));
-        Main.MAIN_SINGLETON.server.sendToAllUDP(new FireballResponse(id, fVelocity));
+        Main.MAIN_SINGLETON.game.projectileManager.projectilesNoC.add(new FireballProjectile(fVelocity, Main.MAIN_SINGLETON.game.player[index].position, Config.FIREBALL_HITBOXRADIUS2, projectileID, Main.MAIN_SINGLETON.game.player[index].position));
+        Main.MAIN_SINGLETON.server.sendToAllUDP(new FireballResponse(projectileID, fVelocity));
         
         startCooldown(index);
         
@@ -66,6 +61,5 @@ public class Fireball extends AttackPickup {
     public Fireball() {
         charge = Config.FIREBALL_CHARGES;
         canUse = true;
-        fireballs = new ArrayList<>();
     }
 }

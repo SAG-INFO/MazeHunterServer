@@ -17,6 +17,12 @@ import de.sag.mazehunter.game.player.abilities.Utility.StandardHeal;
  */
 public class FACTORY extends Ability {
     
+    /**
+     * Method called when trying to collect a fireball pickup
+     * 
+     * @param id connectionID of the player collecting the pickup
+     * @return true if the pickup was collected, false if the slot is already filled.
+     */
     public boolean collectFireball(int id) {
         if (Main.MAIN_SINGLETON.game.player[getIndex(id)].attackAbility != null) {
             System.out.println("ATTACK: You already have an attack Ability.");
@@ -28,6 +34,12 @@ public class FACTORY extends Ability {
         }
     }
     
+    /**
+     * Method called when trying to collect a standardHeal pickup
+     * 
+     * @param id connectionID of the player collecting the pickup
+     * @return true if the pickup was collected, false if the slot is already filled.
+     */
     public boolean collectStandardHeal(int id) {
         if (Main.MAIN_SINGLETON.game.player[getIndex(id)].utilityAbility != null) {
             System.out.println("UTILITY: You already have a utility Ability.");

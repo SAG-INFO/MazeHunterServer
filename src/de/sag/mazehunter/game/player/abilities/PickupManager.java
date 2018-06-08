@@ -1,6 +1,7 @@
 package de.sag.mazehunter.game.player.abilities;
 
 import de.sag.mazehunter.Main;
+import de.sag.mazehunter.game.Config;
 import de.sag.mazehunter.game.player.Player;
 import de.sag.mazehunter.server.networkData.abilities.pickups.DisposePickup;
 import de.sag.mazehunter.server.networkData.abilities.pickups.EquipAbility;
@@ -18,8 +19,6 @@ import java.util.TimerTask;
 public class PickupManager {
 
     public final ArrayList<AbilityPickup> pickups = new ArrayList<>();
-
-    private static final float PICKUP_RADIUS = 60;
 
     private final Vector2 tmpVec = new Vector2();
 
@@ -50,7 +49,7 @@ public class PickupManager {
                 continue;
             
             //Is it a boy or a girl? Its a Lambda-Expression! I <3 Java8
-            Optional<AbilityPickup> pickup = pickups.stream().filter((p) -> (tmpVec.set(player.position).sub(p.position).len2() < PICKUP_RADIUS)).findFirst();
+            Optional<AbilityPickup> pickup = pickups.stream().filter((p) -> (tmpVec.set(player.position).sub(p.position).len2() < Config.PICKUP_HITBOXRADIUS2)).findFirst();
             if(pickup.isPresent())
                 equipAbility(player, pickup.get());
         }

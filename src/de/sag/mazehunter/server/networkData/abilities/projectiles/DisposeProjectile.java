@@ -11,4 +11,11 @@ package de.sag.mazehunter.server.networkData.abilities.projectiles;
  */
 public class DisposeProjectile {
     public int id;
+
+    public DisposeProjectile(int id) {
+        this.id = id;
+    }
+
+    public DisposeProjectile() {
+    }
 }

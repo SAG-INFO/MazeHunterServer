@@ -5,6 +5,8 @@
  */
 package de.sag.mazehunter.game.player.abilities.Attack.projectiles;
 
+import de.sag.mazehunter.game.Config;
+import de.sag.mazehunter.game.player.Player;
 import de.sag.mazehunter.utils.Vector2;
 
 /**
@@ -15,23 +17,26 @@ public abstract class Projectile {
     
     Vector2 velocity;
     Vector2 position;
+    Vector2 startPosition;
     float radius;
     int id;
+    float maxRange;
     
-    public void dispose() {}
-    
-    public void shoot() {}
+    public void shoot(Player player) {}
     
     private final Vector2 tmp = new Vector2();
     public void update(float delta){
         this.position.add(tmp.set(velocity).scl(delta));
+        System.out.println(position.toString());
     }
 
-    public Projectile(Vector2 velocity, Vector2 position, float radius, int id) {
+    public Projectile(Vector2 velocity, Vector2 position, float radius, int id, Vector2 startPosition) {
         this.velocity = velocity;
         this.position = position;
         this.radius = radius;
         this.id = id;
+        this.startPosition = startPosition;
+        this.maxRange = Config.FIREBALL_MAXRANGE;
     }
 }
 

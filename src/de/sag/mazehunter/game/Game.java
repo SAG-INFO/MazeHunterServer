@@ -45,6 +45,8 @@ public class Game {
     
     public void update(float delta){
         pickupManager.update();
+        //projectileManager.updateAll();
+        projectileManager.projectilesNoC.forEach((p) -> {p.update(delta);});
         for (int i = 0; i < 4; i++) {
             if(player[i] == null)
                 continue;

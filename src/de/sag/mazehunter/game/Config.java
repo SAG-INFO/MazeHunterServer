@@ -21,8 +21,12 @@ import de.sag.mazehunter.server.networkData.configs.PushConfig;
  */
 public class Config {
     
+    //Game stuff
+    public static float PICKUP_HITBOXRADIUS2 = 60;
+    
     //Player Stuff
     public static int DEFAULT_SPEED = 50;
+    public static float PLAYER_HITBOXRADIUS2 = 100;
     
     //permanent ability Stuff
     public static final float DASH_COOLDOWN = 4000;
@@ -41,12 +45,11 @@ public class Config {
     
     public static final int FIREBALL_DAMAGE = 25;
     public static final int FIREBALL_SPEED = 75;
-    public static final int FIREBALL_RADIUS = 25;
-    
-    //set super high for testing
-    public static final int FIREBALL_CHARGES = 300;
+    public static final float FIREBALL_HITBOXRADIUS2 = 60;
+    public static final int FIREBALL_CHARGES = 3;
     public static final float FIREBALL_SPAWNRATE = 1.0f;
     public static final float FIREBALL_CD_BETWEEN_USES = 500;
+    public static float FIREBALL_MAXRANGE = 3000;
     
     public static void pushConfig() {
         PushConfig pc = new PushConfig();
@@ -66,7 +69,6 @@ public class Config {
         
         pc.FIREBALL_CHARGES = FIREBALL_CHARGES;
         pc.FIREBALL_DAMAGE = FIREBALL_DAMAGE;
-        pc.FIREBALL_SIZE = FIREBALL_RADIUS;
         pc.FIREBALL_SPEED = FIREBALL_SPEED;
         pc.FIREBALL_CD_BETWEEN_USES = FIREBALL_CD_BETWEEN_USES;
         

@@ -5,6 +5,8 @@
  */
 package de.sag.mazehunter.game.player.abilities.Attack.projectiles;
 
+import de.sag.mazehunter.game.Config;
+import de.sag.mazehunter.game.player.Player;
 import de.sag.mazehunter.utils.Vector2;
 
 
@@ -14,7 +16,13 @@ import de.sag.mazehunter.utils.Vector2;
  */
 public class FireballProjectile extends Projectile {
     
-    public FireballProjectile(Vector2 velocity, Vector2 position, float radius, int id) {
-        super(velocity, position, radius, id);
+    @Override
+    public void shoot(Player player) {
+        player.changeHealth(-Config.FIREBALL_DAMAGE);
+        //shoot Animation (?)
+    }
+    
+    public FireballProjectile(Vector2 velocity, Vector2 position, float radius, int id, Vector2 startPosition) {
+        super(velocity, position, radius, id, startPosition);
     }
 }

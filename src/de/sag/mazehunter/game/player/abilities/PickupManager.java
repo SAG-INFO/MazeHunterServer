@@ -103,6 +103,9 @@ public class PickupManager {
             case "StandardHeal":    oldName = Main.MAIN_SINGLETON.game.abilityFACTORY.collectStandardHeal(player.connectionID);
                                     didthings = true;
                                     break;
+            case "StunArrow":       oldName = Main.MAIN_SINGLETON.game.abilityFACTORY.collectStunArrow(player.connectionID);
+                                    didthings = true;
+                                    break;
             default: return false;
         }
         
@@ -127,7 +130,7 @@ public class PickupManager {
             @Override
             public void run() {
                 if (pickups.size() <= 5) {
-                    String name = Math.random()<0.5f?"Fireball":"StandardHeal";
+                    String name = Math.random()<0.5f?"Fireball":"StunArrow";
                     spawnPickup(new Vector2((float) Math.random() * 400, (float) Math.random() * 400), name);
                 }
             }

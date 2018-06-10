@@ -6,10 +6,9 @@
 package de.sag.mazehunter.game.player.abilities;
 
 import de.sag.mazehunter.Main;
-import de.sag.mazehunter.game.player.abilities.Attack.AttackPickup;
 import de.sag.mazehunter.game.player.abilities.Attack.Fireball;
 import de.sag.mazehunter.game.player.abilities.Utility.StandardHeal;
-import de.sag.mazehunter.game.player.abilities.Utility.UtilityPickup;
+import de.sag.mazehunter.game.player.abilities.Utility.StunArrow;
 
 /**
  *
@@ -20,14 +19,14 @@ import de.sag.mazehunter.game.player.abilities.Utility.UtilityPickup;
 public class FACTORY extends Ability {
     
     public String getOldAttackName(int index) {
-        AttackPickup attack = Main.MAIN_SINGLETON.game.player[index].attackAbility;
+        Ability attack = Main.MAIN_SINGLETON.game.player[index].attackAbility;
         if (attack instanceof Fireball) {return "Fireball";}
         
         return null;
     }
 
     public String getOldUtilityName(int index) {
-        UtilityPickup utility = Main.MAIN_SINGLETON.game.player[index].utilityAbility;
+        Ability utility = Main.MAIN_SINGLETON.game.player[index].utilityAbility;
         if (utility instanceof StandardHeal) {return "StandardHeal";}
         
         return null;
@@ -37,7 +36,7 @@ public class FACTORY extends Ability {
      * Method called when trying to collect a fireball pickup
      * 
      * @param id connectionID of the player collecting the pickup
-     * @return true if the pickup was collected, false if the slot is already filled.
+     * @return the name of the old ability if the Abilities are swapped or null if utilityAbility is null.
      */
     public String collectFireball(int id) {
         int index = getIndex(id);
@@ -58,7 +57,7 @@ public class FACTORY extends Ability {
      * Method called when trying to collect a standardHeal pickup
      * 
      * @param id connectionID of the player collecting the pickup
-     * @return true if the pickup was collected, false if the slot is already filled.
+     * @return the name of the old ability if the Abilities are swapped or null if utilityAbility is null.
      */
     public String collectStandardHeal(int id) {
         int index = getIndex(id);
@@ -71,6 +70,27 @@ public class FACTORY extends Ability {
         } else {
             Main.MAIN_SINGLETON.game.player[index].utilityAbility = new StandardHeal();
             System.out.println("UTILITY: StandardHeal collected.");
+            return null; 
+        }
+    }
+    
+    /**
+     * Method called when trying to collect a StunArrow pickup
+     * 
+     * @param id connectionID of the player collecting the pickup
+     * @return the name of the old ability if the Abilities are swapped or null if utilityAbility is null.
+     */
+    public String collectStunArrow(int id) {
+        int index = getIndex(id);
+        String tmp;
+        if (Main.MAIN_SINGLETON.game.player[index].utilityAbility != null) {
+            tmp = getOldUtilityName(index);
+            Main.MAIN_SINGLETON.game.player[index].utilityAbility = new StunArrow();
+            System.out.println("UTILITY: Abilities swapped. " + tmp);
+            return tmp;
+        } else {
+            Main.MAIN_SINGLETON.game.player[index].utilityAbility = new StunArrow();
+            System.out.println("UTILITY: StunArrow collected.");
             return null; 
         }
     }

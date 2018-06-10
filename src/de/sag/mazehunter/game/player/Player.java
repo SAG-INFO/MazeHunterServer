@@ -7,10 +7,8 @@ package de.sag.mazehunter.game.player;
 
 import de.sag.mazehunter.Main;
 import de.sag.mazehunter.game.Config;
-import de.sag.mazehunter.game.player.abilities.Attack.AttackPickup;
+import de.sag.mazehunter.game.player.abilities.Ability;
 import de.sag.mazehunter.game.player.abilities.Mobility.Dash;
-import de.sag.mazehunter.game.player.abilities.PermanentAbility;
-import de.sag.mazehunter.game.player.abilities.Utility.UtilityPickup;
 import de.sag.mazehunter.server.networkData.HealthUpdate;
 import de.sag.mazehunter.utils.Vector2;
 
@@ -28,9 +26,9 @@ public class Player {
     int maxHealth;
     int currentHealth;
     
-    public AttackPickup attackAbility;
-    public PermanentAbility mobilityAbility;
-    public UtilityPickup utilityAbility;
+    public Ability attackAbility;
+    public Ability mobilityAbility;
+    public Ability utilityAbility;
     
     private final Vector2 tmp = new Vector2();
     

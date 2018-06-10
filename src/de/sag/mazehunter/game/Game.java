@@ -6,8 +6,8 @@ import de.sag.mazehunter.Main;
 import de.sag.mazehunter.game.player.MovementSpeedListener;
 
 import de.sag.mazehunter.game.player.abilities.Attack.AttackListener;
-import de.sag.mazehunter.game.player.abilities.Attack.projectiles.Projectile;
-import de.sag.mazehunter.game.player.abilities.Attack.projectiles.ProjectileManager;
+import de.sag.mazehunter.game.player.abilities.projectiles.Projectile;
+import de.sag.mazehunter.game.player.abilities.projectiles.ProjectileManager;
 import de.sag.mazehunter.game.player.abilities.FACTORY;
 import de.sag.mazehunter.game.player.abilities.Mobility.MobilityListener;
 import de.sag.mazehunter.game.player.abilities.PickupManager;

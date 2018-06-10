@@ -7,6 +7,7 @@ package de.sag.mazehunter.game.player.abilities.Utility;
 
 import de.sag.mazehunter.Main;
 import de.sag.mazehunter.game.Config;
+import de.sag.mazehunter.game.player.abilities.Ability;
 import de.sag.mazehunter.server.networkData.abilities.responses.StandardHealResponse;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -16,12 +17,11 @@ import java.util.TimerTask;
  *
  * @author Karl Huber
  */
-public class StandardHeal extends UtilityPickup {
+public class StandardHeal extends Ability {
     
     public final String name = "StandardHeal";
     
-    @Override
-    public void use(int id) {
+    public void use(int id, float angle) {
         
         int index = getIndex(id);
         

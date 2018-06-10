@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.sag.mazehunter.game.player.abilities.Attack.projectiles;
+package de.sag.mazehunter.game.player.abilities.projectiles;
 
 import de.sag.mazehunter.game.Config;
 import de.sag.mazehunter.game.player.Player;

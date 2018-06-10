@@ -20,6 +20,7 @@ import de.sag.mazehunter.server.networkData.abilities.projectiles.DisposeProject
 import de.sag.mazehunter.server.networkData.abilities.responses.FireballResponse;
 import de.sag.mazehunter.server.networkData.abilities.responses.StandardHealResponse;
 import de.sag.mazehunter.server.networkData.abilities.requests.UtilityRequest;
+import de.sag.mazehunter.server.networkData.abilities.responses.StunArrowResponse;
 import de.sag.mazehunter.server.networkData.configs.PushConfig;
 import de.sag.mazehunter.utils.Vector2;
 import java.io.IOException;
@@ -80,6 +81,7 @@ public class GameServer extends Server{
         getKryo().register(DashResponse.class);
         getKryo().register(StandardHealResponse.class);
         getKryo().register(FireballResponse.class);
+        getKryo().register(StunArrowResponse.class);
         
         //Projectiles
         getKryo().register(DisposeProjectile.class);

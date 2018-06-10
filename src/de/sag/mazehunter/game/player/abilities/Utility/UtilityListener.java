@@ -21,7 +21,7 @@ public class UtilityListener extends InputListener {
         if(object instanceof UtilityRequest) {
             System.out.println("utility request received");
             if(Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].utilityAbility != null) {
-            Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].utilityAbility.use(connection.getID());
+            Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].utilityAbility.use(connection.getID(), ((UtilityRequest) object).angle);
             } else {
                 System.out.println("no utility ability :(");
             }

@@ -24,5 +24,8 @@ public class Ability {
         return -1;
     }
     
+    public void use(int id, float angle) {}
     public void use(int id) {}
+    
+    public void startCooldown() {}
 }

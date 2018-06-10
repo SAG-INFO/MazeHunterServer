@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.sag.mazehunter.game.player.abilities.Attack;
+package de.sag.mazehunter.game.player.abilities.Utility;
 
 import de.sag.mazehunter.Main;
 import de.sag.mazehunter.game.Config;
@@ -11,38 +11,27 @@ import de.sag.mazehunter.game.player.abilities.Ability;
 import de.sag.mazehunter.game.player.abilities.projectiles.FireballProjectile;
 import de.sag.mazehunter.server.networkData.abilities.responses.FireballResponse;
 import de.sag.mazehunter.utils.Vector2;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  *
- * @author Karl Huber 
- * 
- * SO NE GROSSE FEUERBALL JUNGE
+ * @author Karl Huber
  */
-public class Fireball extends Ability {
+public class StunArrow extends Ability{
     
     public int charge;
-    public boolean canUse;
-    public String name = "Fireball";
+    public String name = "StunArrow";
     
     @Override
     public void use(int connectionID, float angle) {
         
-        if (!canUse) {
-            return;
-        }
-        
         int index = getIndex(connectionID);
         int projectileID = Main.MAIN_SINGLETON.game.projectileManager.getNewProjectileID();
         
-        Vector2 fVelocity = new Vector2(Config.FIREBALL_SPEED, 0);
+        Vector2 fVelocity = new Vector2(Config.STUNARROW_SPEED, 0);
         fVelocity.setAngle(angle);
         
-        Main.MAIN_SINGLETON.game.projectileManager.projectilesNoC.add(new FireballProjectile(fVelocity, Main.MAIN_SINGLETON.game.player[index].position, Config.FIREBALL_HITBOXRADIUS2, projectileID, Main.MAIN_SINGLETON.game.player[index].position, connectionID));
+        Main.MAIN_SINGLETON.game.projectileManager.projectilesNoC.add(new FireballProjectile(fVelocity, Main.MAIN_SINGLETON.game.player[index].position, Config.STUNARROW_HITBOXRADIUS2, projectileID, Main.MAIN_SINGLETON.game.player[index].position, connectionID));
         Main.MAIN_SINGLETON.server.sendToAllUDP(new FireballResponse(connectionID, fVelocity.cpy()));
-        
-        startCooldown(index);
         
         charge--;
         if (charge == 0) {
@@ -50,18 +39,7 @@ public class Fireball extends Ability {
         }
     }
         
-    public void startCooldown(int index) {
-        canUse = false;
-        Timer t = new Timer();
-            t.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                canUse = true;
-            }}, (long) (Config.FIREBALL_CD_BETWEEN_USES));
-    }
-
-    public Fireball() {
+    public StunArrow() {
         charge = Config.FIREBALL_CHARGES;
-        canUse = true;
     }
 }

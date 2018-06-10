@@ -3,18 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.sag.mazehunter.game.player.abilities.Attack.projectiles;
+package de.sag.mazehunter.game.player.abilities.projectiles;
 
 import de.sag.mazehunter.game.Config;
 import de.sag.mazehunter.game.player.Player;
 import de.sag.mazehunter.utils.Vector2;
 
-
 /**
  *
  * @author Karl Huber
  */
-public class FireballProjectile extends Projectile {
+public class StunArrowProjectile extends Projectile {
     
     @Override
     public void shoot(Player player) {
@@ -22,7 +21,7 @@ public class FireballProjectile extends Projectile {
         //TODO shoot Animation (?)
     }
     
-    public FireballProjectile(Vector2 velocity, Vector2 position, float radius, int id, Vector2 startPosition, int connectionID) {
+    public StunArrowProjectile(Vector2 velocity, Vector2 position, float radius, int id, Vector2 startPosition, int connectionID) {
         super(velocity, position, radius, id, startPosition, connectionID);
     }
 }

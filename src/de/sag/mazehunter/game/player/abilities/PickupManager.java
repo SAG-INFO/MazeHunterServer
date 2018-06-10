@@ -104,7 +104,7 @@ public class PickupManager {
                                     didthings = true;
                                     break;
             default: return false;
-        } 
+        }
         
         swapUtilityCooldown();
         

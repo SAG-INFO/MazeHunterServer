@@ -45,17 +45,13 @@ public class Game {
     }
     
     public void update(float delta){
-        for (Projectile p : projectileManager.projectilesNoC) {
-            p.update(delta);
-            System.out.println("fuck you");
-        }
         for (Player p : player) {
             if(p == null)
                 continue;
             p.update(delta);
         }
         pickupManager.update();
-        projectileManager.updateAll();
+        projectileManager.updateAll(delta);
         
     }
     

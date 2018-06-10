@@ -38,15 +38,16 @@ public class ProjectileManager {
     }
     
     /** Updates all projectiles */
-    public void updateAll() {
+    public void updateAll(float delta) {
         //updateC();
-        updateNoC();
+        updateNoC(delta);
     }
     
     final Vector2 tmpVec = new Vector2();
-    public void updateNoC() {
-        System.out.print(".");
+    public void updateNoC(float delta) {
         float minDistance = Config.FIREBALL_HITBOXRADIUS2 + Config.PLAYER_HITBOXRADIUS2;
+        
+        projectilesNoC.forEach((p) -> {p.update(delta);});
 
         for (Player player : Main.MAIN_SINGLETON.game.player) {
             if(player == null)
@@ -54,7 +55,7 @@ public class ProjectileManager {
             
             Optional<Projectile> collidesWithPlayer = projectilesNoC.stream().filter((p) -> (tmpVec.set(player.position).sub(p.position).len2() < minDistance && player.connectionID != p.connectionID)).findFirst();
             if(collidesWithPlayer.isPresent()) {
-                System.out.println("collision detected");
+                System.out.println("collision detected with player " + player.connectionID);
                 collidesWithPlayer.get().shoot(player);
                 disposeProjectileNoC(collidesWithPlayer.get());
                 System.out.println();
@@ -62,7 +63,7 @@ public class ProjectileManager {
             
             Optional<Projectile> reachedMaxrange = projectilesNoC.stream().filter((p) -> (tmpVec.set(p.startPosition).sub(p.position).len2() > Config.FIREBALL_MAXRANGE2)).findFirst();
             if(reachedMaxrange.isPresent()) {
-                System.out.println("maxRange");
+                System.out.println("maxRange reached.");
                 disposeProjectileNoC(reachedMaxrange.get());
             }
         }

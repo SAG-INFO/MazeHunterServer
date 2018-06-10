@@ -39,7 +39,7 @@ public class Fireball extends AttackPickup {
         fVelocity.setAngle(angle);
         
         Main.MAIN_SINGLETON.game.projectileManager.projectilesNoC.add(new FireballProjectile(fVelocity, Main.MAIN_SINGLETON.game.player[index].position, Config.FIREBALL_HITBOXRADIUS2, projectileID, Main.MAIN_SINGLETON.game.player[index].position, connectionID));
-        Main.MAIN_SINGLETON.server.sendToAllUDP(new FireballResponse(projectileID, fVelocity));
+        Main.MAIN_SINGLETON.server.sendToAllUDP(new FireballResponse(connectionID, fVelocity.cpy()));
         
         startCooldown(index);
         

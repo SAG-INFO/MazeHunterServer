@@ -28,7 +28,6 @@ public abstract class Projectile {
     private final Vector2 tmp = new Vector2();
     public void update(float delta){
         this.position.add(tmp.set(velocity).scl(delta));
-        System.out.println("Position Update: " + position);
     }
 
     public Projectile(Vector2 velocity, Vector2 position, float radius, int id, Vector2 startPosition, int connectionID) {

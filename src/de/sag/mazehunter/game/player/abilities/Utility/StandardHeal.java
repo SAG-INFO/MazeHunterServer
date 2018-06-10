@@ -18,6 +18,8 @@ import java.util.TimerTask;
  */
 public class StandardHeal extends UtilityPickup {
     
+    public final String name = "StandardHeal";
+    
     @Override
     public void use(int id) {
         

@@ -6,8 +6,10 @@
 package de.sag.mazehunter.game.player.abilities;
 
 import de.sag.mazehunter.Main;
+import de.sag.mazehunter.game.player.abilities.Attack.AttackPickup;
 import de.sag.mazehunter.game.player.abilities.Attack.Fireball;
 import de.sag.mazehunter.game.player.abilities.Utility.StandardHeal;
+import de.sag.mazehunter.game.player.abilities.Utility.UtilityPickup;
 
 /**
  *
@@ -17,20 +19,37 @@ import de.sag.mazehunter.game.player.abilities.Utility.StandardHeal;
  */
 public class FACTORY extends Ability {
     
+    public String getOldAttackName(int index) {
+        AttackPickup attack = Main.MAIN_SINGLETON.game.player[index].attackAbility;
+        if (attack instanceof Fireball) {return "Fireball";}
+        
+        return null;
+    }
+
+    public String getOldUtilityName(int index) {
+        UtilityPickup utility = Main.MAIN_SINGLETON.game.player[index].utilityAbility;
+        if (utility instanceof StandardHeal) {return "StandardHeal";}
+        
+        return null;
+    }
     /**
      * Method called when trying to collect a fireball pickup
      * 
      * @param id connectionID of the player collecting the pickup
      * @return true if the pickup was collected, false if the slot is already filled.
      */
-    public boolean collectFireball(int id) {
-        if (Main.MAIN_SINGLETON.game.player[getIndex(id)].attackAbility != null) {
-            System.out.println("ATTACK: You already have an attack Ability.");
-            return false;
+    public String collectFireball(int id) {
+        int index = getIndex(id);
+        String tmp;
+        if (Main.MAIN_SINGLETON.game.player[index].attackAbility != null) {
+            tmp = getOldAttackName(index);
+            Main.MAIN_SINGLETON.game.player[index].attackAbility = new Fireball();
+            System.out.println("ATTACK: Abilities swapped. " + tmp);
+            return tmp;
         } else {
-            Main.MAIN_SINGLETON.game.player[getIndex(id)].attackAbility = new Fireball();
+            Main.MAIN_SINGLETON.game.player[index].attackAbility = new Fireball();
             System.out.println("ATTACK: Fireball collected.");
-            return true; 
+            return null;
         }
     }
     
@@ -40,14 +59,18 @@ public class FACTORY extends Ability {
      * @param id connectionID of the player collecting the pickup
      * @return true if the pickup was collected, false if the slot is already filled.
      */
-    public boolean collectStandardHeal(int id) {
-        if (Main.MAIN_SINGLETON.game.player[getIndex(id)].utilityAbility != null) {
-            System.out.println("UTILITY: You already have a utility Ability.");
-            return false;
+    public String collectStandardHeal(int id) {
+        int index = getIndex(id);
+        String tmp;
+        if (Main.MAIN_SINGLETON.game.player[index].utilityAbility != null) {
+            tmp = getOldUtilityName(index);
+            Main.MAIN_SINGLETON.game.player[index].utilityAbility = new StandardHeal();
+            System.out.println("UTILITY: Abilities swapped. " + tmp);
+            return tmp;
         } else {
-            Main.MAIN_SINGLETON.game.player[getIndex(id)].utilityAbility = new StandardHeal();
+            Main.MAIN_SINGLETON.game.player[index].utilityAbility = new StandardHeal();
             System.out.println("UTILITY: StandardHeal collected.");
-            return true; 
+            return null; 
         }
     }
 

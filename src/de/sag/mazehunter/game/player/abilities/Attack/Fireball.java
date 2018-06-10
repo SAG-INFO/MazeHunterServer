@@ -23,6 +23,7 @@ public class Fireball extends AttackPickup {
     
     public int charge;
     public boolean canUse;
+    public String name = "Fireball";
     
     @Override
     public void use(int id, float angle) {

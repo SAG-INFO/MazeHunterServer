@@ -27,7 +27,7 @@ public abstract class Projectile {
     private final Vector2 tmp = new Vector2();
     public void update(float delta){
         this.position.add(tmp.set(velocity).scl(delta));
-        System.out.println(position.toString());
+        System.out.println("Position Update: " + position);
     }
 
     public Projectile(Vector2 velocity, Vector2 position, float radius, int id, Vector2 startPosition) {
@@ -36,7 +36,7 @@ public abstract class Projectile {
         this.radius = radius;
         this.id = id;
         this.startPosition = startPosition;
-        this.maxRange = Config.FIREBALL_MAXRANGE;
+        this.maxRange = Config.FIREBALL_MAXRANGE2;
     }
 }
 

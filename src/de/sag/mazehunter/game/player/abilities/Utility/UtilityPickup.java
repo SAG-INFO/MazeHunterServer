@@ -11,6 +11,6 @@ import de.sag.mazehunter.game.player.abilities.Ability;
  *
  * @author Karl Huber
  */
-public class UtilityPickup extends Ability{
-    
+public abstract class UtilityPickup extends Ability{
+   public String name; 
 }

@@ -44,14 +44,14 @@ public class Game {
     }
     
     public void update(float delta){
-        pickupManager.update();
-        //projectileManager.updateAll();
-        projectileManager.projectilesNoC.forEach((p) -> {p.update(delta);});
-        for (int i = 0; i < 4; i++) {
-            if(player[i] == null)
+        for (Player p : player) {
+            if(p == null)
                 continue;
-            player[i].update(delta);
+            p.update(delta);
         }
+        pickupManager.update();
+        projectileManager.updateAll(delta);
+        
     }
     
     public void exit() {

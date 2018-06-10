@@ -24,6 +24,9 @@ public class PickupManager {
 
     private int idr=0;
     
+    private boolean canCollectUtility = true;
+    private boolean canCollectAttack = true;
+    
     public PickupManager() {
         this.spawnRandomPickupsOnRandomPositionsAtAlmostRandomTimesBoii();
     }
@@ -56,25 +59,59 @@ public class PickupManager {
     }
     
     private void equipAbility(Player player, AbilityPickup pickup) {
-        String name = pickup.abilityName;
-        String type = "";
+        String type;
         
-        //add new if statement here for every new pickup ability
-        //attack
-        if (name.equals("Fireball") && Main.MAIN_SINGLETON.game.abilityFACTORY.collectFireball(player.connectionID)) {disposePickup(pickup); type = "attack";}
+        if (equipAttackAbility(player, pickup)) {type = "attack";} 
+        else if (equipUtilityAbility(player, pickup)) {type = "utility";}
+        else {return;}
         
-        //utility
-        if (name.equals("StandardHeal") && Main.MAIN_SINGLETON.game.abilityFACTORY.collectStandardHeal(player.connectionID)) {disposePickup(pickup); type = "utility";}
+        disposePickup(pickup); 
         
-        if (!type.equals("")) {
-            EquipAbility ea = new EquipAbility();
-            ea.abilityName = name;
-            ea.type = type;
-            ea.id = player.connectionID;
-            Main.MAIN_SINGLETON.server.sendToAllTCP(ea);
-        }
+        EquipAbility ea = new EquipAbility();
+        ea.abilityName = pickup.abilityName;
+        ea.type = type;
+        ea.id = player.connectionID;
+        Main.MAIN_SINGLETON.server.sendToAllTCP(ea);
     }
 
+    private boolean equipAttackAbility(Player player, AbilityPickup pickup) {
+        if (!canCollectAttack) {return false;}
+        String name = pickup.abilityName;
+        String oldName;
+        boolean didthings;
+        
+        switch (name) {
+            case "Fireball":    oldName = Main.MAIN_SINGLETON.game.abilityFACTORY.collectFireball(player.connectionID);
+                                didthings = true;
+                                break;
+            default: return false;
+        } 
+        
+        swapAttackCooldown();
+        
+        if (oldName != null) {spawnPickup(pickup.position, oldName);}
+        return didthings;
+    }
+    
+    private boolean equipUtilityAbility(Player player, AbilityPickup pickup) {
+        if (!canCollectUtility) {return false;}
+        String name = pickup.abilityName;
+        String oldName;
+        boolean didthings ;
+        
+        switch (name) {
+            case "StandardHeal":    oldName = Main.MAIN_SINGLETON.game.abilityFACTORY.collectStandardHeal(player.connectionID);
+                                    didthings = true;
+                                    break;
+            default: return false;
+        } 
+        
+        swapUtilityCooldown();
+        
+        if (oldName != null) {spawnPickup(pickup.position, oldName);}
+        return didthings;
+    }
+    
     private void disposePickup(AbilityPickup pickup) {
         pickups.remove(pickup);
 
@@ -95,5 +132,25 @@ public class PickupManager {
                 }
             }
         }, 0, 5000);
+    }
+
+    private void swapAttackCooldown() {
+        canCollectAttack = false;
+        Timer t = new Timer();
+        t.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                canCollectAttack = true;
+            }}, 1000);
+    }
+    
+    private void swapUtilityCooldown() {
+        canCollectUtility = false;
+        Timer t = new Timer();
+        t.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                canCollectUtility = true;
+            }}, 1000);
     }
 }

@@ -8,7 +8,6 @@ package de.sag.mazehunter.game.player.abilities.Attack.projectiles;
 import de.sag.mazehunter.Main;
 import de.sag.mazehunter.game.Config;
 import de.sag.mazehunter.game.player.Player;
-import de.sag.mazehunter.game.player.abilities.AbilityPickup;
 import de.sag.mazehunter.server.networkData.abilities.projectiles.DisposeProjectile;
 import de.sag.mazehunter.utils.Vector2;
 import java.util.ArrayList;
@@ -39,25 +38,30 @@ public class ProjectileManager {
     }
     
     /** Updates all projectiles */
-    public void updateAll() {
-        updateC();
-        updateNoC();
+    public void updateAll(float delta) {
+        //updateC();
+        updateNoC(delta);
     }
     
-    public void updateNoC() {
-        final Vector2 tmpVec = new Vector2();
+    final Vector2 tmpVec = new Vector2();
+    public void updateNoC(float delta) {
+        projectilesNoC.forEach((p) -> {p.update(delta);});
+
         for (Player player : Main.MAIN_SINGLETON.game.player) {
             if(player == null)
                 continue;
             
-            Optional<Projectile> projectile = projectilesNoC.stream().filter((p) -> (tmpVec.set(player.position).sub(p.position).len2() < Config.FIREBALL_HITBOXRADIUS2 + Config.PLAYER_HITBOXRADIUS2)).findFirst();
-            if(projectile.isPresent())
-                projectile.get().shoot(player);
-                disposeProjectileNoC(projectile.get());
+            Optional<Projectile> collidesWithPlayer = projectilesNoC.stream().filter((p) -> (tmpVec.set(player.position).sub(p.position).len2() < Config.FIREBALL_HITBOXRADIUS2 + Config.PLAYER_HITBOXRADIUS2)).findFirst();
+            if(collidesWithPlayer.isPresent()) {
+                collidesWithPlayer.get().shoot(player);
+                disposeProjectileNoC(collidesWithPlayer.get());
+                System.out.println();
+            }
                 
-            Optional<Projectile> pimmel = projectilesNoC.stream().filter((p) -> (tmpVec.set(p.startPosition).sub(p.position).len2() < Config.FIREBALL_MAXRANGE)).findFirst();
-            if(projectile.isPresent())
-                disposeProjectileNoC(pimmel.get());
+            Optional<Projectile> reachedMaxrange = projectilesNoC.stream().filter((p) -> (tmpVec.set(p.startPosition).sub(p.position).len2() < Config.FIREBALL_MAXRANGE2)).findFirst();
+            if(reachedMaxrange.isPresent()) {
+               disposeProjectileNoC(reachedMaxrange.get());
+            }
         }
     }
 

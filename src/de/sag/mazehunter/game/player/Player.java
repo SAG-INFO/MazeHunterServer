@@ -25,7 +25,6 @@ public class Player {
     public float movementSpeedFactor;
     public int maxHealth;
     public int currentHealth;
-    float CollisionDistance;
 
     private final Vector2 tmp = new Vector2();
 
@@ -76,7 +75,7 @@ public class Player {
         this.position.add(tmp.set(velocity).scl(delta));
     }
 
-//    public void calcCD() {
+    //    public void calcCD() {
 //        if (velocity.y > 0 && !MAIN_SINGLETON.game.world.talktoTile(tmp.set(position).add(0, 1)).open) {
 //            velocity.y = 0;
 //            InputListener.sendMovementResponse(this);
@@ -91,14 +90,11 @@ public class Player {
 //            InputListener.sendMovementResponse(this);
 //        }
 //    }
-    
     public void calcCD2() {
-        if(velocity.y != 0 && !MAIN_SINGLETON.game.world.talktoTile(tmp.set(position).add(0, Integer.signum((int)velocity.y))).open){
+        if (!MAIN_SINGLETON.game.world.talktoTile(tmp.set(position).add(0, Integer.signum((int) velocity.y))).open) {
             velocity.y = 0;
-            InputListener.sendMovementResponse(this);
-        } else if(velocity.x != 0 && !MAIN_SINGLETON.game.world.talktoTile(tmp.set(position).add(Integer.signum((int)velocity.x), 0)).open){
+        } else if (!MAIN_SINGLETON.game.world.talktoTile(tmp.set(position).add(Integer.signum((int) velocity.x), 0)).open) {
             velocity.x = 0;
-            InputListener.sendMovementResponse(this);
         }
     }
 }

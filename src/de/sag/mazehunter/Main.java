@@ -7,6 +7,8 @@ import de.sag.mazehunter.lobby.Lobby;
 import de.sag.mazehunter.server.networkData.PlayerLobby;
 import de.sag.mazehunter.server.networkData.StartGameResponse;
 import de.sag.mazehunter.server.networkData.configs.PushConfig;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Branch Test
@@ -76,6 +78,7 @@ public class Main {
             game.player[i] = new Player(player.id);
             i++;
         }
+        
         
         game.start();
     }

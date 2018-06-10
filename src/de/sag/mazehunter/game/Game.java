@@ -1,13 +1,12 @@
 package de.sag.mazehunter.game;
 
-import de.sag.mazehunter.game.player.MovementListener;
+import de.sag.mazehunter.game.player.movement.MovementListener;
 import de.sag.mazehunter.game.player.Player;
 import de.sag.mazehunter.Main;
-import de.sag.mazehunter.server.networkData.configs.PushConfig;
-import de.sag.mazehunter.game.player.MovementSpeedListener;
+import de.sag.mazehunter.game.map.World;
+import de.sag.mazehunter.game.player.movement.MovementSpeedListener;
 import de.sag.mazehunter.game.player.abilities.DashListener;
 import de.sag.mazehunter.game.player.abilities.StandardHealListener;
-import de.sag.mazehunter.server.networkData.HealthUpdate;
 
 /**
  *
@@ -16,6 +15,8 @@ import de.sag.mazehunter.server.networkData.HealthUpdate;
 public class Game {
     
     public Player player[];
+    
+    public World world;
 
     public Game() {
         player = new Player[4];
@@ -23,6 +24,9 @@ public class Game {
         createAbilityListeners();
         Main.MAIN_SINGLETON.server.addListener(new MovementListener());
         Main.MAIN_SINGLETON.server.addListener(new MovementSpeedListener());
+        
+        world = new World(25, 50);
+        world.makeMap(true, false, false, true, true, true, false, true, true, false, false, true, true, true, true, true, false, true, true, true, true, false, true, false, false, true, true, false, true, true, false, true, false, true, true, true);
     }
     
     public void createAbilityListeners() {
@@ -39,8 +43,12 @@ public class Game {
                 continue;
             player[i].update(delta);
         }
+        
     }
     
+    public void getPlayer(int netID){
+        
+    }
     
 
     public void exit() {

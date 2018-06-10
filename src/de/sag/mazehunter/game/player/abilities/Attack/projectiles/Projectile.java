@@ -15,12 +15,13 @@ import de.sag.mazehunter.utils.Vector2;
  */
 public abstract class Projectile {
     
-    Vector2 velocity;
-    Vector2 position;
-    Vector2 startPosition;
-    float radius;
-    int id;
-    float maxRange;
+    public final Vector2 velocity = new Vector2();
+    public final Vector2 position = new Vector2();
+    public final Vector2 startPosition = new Vector2();
+    public float radius;
+    public int projectileID;
+    public int connectionID;
+    public float maxRange;
     
     public void shoot(Player player) {}
     
@@ -30,13 +31,14 @@ public abstract class Projectile {
         System.out.println("Position Update: " + position);
     }
 
-    public Projectile(Vector2 velocity, Vector2 position, float radius, int id, Vector2 startPosition) {
-        this.velocity = velocity;
-        this.position = position;
+    public Projectile(Vector2 velocity, Vector2 position, float radius, int id, Vector2 startPosition, int connectionID) {
+        this.velocity.set(velocity);
+        this.position.set(position);
         this.radius = radius;
-        this.id = id;
-        this.startPosition = startPosition;
+        this.projectileID = id;
+        this.startPosition.set(startPosition);
         this.maxRange = Config.FIREBALL_MAXRANGE2;
+        this.connectionID = connectionID;
     }
 }
 

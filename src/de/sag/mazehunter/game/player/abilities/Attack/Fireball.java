@@ -26,19 +26,19 @@ public class Fireball extends AttackPickup {
     public String name = "Fireball";
     
     @Override
-    public void use(int id, float angle) {
+    public void use(int connectionID, float angle) {
         
         if (!canUse) {
             return;
         }
         
-        int index = getIndex(id);
+        int index = getIndex(connectionID);
         int projectileID = Main.MAIN_SINGLETON.game.projectileManager.getNewProjectileID();
         
         Vector2 fVelocity = new Vector2(Config.FIREBALL_SPEED, 0);
         fVelocity.setAngle(angle);
         
-        Main.MAIN_SINGLETON.game.projectileManager.projectilesNoC.add(new FireballProjectile(fVelocity, Main.MAIN_SINGLETON.game.player[index].position, Config.FIREBALL_HITBOXRADIUS2, projectileID, Main.MAIN_SINGLETON.game.player[index].position));
+        Main.MAIN_SINGLETON.game.projectileManager.projectilesNoC.add(new FireballProjectile(fVelocity, Main.MAIN_SINGLETON.game.player[index].position, Config.FIREBALL_HITBOXRADIUS2, projectileID, Main.MAIN_SINGLETON.game.player[index].position, connectionID));
         Main.MAIN_SINGLETON.server.sendToAllUDP(new FireballResponse(projectileID, fVelocity));
         
         startCooldown(index);

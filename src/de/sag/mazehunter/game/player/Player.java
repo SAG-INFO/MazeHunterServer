@@ -83,4 +83,4 @@ public class Player {
     public void update(float delta) {
         this.position.add(tmp.set(velocity).scl(delta));
     }
-}
+}   

@@ -6,6 +6,7 @@ import de.sag.mazehunter.Main;
 import de.sag.mazehunter.game.player.MovementSpeedListener;
 
 import de.sag.mazehunter.game.player.abilities.Attack.AttackListener;
+import de.sag.mazehunter.game.player.abilities.Attack.projectiles.Projectile;
 import de.sag.mazehunter.game.player.abilities.Attack.projectiles.ProjectileManager;
 import de.sag.mazehunter.game.player.abilities.FACTORY;
 import de.sag.mazehunter.game.player.abilities.Mobility.MobilityListener;
@@ -44,13 +45,17 @@ public class Game {
     }
     
     public void update(float delta){
+        for (Projectile p : projectileManager.projectilesNoC) {
+            p.update(delta);
+            System.out.println("fuck you");
+        }
         for (Player p : player) {
             if(p == null)
                 continue;
             p.update(delta);
         }
         pickupManager.update();
-        projectileManager.updateAll(delta);
+        projectileManager.updateAll();
         
     }
     

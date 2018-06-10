@@ -19,7 +19,7 @@ public class AttackListener extends InputListener {
     @Override
     public void received(Connection connection, Object object) {
         if(object instanceof AttackRequest) {
-            System.out.println("Request received");
+            System.out.println("Attack request received");
             if(Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].attackAbility != null) {
             Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].attackAbility.use(connection.getID(),((AttackRequest) object).angle);
             } else {

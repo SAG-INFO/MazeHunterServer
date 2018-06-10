@@ -19,10 +19,10 @@ public class FireballProjectile extends Projectile {
     @Override
     public void shoot(Player player) {
         player.changeHealth(-Config.FIREBALL_DAMAGE);
-        //shoot Animation (?)
+        //TODO shoot Animation (?)
     }
     
-    public FireballProjectile(Vector2 velocity, Vector2 position, float radius, int id, Vector2 startPosition) {
-        super(velocity, position, radius, id, startPosition);
+    public FireballProjectile(Vector2 velocity, Vector2 position, float radius, int id, Vector2 startPosition, int connectionID) {
+        super(velocity, position, radius, id, startPosition, connectionID);
     }
 }

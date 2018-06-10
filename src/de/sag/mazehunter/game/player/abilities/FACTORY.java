@@ -32,6 +32,7 @@ public class FACTORY extends Ability {
         
         return null;
     }
+    
     /**
      * Method called when trying to collect a fireball pickup
      * 

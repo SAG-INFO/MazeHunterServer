@@ -7,6 +7,7 @@ package de.sag.mazehunter.game.player;
 
 import de.sag.mazehunter.Main;
 import de.sag.mazehunter.game.Config;
+import de.sag.mazehunter.game.map.World;
 import de.sag.mazehunter.server.networkData.HealthUpdate;
 import de.sag.mazehunter.utils.Vector2;
 
@@ -26,12 +27,13 @@ public class Player {
     float collisionDistanceX;
     float collisionDistanceY;
     float size;
-    float treshold; 
+    float treshold;
+    World world;
     
     private final Vector2 tmp = new Vector2();
     private final Vector2 backupPosition = new Vector2();
 
-    public Player(int id) {
+    public Player(int id, World pworld) {
         position = new Vector2();
         position.set(0f, 0f);
         velocity = new Vector2();
@@ -45,6 +47,7 @@ public class Player {
         collisionDistanceY = 0f;
         size = 2.0f;
         treshold = 0.5f;
+        world = pworld;
     }
 
     public void move(int angle, boolean movement) {
@@ -109,62 +112,62 @@ public class Player {
         case 359:
         case 360:
         case 0: 
-            if(!world.IsTileOpen(myNeighbours[0][0], myNeighbours[0][1], myNeighbours[0][2], myNeighbours[0][3]))
+            if(!world.isTileOpen(myNeighbours[0][0], myNeighbours[0][1], myNeighbours[0][2], myNeighbours[0][3]))
                 collisionDistanceX = getTilePosition(myNeighbours[0][0], myNeighbours[0][2], 'r') - this.position.x;
             break;
         case 44:
         case 45:
-            if(!world.IsTileOpen(myNeighbours[0][0], myNeighbours[0][1], myNeighbours[0][2], myNeighbours[0][3]))
+            if(!world.isTileOpen(myNeighbours[0][0], myNeighbours[0][1], myNeighbours[0][2], myNeighbours[0][3]))
                 collisionDistanceX = getTilePosition(myNeighbours[0][0], myNeighbours[0][2], 'r') - this.position.x;  
-            if(!world.IsTileOpen(myNeighbours[1][0], myNeighbours[1][1], myNeighbours[1][2], myNeighbours[1][3]))
+            if(!world.isTileOpen(myNeighbours[1][0], myNeighbours[1][1], myNeighbours[1][2], myNeighbours[1][3]))
                 collisionDistanceX = getTilePosition(myNeighbours[1][0], myNeighbours[1][2], 'r') - this.position.x;
                 collisionDistanceY = getTilePosition(myNeighbours[1][1], myNeighbours[1][3], 'o') - this.position.y;
-            if(!world.IsTileOpen(myNeighbours[2][0], myNeighbours[2][1], myNeighbours[2][2], myNeighbours[2][3]))
+            if(!world.isTileOpen(myNeighbours[2][0], myNeighbours[2][1], myNeighbours[2][2], myNeighbours[2][3]))
                 collisionDistanceY = getTilePosition(myNeighbours[2][1], myNeighbours[2][3], 'o') - this.position.y;
             break;
         case 89:
         case 90:
-            if(!world.IsTileOpen(myNeighbours[2][0], myNeighbours[2][1], myNeighbours[2][2], myNeighbours[2][3]))
+            if(!world.isTileOpen(myNeighbours[2][0], myNeighbours[2][1], myNeighbours[2][2], myNeighbours[2][3]))
                 collisionDistanceY = getTilePosition(myNeighbours[2][1], myNeighbours[2][3], 'o') - this.position.y;
             break;
         case 134:
         case 135:
-            if(!world.IsTileOpen(myNeighbours[2][0], myNeighbours[2][1], myNeighbours[2][2], myNeighbours[2][3]))
+            if(!world.isTileOpen(myNeighbours[2][0], myNeighbours[2][1], myNeighbours[2][2], myNeighbours[2][3]))
                 collisionDistanceY = getTilePosition(myNeighbours[2][1], myNeighbours[2][3], 'o') - this.position.y;  
-            if(!world.IsTileOpen(myNeighbours[3][0], myNeighbours[3][1], myNeighbours[3][2], myNeighbours[3][3]))
+            if(!world.isTileOpen(myNeighbours[3][0], myNeighbours[3][1], myNeighbours[3][2], myNeighbours[3][3]))
                 collisionDistanceY = getTilePosition(myNeighbours[3][1], myNeighbours[3][3], 'o') - this.position.y;
                 collisionDistanceX = getTilePosition(myNeighbours[3][0], myNeighbours[3][2], 'l') - this.position.x;
-            if(!world.IsTileOpen(myNeighbours[4][0], myNeighbours[4][1], myNeighbours[4][2], myNeighbours[4][3]))
+            if(!world.isTileOpen(myNeighbours[4][0], myNeighbours[4][1], myNeighbours[4][2], myNeighbours[4][3]))
                 collisionDistanceX = getTilePosition(myNeighbours[4][0], myNeighbours[4][2], 'l') - this.position.x;
             break;
         case 179:
         case 180:
-            if(!world.IsTileOpen(myNeighbours[4][0], myNeighbours[4][1], myNeighbours[4][2], myNeighbours[4][3]))
+            if(!world.isTileOpen(myNeighbours[4][0], myNeighbours[4][1], myNeighbours[4][2], myNeighbours[4][3]))
                 collisionDistanceX = getTilePosition(myNeighbours[4][0], myNeighbours[4][2], 'l') - this.position.x;
             break;
         case 224:
         case 225:
-            if(!world.IsTileOpen(myNeighbours[4][0], myNeighbours[4][1], myNeighbours[4][2], myNeighbours[4][3]))
+            if(!world.isTileOpen(myNeighbours[4][0], myNeighbours[4][1], myNeighbours[4][2], myNeighbours[4][3]))
                 collisionDistanceX = getTilePosition(myNeighbours[4][0], myNeighbours[4][2], 'l') - this.position.x;  
-            if(!world.IsTileOpen(myNeighbours[5][0], myNeighbours[5][1], myNeighbours[5][2], myNeighbours[5][3]))
+            if(!world.isTileOpen(myNeighbours[5][0], myNeighbours[5][1], myNeighbours[5][2], myNeighbours[5][3]))
                 collisionDistanceX = getTilePosition(myNeighbours[5][0], myNeighbours[5][2], 'l') - this.position.x;
                 collisionDistanceY = getTilePosition(myNeighbours[5][1], myNeighbours[5][3], 'u') - this.position.y;
-            if(!world.IsTileOpen(myNeighbours[6][0], myNeighbours[6][1], myNeighbours[6][2], myNeighbours[6][3]))
+            if(!world.isTileOpen(myNeighbours[6][0], myNeighbours[6][1], myNeighbours[6][2], myNeighbours[6][3]))
                 collisionDistanceY = getTilePosition(myNeighbours[6][1], myNeighbours[6][3], 'u') - this.position.y;
             break;
         case 269:
         case 270:
-            if(!world.IsTileOpen(myNeighbours[6][0], myNeighbours[6][1], myNeighbours[6][2], myNeighbours[6][3]))
+            if(!world.isTileOpen(myNeighbours[6][0], myNeighbours[6][1], myNeighbours[6][2], myNeighbours[6][3]))
                 collisionDistanceY = getTilePosition(myNeighbours[6][1], myNeighbours[6][3], 'u') - this.position.y;
             break;
         case 314:
         case 315:
-            if(!world.IsTileOpen(myNeighbours[6][0], myNeighbours[6][1], myNeighbours[6][2], myNeighbours[6][3]))
+            if(!world.isTileOpen(myNeighbours[6][0], myNeighbours[6][1], myNeighbours[6][2], myNeighbours[6][3]))
                 collisionDistanceY = getTilePosition(myNeighbours[6][1], myNeighbours[6][3], 'u') - this.position.y;  
-            if(!world.IsTileOpen(myNeighbours[7][0], myNeighbours[7][1], myNeighbours[7][2], myNeighbours[7][3]))
+            if(!world.isTileOpen(myNeighbours[7][0], myNeighbours[7][1], myNeighbours[7][2], myNeighbours[7][3]))
                 collisionDistanceY = getTilePosition(myNeighbours[7][1], myNeighbours[7][3], 'u') - this.position.y;
                 collisionDistanceX = getTilePosition(myNeighbours[7][0], myNeighbours[7][2], 'r') - this.position.x;
-            if(!world.IsTileOpen(myNeighbours[0][0], myNeighbours[0][1], myNeighbours[0][2], myNeighbours[0][3]))
+            if(!world.isTileOpen(myNeighbours[0][0], myNeighbours[0][1], myNeighbours[0][2], myNeighbours[0][3]))
                 collisionDistanceX = getTilePosition(myNeighbours[0][0], myNeighbours[0][2], 'r') - this.position.x;
             break;
     }

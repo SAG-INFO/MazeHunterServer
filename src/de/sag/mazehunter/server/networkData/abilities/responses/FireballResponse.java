@@ -12,12 +12,16 @@ import de.sag.mazehunter.utils.Vector2;
  * @author Karl Huber
  */
 public class FireballResponse {
-    public int id;
+    public int projectileID;
+    public int connectionID;
     public Vector2 velocity;
+    public float rotation;
 
-    public FireballResponse(int id, Vector2 velocity) {
-        this.id = id;
+    public FireballResponse(int projectileID, int connectionID, Vector2 velocity, float rotation) {
+        this.projectileID = projectileID;
+        this.connectionID = connectionID;
         this.velocity = velocity;
+        this.rotation = rotation;
     }
 
     public FireballResponse() {

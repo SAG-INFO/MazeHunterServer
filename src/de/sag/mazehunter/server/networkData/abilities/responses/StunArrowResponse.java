@@ -12,13 +12,19 @@ import de.sag.mazehunter.utils.Vector2;
  * @author Karl Huber
  */
 public class StunArrowResponse {
-    public int id;
+    public int projectileID;
+    public int connectionID;
     public Vector2 velocity;
-    public float duration;
+    public float rotation;
 
-    public StunArrowResponse(int id, Vector2 velocity, float duration) {
-        this.id = id;
+    public StunArrowResponse(int projectileID, int connectionID, Vector2 velocity, float rotation) {
+        this.projectileID = projectileID;
+        this.connectionID = connectionID;
         this.velocity = velocity;
-        this.duration = duration;
+        this.rotation = rotation;
     }
+
+    public StunArrowResponse() {
+    }
+    
 }

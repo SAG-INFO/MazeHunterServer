@@ -46,17 +46,19 @@ public class Config {
     public static final int FIREBALL_DAMAGE = 25;
     public static final int FIREBALL_SPEED = 300;
     public static final float FIREBALL_HITBOXRADIUS2 = 60;
-    public static final int FIREBALL_CHARGES = 10;
+    public static final int FIREBALL_CHARGES = 3;
     public static final float FIREBALL_SPAWNRATE = 1.0f;
     public static final float FIREBALL_CD_BETWEEN_USES = 500;
-    public static final float FIREBALL_MAXRANGE2 = 2000;
+    public static final float FIREBALL_MAXRANGE2 = 100000;
     
     public static final float STUNARROW_BASE_STUN_DURATION = 0.3f;
+    public static final float STUNARROW_GAIN_PER_PIXEL = 0.003f;
     public static final int STUNARROW_SPEED = 200;
     public static final int STUNARROW_HITBOXRADIUS2 = 50;
     public static final float STUNARROW_SPAWNRATE = 1.0f;
-    public static final int STUNARROW_MAXRANGE2 = 2000;
-    public static final float STUNARROW_GAIN_PER_TICK = 0.003f;
+    public static final int STUNARROW_MAXRANGE2 = 100000;
+    public static final int STUNARROW_CHARGES = 1;
+    public static final float STUNARROW_CD_BETWEEN_USES = 5000;
     
     public static void pushConfig() {
         PushConfig pc = new PushConfig();

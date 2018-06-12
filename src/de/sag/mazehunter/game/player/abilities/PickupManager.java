@@ -97,14 +97,12 @@ public class PickupManager {
         if (!canCollectUtility) {return false;}
         String name = pickup.abilityName;
         String oldName;
-        boolean didthings ;
         
         switch (name) {
             case "StandardHeal":    oldName = Main.MAIN_SINGLETON.game.abilityFACTORY.collectStandardHeal(player.connectionID);
-                                    didthings = true;
                                     break;
             case "StunArrow":       oldName = Main.MAIN_SINGLETON.game.abilityFACTORY.collectStunArrow(player.connectionID);
-                                    didthings = true;
+                                    System.out.println("StunArrow detected");
                                     break;
             default: return false;
         }
@@ -112,7 +110,7 @@ public class PickupManager {
         swapUtilityCooldown();
         
         if (oldName != null) {spawnPickup(pickup.position, oldName);}
-        return didthings;
+        return true;
     }
     
     private void disposePickup(AbilityPickup pickup) {

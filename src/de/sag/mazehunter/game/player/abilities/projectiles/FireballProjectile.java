@@ -5,8 +5,10 @@
  */
 package de.sag.mazehunter.game.player.abilities.projectiles;
 
+import de.sag.mazehunter.Main;
 import de.sag.mazehunter.game.Config;
 import de.sag.mazehunter.game.player.Player;
+import de.sag.mazehunter.server.networkData.abilities.responses.FireballShootResponse;
 import de.sag.mazehunter.utils.Vector2;
 
 
@@ -17,12 +19,13 @@ import de.sag.mazehunter.utils.Vector2;
 public class FireballProjectile extends Projectile {
     
     @Override
-    public void shoot(Player player) {
+    public void shoot(Player player, int projectileID) {
         player.changeHealth(-Config.FIREBALL_DAMAGE);
-        //TODO shoot Animation (?)
+        
+        Main.MAIN_SINGLETON.server.sendToAllUDP(new FireballShootResponse(player.connectionID, projectileID));
     }
     
-    public FireballProjectile(Vector2 velocity, Vector2 position, float radius, int id, Vector2 startPosition, int connectionID) {
-        super(velocity, position, radius, id, startPosition, connectionID);
+    public FireballProjectile(Vector2 velocity, Vector2 position, float radius, int id, int connectionID) {
+        super(velocity, position, radius, id, connectionID, Config.FIREBALL_MAXRANGE2);
     }
 }

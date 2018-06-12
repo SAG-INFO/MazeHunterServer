@@ -24,7 +24,6 @@ public class Fireball extends Ability {
     
     public int charge;
     public boolean canUse;
-    public String name = "Fireball";
     
     @Override
     public void use(int connectionID, float angle) {
@@ -39,8 +38,8 @@ public class Fireball extends Ability {
         Vector2 fVelocity = new Vector2(Config.FIREBALL_SPEED, 0);
         fVelocity.setAngle(angle);
         
-        Main.MAIN_SINGLETON.game.projectileManager.projectilesNoC.add(new FireballProjectile(fVelocity, Main.MAIN_SINGLETON.game.player[index].position, Config.FIREBALL_HITBOXRADIUS2, projectileID, Main.MAIN_SINGLETON.game.player[index].position, connectionID));
-        Main.MAIN_SINGLETON.server.sendToAllUDP(new FireballResponse(connectionID, fVelocity.cpy()));
+        Main.MAIN_SINGLETON.game.projectileManager.projectilesNoC.add(new FireballProjectile(fVelocity, Main.MAIN_SINGLETON.game.player[index].position.cpy(), Config.FIREBALL_HITBOXRADIUS2, projectileID, connectionID));
+        Main.MAIN_SINGLETON.server.sendToAllUDP(new FireballResponse(projectileID, connectionID, fVelocity.cpy(), angle));
         
         startCooldown(index);
         

@@ -32,8 +32,9 @@ public class ProjectileManager {
         return projectileID;
     }
     
-    public void disposeProjectileNoC(Projectile p) {
+    public void disposeProjectile(Projectile p) {
         projectilesNoC.remove(p);
+        System.out.println("disposethatshit");
         Main.MAIN_SINGLETON.server.sendToAllTCP(new DisposeProjectile(p.projectileID));
     }
     
@@ -56,21 +57,19 @@ public class ProjectileManager {
             Optional<Projectile> collidesWithPlayer = projectilesNoC.stream().filter((p) -> (tmpVec.set(player.position).sub(p.position).len2() < minDistance && player.connectionID != p.connectionID)).findFirst();
             if(collidesWithPlayer.isPresent()) {
                 System.out.println("collision detected with player " + player.connectionID);
-                collidesWithPlayer.get().shoot(player);
-                disposeProjectileNoC(collidesWithPlayer.get());
-                System.out.println();
+                collidesWithPlayer.get().shoot(player, collidesWithPlayer.get().projectileID);
             }
             
-            Optional<Projectile> reachedMaxrange = projectilesNoC.stream().filter((p) -> (tmpVec.set(p.startPosition).sub(p.position).len2() > Config.FIREBALL_MAXRANGE2)).findFirst();
+            Optional<Projectile> reachedMaxrange = projectilesNoC.stream().filter((p) -> (tmpVec.set(p.startPosition).sub(p.position).len2() > p.maxRange2)).findFirst();
             if(reachedMaxrange.isPresent()) {
-                System.out.println("maxRange reached.");
-                disposeProjectileNoC(reachedMaxrange.get());
+                System.out.println("maxRange reached: " + tmpVec.set(reachedMaxrange.get().startPosition).sub(reachedMaxrange.get().position).len2());
+                disposeProjectile(reachedMaxrange.get());
             }
         }
     }
 
     public void updateC() {
-        //TODO collision
+        //TODO 
     }
     
     public ProjectileManager() {

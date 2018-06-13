@@ -3,26 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.sag.mazehunter.game.player.abilities.projectiles;
+package de.sag.mazehunter.game.player.abilities.Entity.projectiles;
 
 import de.sag.mazehunter.game.player.Player;
+import de.sag.mazehunter.game.player.abilities.Entity.AbilityEntity;
 import de.sag.mazehunter.utils.Vector2;
 
 /**
  *
  * @author Karl Huber
  */
-public abstract class Projectile {
+public abstract class Projectile extends AbilityEntity {
     
     public final Vector2 velocity = new Vector2();
-    public final Vector2 position = new Vector2();
     public final Vector2 startPosition = new Vector2();
-    public float radius;
-    public int projectileID;
     public int connectionID;
     public float maxRange2;
-    
-    public void shoot(Player player, int projectileID) {}
     
     private final Vector2 tmp = new Vector2();
     public void update(float delta){
@@ -32,8 +28,8 @@ public abstract class Projectile {
     public Projectile(Vector2 velocity, Vector2 position, float radius, int id, int connectionID, float maxRange2) {
         this.velocity.set(velocity);
         this.position.set(position);
-        this.radius = radius;
-        this.projectileID = id;
+        this.radius2 = radius;
+        this.entityID = id;
         this.startPosition.set(position.cpy());
         this.maxRange2 = maxRange2;
         this.connectionID = connectionID;

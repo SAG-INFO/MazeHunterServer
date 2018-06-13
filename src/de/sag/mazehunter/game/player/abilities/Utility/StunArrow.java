@@ -8,7 +8,7 @@ package de.sag.mazehunter.game.player.abilities.Utility;
 import de.sag.mazehunter.Main;
 import de.sag.mazehunter.game.Config;
 import de.sag.mazehunter.game.player.abilities.Ability;
-import de.sag.mazehunter.game.player.abilities.projectiles.StunArrowProjectile;
+import de.sag.mazehunter.game.player.abilities.Entity.projectiles.StunArrowProjectile;
 import de.sag.mazehunter.server.networkData.abilities.responses.StunArrowResponse;
 import de.sag.mazehunter.utils.Vector2;
 
@@ -24,7 +24,7 @@ public class StunArrow extends Ability{
     public void use(int connectionID, float angle) {
         
         int index = getIndex(connectionID);
-        int projectileID = Main.MAIN_SINGLETON.game.projectileManager.getNewProjectileID();
+        int projectileID = Main.MAIN_SINGLETON.game.entityManager.getNewEntityID();
         
         Vector2 fVelocity = new Vector2(Config.STUNARROW_SPEED, 0);
         fVelocity.setAngle(angle);

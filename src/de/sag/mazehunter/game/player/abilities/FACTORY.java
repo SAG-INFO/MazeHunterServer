@@ -15,6 +15,8 @@ import de.sag.mazehunter.game.player.abilities.Utility.StunArrow;
  * @author Karl Huber
  * 
  * extends Ability just to get the getIndex() Method.
+ * 
+ * collectWhatever() methods return the name of the old Abilityname if the player currently has one or null if the slot was empty.
  */
 public class FACTORY extends Ability {
     
@@ -32,12 +34,6 @@ public class FACTORY extends Ability {
         return null;
     }
     
-    /**
-     * Method called when trying to collect a fireball pickup
-     * 
-     * @param id connectionID of the player collecting the pickup
-     * @return the name of the old ability if the Abilities are swapped or null if utilityAbility is null.
-     */
     public String collectFireball(int id) {
         int index = getIndex(id);
         String tmp;
@@ -53,12 +49,6 @@ public class FACTORY extends Ability {
         }
     }
     
-    /**
-     * Method called when trying to collect a standardHeal pickup
-     * 
-     * @param id connectionID of the player collecting the pickup
-     * @return the name of the old ability if the Abilities are swapped or null if utilityAbility is null.
-     */
     public String collectStandardHeal(int id) {
         int index = getIndex(id);
         String tmp;
@@ -74,12 +64,6 @@ public class FACTORY extends Ability {
         }
     }
     
-    /**
-     * Method called when trying to collect a StunArrow pickup
-     * 
-     * @param id connectionID of the player collecting the pickup
-     * @return the name of the old ability if the Abilities are swapped or null if utilityAbility is null.
-     */
     public String collectStunArrow(int id) {
         int index = getIndex(id);
         String tmp;

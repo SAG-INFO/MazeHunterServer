@@ -6,8 +6,9 @@ import de.sag.mazehunter.Main;
 import de.sag.mazehunter.game.player.MovementSpeedListener;
 
 import de.sag.mazehunter.game.player.abilities.Attack.AttackListener;
-import de.sag.mazehunter.game.player.abilities.projectiles.Projectile;
-import de.sag.mazehunter.game.player.abilities.projectiles.ProjectileManager;
+import de.sag.mazehunter.game.player.abilities.Entity.EntityManager;
+import de.sag.mazehunter.game.player.abilities.Entity.nonMoving.NonMovingManager;
+import de.sag.mazehunter.game.player.abilities.Entity.projectiles.ProjectileManager;
 import de.sag.mazehunter.game.player.abilities.FACTORY;
 import de.sag.mazehunter.game.player.abilities.Mobility.MobilityListener;
 import de.sag.mazehunter.game.player.abilities.PickupManager;
@@ -21,6 +22,8 @@ public class Game {
 
     public PickupManager pickupManager;
     public ProjectileManager projectileManager;
+    public NonMovingManager nonMovingManager;
+    public EntityManager entityManager;
 
     public Player player[];
     public FACTORY abilityFACTORY;
@@ -39,6 +42,8 @@ public class Game {
         abilityFACTORY = new FACTORY();
         pickupManager = new PickupManager();
         projectileManager = new ProjectileManager();
+        nonMovingManager = new NonMovingManager();
+        entityManager = new EntityManager();
     }
 
     public void start(){

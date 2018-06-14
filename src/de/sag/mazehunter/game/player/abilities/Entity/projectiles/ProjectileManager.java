@@ -8,7 +8,7 @@ package de.sag.mazehunter.game.player.abilities.Entity.projectiles;
 import de.sag.mazehunter.Main;
 import de.sag.mazehunter.game.Config;
 import de.sag.mazehunter.game.player.Player;
-import de.sag.mazehunter.server.networkData.abilities.projectiles.DisposeProjectile;
+import de.sag.mazehunter.server.networkData.abilities.entity.DisposeProjectile;
 import de.sag.mazehunter.utils.Vector2;
 import java.util.ArrayList;
 import java.util.Optional;

@@ -42,4 +42,8 @@ public class NonMovingManager {
             }
         }
     }
+    
+    public NonMovingManager() {
+        nonMoving = new ArrayList<>();
+    }
 }

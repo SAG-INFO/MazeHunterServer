@@ -26,7 +26,7 @@ public class Trap extends Ability{
         int entityID = Main.MAIN_SINGLETON.game.entityManager.getNewEntityID();
         
         Main.MAIN_SINGLETON.game.nonMovingManager.nonMoving.add(new TrapNonMoving(Main.MAIN_SINGLETON.game.player[index].position.cpy(), entityID, connectionID, Config.TRAP_HITBOXRADIUS2));
-        Main.MAIN_SINGLETON.server.sendToAllUDP(new TrapResponse(Main.MAIN_SINGLETON.game.player[index].position.cpy()));
+        Main.MAIN_SINGLETON.server.sendToAllUDP(new TrapResponse(Main.MAIN_SINGLETON.game.player[index].position.cpy(), connectionID, entityID));
         System.out.println("TrapResponse sent.");
         
         charge--;

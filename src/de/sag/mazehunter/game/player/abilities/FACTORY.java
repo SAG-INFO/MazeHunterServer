@@ -9,6 +9,7 @@ import de.sag.mazehunter.Main;
 import de.sag.mazehunter.game.player.abilities.Attack.Fireball;
 import de.sag.mazehunter.game.player.abilities.Utility.StandardHeal;
 import de.sag.mazehunter.game.player.abilities.Utility.StunArrow;
+import de.sag.mazehunter.game.player.abilities.Utility.Trap;
 
 /**
  *
@@ -75,6 +76,21 @@ public class FACTORY extends Ability {
         } else {
             Main.MAIN_SINGLETON.game.player[index].utilityAbility = new StunArrow();
             System.out.println("UTILITY: StunArrow collected.");
+            return null; 
+        }
+    }
+    
+    public String collectTrap(int id) {
+        int index = getIndex(id);
+        String tmp;
+        if (Main.MAIN_SINGLETON.game.player[index].utilityAbility != null) {
+            tmp = getOldUtilityName(index);
+            Main.MAIN_SINGLETON.game.player[index].utilityAbility = new Trap();
+            System.out.println("UTILITY: Trap swapped. " + tmp);
+            return tmp;
+        } else {
+            Main.MAIN_SINGLETON.game.player[index].utilityAbility = new Trap();
+            System.out.println("UTILITY: Trap collected.");
             return null; 
         }
     }

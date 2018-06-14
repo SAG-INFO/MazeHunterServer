@@ -13,12 +13,15 @@ import de.sag.mazehunter.utils.Vector2;
  */
 public class TrapResponse {
     public Vector2 position;
+    public int connectionID;
+    public int entityID;
 
-    public TrapResponse(Vector2 position) {
+    public TrapResponse(Vector2 position, int connectionID, int entityID) {
         this.position = position;
+        this.connectionID = connectionID;
+        this.entityID = entityID;
     }
 
     public TrapResponse() {
     }
-    
 }

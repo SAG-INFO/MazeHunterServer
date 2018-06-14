@@ -19,6 +19,7 @@ import java.util.TimerTask;
  */
 public class StandardHeal extends Ability {
     
+    @Override
     public void use(int id, float angle) {
         
         int index = getIndex(id);

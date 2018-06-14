@@ -16,8 +16,6 @@ import de.sag.mazehunter.server.networkData.configs.PushConfig;
  * damage and heal always int (eg. no 10.5 HP possible)
  * 
  * movementspeed factors always floats from 0.0 to 1.0 for slows and 1.0 to infinity to increase movementspeed
- * 
- * 
  */
 public class Config {
     
@@ -25,7 +23,7 @@ public class Config {
     public static float PICKUP_HITBOXRADIUS2 = 60;
     
     //Player Stuff
-    public static int DEFAULT_SPEED = 50;
+    public static int DEFAULT_SPEED = 150;
     public static float PLAYER_HITBOXRADIUS2 = 100;
     
     //permanent ability Stuff
@@ -44,11 +42,11 @@ public class Config {
     public static final int STANDARDHEAL_TOTALHEAL = 100;
     
     public static final int FIREBALL_DAMAGE = 25;
-    public static final int FIREBALL_SPEED = 300;
+    public static final int FIREBALL_SPEED = 1000;
     public static final float FIREBALL_HITBOXRADIUS2 = 60;
-    public static final int FIREBALL_CHARGES = 3;
+    public static final int FIREBALL_CHARGES = 100;
     public static final float FIREBALL_SPAWNRATE = 1.0f;
-    public static final float FIREBALL_CD_BETWEEN_USES = 500;
+    public static final float FIREBALL_CD_BETWEEN_USES = 1;
     public static final float FIREBALL_MAXRANGE2 = 100000;
     
     public static final float STUNARROW_BASE_STUN_DURATION = 0.3f;
@@ -69,21 +67,12 @@ public class Config {
         
         pc.DEFAULT_SPEED = DEFAULT_SPEED;
         
-        pc.BLIZZARD_RADIUS = BLIZZARD_RADIUS;
         pc.BLIZZARD_SLOW_DURATION = BLIZZARD_SLOW_DURATION;
         pc.BLIZZARD_SLOW_AMOUNT = BLIZZARD_SLOW_AMOUNT;
-        pc.BLIZZARD_DAMAGE = BLIZZARD_DAMAGE;
-        
-        pc.DASH_COOLDOWN = DASH_COOLDOWN;
-        pc.DASH_RANGE = DASH_RANGE;
         
         pc.STANDARDHEAL_DURATION = STANDARDHEAL_DURATION;
-        pc.STANDARDHEAL_TOTALHEAL = STANDARDHEAL_TOTALHEAL;
         
-        pc.FIREBALL_CHARGES = FIREBALL_CHARGES;
-        pc.FIREBALL_DAMAGE = FIREBALL_DAMAGE;
-        pc.FIREBALL_SPEED = FIREBALL_SPEED;
-        pc.FIREBALL_CD_BETWEEN_USES = FIREBALL_CD_BETWEEN_USES;
+        pc.TRAP_ROOTDURATION = TRAP_ROOTDURATION;
         
         Main.MAIN_SINGLETON.server.sendToAllUDP(pc);
     }

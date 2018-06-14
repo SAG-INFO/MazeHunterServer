@@ -35,28 +35,10 @@ public class ProjectileManager {
     public void updateAll(float delta) {
         //updateC();
         updateNoC(delta);
-        updateNonMoving();
     }
     
     final Vector2 tmpVec = new Vector2();
-    public void updateNonMoving() {
-        
-        float minDistance = Config.FIREBALL_HITBOXRADIUS2 + Config.PLAYER_HITBOXRADIUS2;
-        
-        for (Player player : Main.MAIN_SINGLETON.game.player) {
-            if(player == null)
-                continue;
-            
-            Optional<Projectile> collidesWithPlayer = projectilesNoC.stream().filter((p) -> (tmpVec.set(player.position).sub(p.position).len2() < minDistance && player.connectionID != p.connectionID)).findFirst();
-            if(collidesWithPlayer.isPresent()) {
-                System.out.println("collision detected with player " + player.connectionID);
-                collidesWithPlayer.get().shoot(player, collidesWithPlayer.get().entityID);
-            }
-        }
-    }
-    
     public void updateNoC(float delta) {
-        float minDistance = Config.FIREBALL_HITBOXRADIUS2 + Config.PLAYER_HITBOXRADIUS2;
         
         projectilesNoC.forEach((p) -> {p.update(delta);});
 
@@ -64,7 +46,7 @@ public class ProjectileManager {
             if(player == null)
                 continue;
             
-            Optional<Projectile> collidesWithPlayer = projectilesNoC.stream().filter((p) -> (tmpVec.set(player.position).sub(p.position).len2() < minDistance && player.connectionID != p.connectionID)).findFirst();
+            Optional<Projectile> collidesWithPlayer = projectilesNoC.stream().filter((p) -> (tmpVec.set(player.position).sub(p.position).len2() < p.radius2 + Config.PLAYER_HITBOXRADIUS2 && player.connectionID != p.connectionID)).findFirst();
             if(collidesWithPlayer.isPresent()) {
                 System.out.println("Projectil: collision detected with player " + player.connectionID);
                 collidesWithPlayer.get().shoot(player, collidesWithPlayer.get().entityID);

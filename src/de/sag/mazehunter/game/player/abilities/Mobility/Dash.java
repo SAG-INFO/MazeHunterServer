@@ -28,7 +28,7 @@ public class Dash extends Ability {
         
             int index = getIndex(id);
         
-            Vector2 tempVelocity = Main.MAIN_SINGLETON.game.player[index].velocity;
+            Vector2 tempVelocity = Main.MAIN_SINGLETON.game.player[index].velocity.cpy();
             Main.MAIN_SINGLETON.game.player[index].position.add(tempVelocity.setLength(Config.DASH_RANGE));
         
             DashResponse dr = new DashResponse(Main.MAIN_SINGLETON.game.player[index].position, Main.MAIN_SINGLETON.game.player[index].velocity, id);

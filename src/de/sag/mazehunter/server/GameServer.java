@@ -10,6 +10,7 @@ import de.sag.mazehunter.server.networkData.MovementSpeedRequest;
 import de.sag.mazehunter.server.networkData.PlayerLobby;
 import de.sag.mazehunter.server.networkData.StartGameRequest;
 import de.sag.mazehunter.server.networkData.StartGameResponse;
+import de.sag.mazehunter.server.networkData.abilities.entity.DisposeNonMoving;
 import de.sag.mazehunter.server.networkData.abilities.requests.AttackRequest;
 import de.sag.mazehunter.server.networkData.abilities.requests.MobilityRequest;
 import de.sag.mazehunter.server.networkData.abilities.responses.DashResponse;
@@ -23,6 +24,8 @@ import de.sag.mazehunter.server.networkData.abilities.requests.UtilityRequest;
 import de.sag.mazehunter.server.networkData.abilities.responses.FireballShootResponse;
 import de.sag.mazehunter.server.networkData.abilities.responses.StunArrowResponse;
 import de.sag.mazehunter.server.networkData.abilities.responses.StunArrowShootResponse;
+import de.sag.mazehunter.server.networkData.abilities.responses.TrapResponse;
+import de.sag.mazehunter.server.networkData.abilities.responses.TrapShootResponse;
 import de.sag.mazehunter.server.networkData.configs.PushConfig;
 import de.sag.mazehunter.utils.Vector2;
 import java.io.IOException;
@@ -86,9 +89,12 @@ public class GameServer extends Server{
         getKryo().register(FireballShootResponse.class);
         getKryo().register(StunArrowResponse.class);
         getKryo().register(StunArrowShootResponse.class);
+        getKryo().register(TrapResponse.class);
+        getKryo().register(TrapShootResponse.class);
         
-        //Projectiles
+        //Entity Stuff
         getKryo().register(DisposeProjectile.class);
+        getKryo().register(DisposeNonMoving.class);
         
         //Pickups
         getKryo().register(SpawnPickup.class);

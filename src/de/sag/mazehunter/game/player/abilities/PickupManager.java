@@ -131,7 +131,7 @@ public class PickupManager {
             @Override
             public void run() {
                 if (pickups.size() <= 5) {
-                    String name = Math.random()<0.5f?"Trap":"Trap";
+                    String name = Math.random()<0.5f?"Trap":"Fireball";
                     spawnPickup(new Vector2((float) Math.random() * 400, (float) Math.random() * 400), name);
                 }
             }

@@ -61,6 +61,7 @@ public class Config {
     public static final int TRAP_HITBOXRADIUS2 = 100;
     public static final float TRAP_ROOTDURATION = 4;
     public static final int TRAP_CHARGES = 1;
+    public static final int TRAP_MAXTRAPCOUNT_PER_PLAYER = 2;
     
     public static void pushConfig() {
         PushConfig pc = new PushConfig();

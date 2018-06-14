@@ -78,10 +78,11 @@ public class Player {
 
 
     public void update(float delta) {
+        velocity.set(requestedVelocity);
         backupPosition.set(this.position);
         backupVelocity.set(this.requestedVelocity);
-        this.position.add(tmp.set(requestedVelocity).scl(delta));
         this.calcCD2();
+        this.position.add(tmp.set(requestedVelocity).scl(delta));
         if(backupVelocity != this.velocity){
             this.position.set(backupPosition);
             this.position.add(tmp.set(velocity).scl(delta));

@@ -11,9 +11,11 @@ package de.sag.mazehunter.server.networkData.abilities.responses;
  */
 public class TrapShootResponse {
     public int connectionID;
+    public int entityID;
 
-    public TrapShootResponse(int connectionID) {
+    public TrapShootResponse(int connectionID, int entityID) {
         this.connectionID = connectionID;
+        this.entityID = entityID;
     }
 
     public TrapShootResponse() {

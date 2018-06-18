@@ -16,7 +16,7 @@ import de.sag.mazehunter.utils.Vector2;
  *
  * @author Karl Huber
  */
-public class FireballProjectile extends Projectile {
+public class FireballEntity extends Projectile {
     
     @Override
     public void shoot(Player player, int projectileID) {
@@ -25,7 +25,7 @@ public class FireballProjectile extends Projectile {
         Main.MAIN_SINGLETON.server.sendToAllUDP(new FireballShootResponse(player.connectionID, projectileID));
     }
     
-    public FireballProjectile(Vector2 velocity, Vector2 position, float radius, int id, int connectionID) {
+    public FireballEntity(Vector2 velocity, Vector2 position, float radius, int id, int connectionID) {
         super(velocity, position, radius, id, connectionID, Config.FIREBALL_MAXRANGE2);
     }
 }

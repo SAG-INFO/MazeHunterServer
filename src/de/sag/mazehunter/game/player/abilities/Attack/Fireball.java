@@ -8,7 +8,7 @@ package de.sag.mazehunter.game.player.abilities.Attack;
 import de.sag.mazehunter.Main;
 import de.sag.mazehunter.game.Config;
 import de.sag.mazehunter.game.player.abilities.Ability;
-import de.sag.mazehunter.game.player.abilities.Entity.projectiles.FireballProjectile;
+import de.sag.mazehunter.game.player.abilities.Entity.projectiles.FireballEntity;
 import de.sag.mazehunter.server.networkData.abilities.responses.FireballResponse;
 import de.sag.mazehunter.utils.Vector2;
 import java.util.Timer;
@@ -38,7 +38,7 @@ public class Fireball extends Ability {
         Vector2 fVelocity = new Vector2(Config.FIREBALL_SPEED, 0);
         fVelocity.setAngle(angle);
         
-        Main.MAIN_SINGLETON.game.projectileManager.projectilesNoC.add(new FireballProjectile(fVelocity, Main.MAIN_SINGLETON.game.player[index].position.cpy(), Config.FIREBALL_HITBOXRADIUS2, projectileID, connectionID));
+        Main.MAIN_SINGLETON.game.projectileManager.projectilesNoC.add(new FireballEntity(fVelocity, Main.MAIN_SINGLETON.game.player[index].position.cpy(), Config.FIREBALL_HITBOXRADIUS2, projectileID, connectionID));
         Main.MAIN_SINGLETON.server.sendToAllUDP(new FireballResponse(projectileID, connectionID, fVelocity.cpy(), angle));
         
         startCooldown(index);

@@ -15,7 +15,7 @@ import de.sag.mazehunter.utils.Vector2;
  *
  * @author Karl Huber
  */
-public class StunArrowProjectile extends Projectile {
+public class StunArrowEntity extends Projectile {
     
     @Override
     public void shoot(Player player, int projectileID) {
@@ -23,7 +23,7 @@ public class StunArrowProjectile extends Projectile {
         Main.MAIN_SINGLETON.server.sendToAllUDP(new StunArrowShootResponse(player.connectionID, projectileID, stunDuration));
     }
     
-    public StunArrowProjectile(Vector2 velocity, Vector2 position, float radius, int id, int connectionID) {
+    public StunArrowEntity(Vector2 velocity, Vector2 position, float radius, int id, int connectionID) {
         super(velocity, position, radius, id, connectionID, Config.STUNARROW_MAXRANGE2);
     }
 }

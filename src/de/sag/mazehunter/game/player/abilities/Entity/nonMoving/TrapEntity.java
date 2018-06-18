@@ -14,14 +14,15 @@ import de.sag.mazehunter.utils.Vector2;
  *
  * @author Karl Huber
  */
-public class TrapNonMoving extends NonMoving {
+public class TrapEntity extends NonMoving {
 
     @Override
     public void shoot(Player player, int entityID) {
-        Main.MAIN_SINGLETON.server.sendToAllTCP(new TrapShootResponse(player.connectionID));
+        Main.MAIN_SINGLETON.server.sendToAllTCP(new TrapShootResponse(player.connectionID, entityID));
+        System.out.println("TSR triggered.");
     }
     
-    public TrapNonMoving(Vector2 position, int entityID, int connectionID, int radius2) {
+    public TrapEntity(Vector2 position, int entityID, int connectionID, int radius2) {
         super(position, entityID, connectionID, radius2);
     }
 }

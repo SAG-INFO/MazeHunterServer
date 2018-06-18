@@ -5,6 +5,8 @@
  */
 package de.sag.mazehunter.game.player.abilities.Entity.projectiles;
 
+import de.sag.mazehunter.Main;
+import de.sag.mazehunter.game.Config;
 import de.sag.mazehunter.game.player.Player;
 import de.sag.mazehunter.game.player.abilities.Entity.AbilityEntity;
 import de.sag.mazehunter.utils.Vector2;
@@ -17,13 +19,10 @@ public abstract class Projectile extends AbilityEntity {
     
     public final Vector2 velocity = new Vector2();
     public final Vector2 startPosition = new Vector2();
-    public int connectionID;
     public float maxRange2;
+    public boolean collidesWithWalls;
     
-    private final Vector2 tmp = new Vector2();
-    public void update(float delta){
-        this.position.add(tmp.set(velocity).scl(delta));
-    }
+    public void collideWithWalls() {}
 
     public Projectile(Vector2 velocity, Vector2 position, float radius, int id, int connectionID, float maxRange2) {
         this.velocity.set(velocity);
@@ -34,5 +33,33 @@ public abstract class Projectile extends AbilityEntity {
         this.maxRange2 = maxRange2;
         this.connectionID = connectionID;
     }
+    
+    private final Vector2 tmp1 = new Vector2();
+    private final Vector2 tmp2 = new Vector2();
+    public void update(float delta) {
+        
+        this.position.add(tmp1.set(velocity).scl(delta));
+
+        for (Player player : Main.MAIN_SINGLETON.game.player) {
+            if(player == null)
+                continue;
+            
+            //collide with player
+            if (tmp2.set(player.position).sub(position).len2() < radius2 + Config.PLAYER_HITBOXRADIUS2 && player.connectionID != connectionID) {
+                shoot(player, entityID);
+            }
+            
+            //maxrange reached
+            if (tmp2.set(player.position).sub(position).len2() < radius2 + Config.PLAYER_HITBOXRADIUS2 && player.connectionID != connectionID) {
+                Main.MAIN_SINGLETON.game.entityManager.disposeEntity(this);
+            }
+            
+            if (collidesWithWalls) {
+                collideWithWalls();
+            }
+        }
+    }
+    
+    
 }
 

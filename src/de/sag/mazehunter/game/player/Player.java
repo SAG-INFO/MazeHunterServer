@@ -74,11 +74,11 @@ public class Player {
     }
     
     public void updateVelocity(int angle) {
-        velocity.set(speed, 0); 
+        velocity.set(speed, 0);
         velocity.setAngle((float) angle);
     }
 
     public void update(float delta) {
         this.position.add(tmp.set(velocity).scl(delta));
     }
-}   
+}

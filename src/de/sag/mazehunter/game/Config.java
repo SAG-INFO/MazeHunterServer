@@ -20,11 +20,11 @@ import de.sag.mazehunter.server.networkData.configs.PushConfig;
 public class Config {
     
     //Game stuff
-    public static float PICKUP_HITBOXRADIUS2 = 60;
+    public static float PICKUP_HITBOXRADIUS2 = 100;
     
     //Player Stuff
     public static int DEFAULT_SPEED = 150;
-    public static float PLAYER_HITBOXRADIUS2 = 100;
+    public static float PLAYER_HITBOXRADIUS2 = 200;
     
     //permanent ability Stuff
     public static final float DASH_COOLDOWN = 4000;
@@ -58,7 +58,7 @@ public class Config {
     public static final int STUNARROW_CHARGES = 1;
     public static final float STUNARROW_CD_BETWEEN_USES = 5000;
     
-    public static final int TRAP_HITBOXRADIUS2 = 100;
+    public static final int TRAP_HITBOXRADIUS2 = 200;
     public static final float TRAP_ROOTDURATION = 4;
     public static final int TRAP_CHARGES = 1;
     public static final int TRAP_MAXTRAPCOUNT_PER_PLAYER = 2;

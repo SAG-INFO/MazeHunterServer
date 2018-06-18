@@ -8,6 +8,7 @@ package de.sag.mazehunter.game.player.abilities.Entity;
 import de.sag.mazehunter.game.player.Player;
 import de.sag.mazehunter.utils.Vector2;
 
+
 /**
  *
  * @author Karl Huber
@@ -20,4 +21,8 @@ public class AbilityEntity {
     
     /** called when entity gets triggered by some event, most of the time when it collides with a player.*/
     public void shoot(Player player, int entityID) {}
+    
+    public void update(float delta){
+        
+    }
 }

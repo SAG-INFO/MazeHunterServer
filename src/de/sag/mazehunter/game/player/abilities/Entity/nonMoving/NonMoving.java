@@ -5,6 +5,9 @@
  */
 package de.sag.mazehunter.game.player.abilities.Entity.nonMoving;
 
+import de.sag.mazehunter.Main;
+import de.sag.mazehunter.game.Config;
+import de.sag.mazehunter.game.player.Player;
 import de.sag.mazehunter.game.player.abilities.Entity.AbilityEntity;
 import de.sag.mazehunter.utils.Vector2;
 
@@ -19,5 +22,19 @@ public abstract class NonMoving extends AbilityEntity {
         this.entityID = entityID;
         this.connectionID = connectionID;
         this.radius2 = radius2;
+    }
+    
+    private final Vector2 tmpVec = new Vector2();
+    public void updateNonMoving() {
+        
+        for (Player player : Main.MAIN_SINGLETON.game.player) {
+            if(player == null)
+                continue;
+            
+            if (tmpVec.set(player.position).sub(position).len2() < radius2 + Config.PLAYER_HITBOXRADIUS2 && player.connectionID != connectionID) {
+                shoot(player, entityID);
+                Main.MAIN_SINGLETON.game.entityManager.disposeEntity(this);
+            }
+        }
     }
 }

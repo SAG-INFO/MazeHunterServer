@@ -21,7 +21,9 @@ public class Player {
     private final float size = 5;
     public final Vector2 position = new Vector2(35, 35);
     public final Vector2 desiredVelocity = new Vector2(0, 0);
-    public final Vector2 velocity = new Vector2(0, 0);
+    public final Vector2 requestedVelocity = new Vector2(0, 0);
+    private final Vector2 velocity = new Vector2();
+    
     public float speed;
     public float movementSpeedFactor;
     
@@ -33,7 +35,6 @@ public class Player {
     private final Vector2 tmp = new Vector2();
     private final Vector2 backupPosition = new Vector2();
     private final Vector2 backupVelocity = new Vector2();
-    private final Vector2 requestedVelocity = new Vector2();
 
     public Player(int id) {
         connectionID = id;
@@ -45,7 +46,6 @@ public class Player {
 
     public void move(int angle, boolean movement) {
         if (!movement) {
-            velocity.set(0f, 0f);
             requestedVelocity.set(0f, 0f);
         } else {
             updateVelocity(angle);
@@ -53,8 +53,6 @@ public class Player {
     }
 
     public void updateVelocity(int angle) {
-        velocity.set(speed, 0);
-        velocity.setAngle((float) angle);
         requestedVelocity.set(speed, 0);
         requestedVelocity.setAngle((float) angle);
     }
@@ -82,16 +80,16 @@ public class Player {
         backupPosition.set(this.position);
         backupVelocity.set(this.requestedVelocity);
         this.calcCD2();
-        this.position.add(tmp.set(requestedVelocity).scl(delta));
+        this.position.add(tmp.set(velocity).scl(delta));
         if(backupVelocity != this.velocity){
             this.position.set(backupPosition);
             this.position.add(tmp.set(velocity).scl(delta));
         }
-}
+    }
     
     public void calcCD2() {
-        int signX = Integer.signum((int)requestedVelocity.x);
-        int signY = Integer.signum((int)requestedVelocity.y);
+        int signX = Integer.signum((int)velocity.x);
+        int signY = Integer.signum((int)velocity.y);
         if(collides(tmp.set(position).add(size/2, size*signY)) || collides(tmp.set(position).add(-size/2, size*signY))){
             velocity.y = 0;
             InputListener.sendMovementResponse(this);

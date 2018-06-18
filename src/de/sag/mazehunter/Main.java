@@ -19,7 +19,7 @@ public class Main {
     public static Main MAIN_SINGLETON;
     
     /**maximum framerate. -1 for unlimited FPS.*/
-    private static float FPS_CAP = 60;
+    private static float FPS_CAP = 40;
     
     public final GameServer server;
     public Game game; 

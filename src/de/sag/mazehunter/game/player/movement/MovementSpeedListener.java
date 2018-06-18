@@ -22,7 +22,7 @@ public class MovementSpeedListener extends InputListener {
         if(object instanceof MovementSpeedRequest) {
             Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].movementSpeedFactor += ((MovementSpeedRequest) object).change; 
             Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].speed = Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].movementSpeedFactor*Config.DEFAULT_SPEED;
-            Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].updateVelocity((int)Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].requestedVelocity.angle());
+            Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].setVelocity((int)Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].requestedVelocity.angle(), true);
             sendMovementResponse(Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].position, Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].requestedVelocity,connection.getID());
         }
     }

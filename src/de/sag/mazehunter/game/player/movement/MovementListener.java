@@ -25,7 +25,7 @@ public class MovementListener extends InputListener{
     @Override
     public void received(Connection connection, Object object) {
         if(object instanceof MovementRequest) {
-            Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].move(((MovementRequest) object).angle, ((MovementRequest) object).movement);
+            Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].setVelocity(((MovementRequest) object).angle, ((MovementRequest) object).movement);
             sendMovementResponse(Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())]);
             if (first) {
                 Config.pushConfig();

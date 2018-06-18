@@ -44,17 +44,13 @@ public class Player {
         currentHealth = maxHealth;
     }
 
-    public void move(int angle, boolean movement) {
+    public void setVelocity(int angle, boolean movement) {
         if (!movement) {
             requestedVelocity.set(0f, 0f);
         } else {
-            updateVelocity(angle);
-        }
-    }
-
-    public void updateVelocity(int angle) {
         requestedVelocity.set(speed, 0);
         requestedVelocity.setAngle((float) angle);
+        }
     }
 
     /**
@@ -75,11 +71,11 @@ public class Player {
     }
 
 
-    public void update(float delta) {
+    public void updateMovement(float delta) {
         velocity.set(requestedVelocity);
         backupPosition.set(this.position);
-        backupVelocity.set(this.requestedVelocity);
-        this.calcCD2();
+        backupVelocity.set(this.velocity);
+        this.stopMoveAgainstWall();
         this.position.add(tmp.set(velocity).scl(delta));
         if(backupVelocity != this.velocity){
             this.position.set(backupPosition);
@@ -87,7 +83,11 @@ public class Player {
         }
     }
     
-    public void calcCD2() {
+    public void update(float delta) {
+        updateMovement(delta);
+    }
+    
+    public void stopMoveAgainstWall() {
         int signX = Integer.signum((int)velocity.x);
         int signY = Integer.signum((int)velocity.y);
         if(collides(tmp.set(position).add(size/2, size*signY)) || collides(tmp.set(position).add(-size/2, size*signY))){
@@ -103,26 +103,10 @@ public class Player {
         return !MAIN_SINGLETON.game.world.talktoTile(position).open;
     }
     
-//    public void calcCD() {
-//        if (velocity.y > 0 && !MAIN_SINGLETON.game.world.talktoTile(tmp.set(position).add(0, 1)).open) {
-//            velocity.y = 0;
-//            InputListener.sendMovementResponse(this);
-//        }else if (velocity.y < 0 && !MAIN_SINGLETON.game.world.talktoTile(tmp.set(position).add(0, -1)).open) {
-//            velocity.y = 0;
-//            InputListener.sendMovementResponse(this);
-//        }if (velocity.x > 0 && !MAIN_SINGLETON.game.world.talktoTile(tmp.set(position).add(1, 0)).open) {
-//            velocity.x = 0;
-//            InputListener.sendMovementResponse(this);
-//        }else if (velocity.x < 0 && !MAIN_SINGLETON.game.world.talktoTile(tmp.set(position).add(-1, 0)).open) {
-//            velocity.x = 0;
-//            InputListener.sendMovementResponse(this);
-//        }
-//    }
-//    public void calcCD2() {
-//        if (!MAIN_SINGLETON.game.world.talktoTile(tmp.set(position).add(0, Integer.signum((int) velocity.y))).open) {
-//            velocity.y = 0;
-//        } else if (!MAIN_SINGLETON.game.world.talktoTile(tmp.set(position).add(Integer.signum((int) velocity.x), 0)).open) {
-//            velocity.x = 0;
-//        }
-//    }
+    //public void setPosition(Vector2 p) {
+    //    updateMovement
+    
+    
+    
+    //}
 }

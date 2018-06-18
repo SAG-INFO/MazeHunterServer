@@ -32,7 +32,7 @@ public class InputListener extends Listener {
     }
     
     public static void sendMovementResponse(Player player){
-        sendMovementResponse(player.position, player.velocity, player.connectionID);
+        sendMovementResponse(player.position, player.requestedVelocity, player.connectionID);
     }
     
     public static void sendMovementResponse(Vector2 position, Vector2 velocity, int id) {

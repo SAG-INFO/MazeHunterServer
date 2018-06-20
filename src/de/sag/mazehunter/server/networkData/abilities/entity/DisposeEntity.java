@@ -9,13 +9,13 @@ package de.sag.mazehunter.server.networkData.abilities.entity;
  *
  * @author Karl Huber
  */
-public class DisposeNonMoving {
+public class DisposeEntity {
     public int entityID;
 
-    public DisposeNonMoving(int entityID) {
+    public DisposeEntity(int entityID) {
         this.entityID = entityID;
     }
 
-    public DisposeNonMoving() {
+    public DisposeEntity() {
     }
 }

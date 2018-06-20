@@ -25,7 +25,8 @@ public abstract class NonMoving extends AbilityEntity {
     }
     
     private final Vector2 tmpVec = new Vector2();
-    public void updateNonMoving() {
+    @Override
+    public void update(float delta) {
         
         for (Player player : Main.MAIN_SINGLETON.game.player) {
             if(player == null)

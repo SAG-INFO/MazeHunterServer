@@ -6,7 +6,7 @@
 package de.sag.mazehunter.game.player.abilities.Entity;
 
 import de.sag.mazehunter.Main;
-import de.sag.mazehunter.game.player.abilities.Entity.nonMoving.TrapEntity;
+import de.sag.mazehunter.server.networkData.abilities.entity.DisposeEntity;
 import java.util.ArrayList;
 
 /**
@@ -19,9 +19,9 @@ public class EntityManager {
     
     public ArrayList<AbilityEntity> entities;
     
-    public void disposeEntity(AbilityEntity a) {
-        entities.remove(a);
-        Main.MAIN_SINGLETON.server.sendToAllTCP(new DisposeEntity(a.entityID));
+    public void disposeEntity(AbilityEntity e) {
+        entities.remove(e);
+        Main.MAIN_SINGLETON.server.sendToAllTCP(new DisposeEntity(e.entityID));
     }
 
     public void disposeEntity(int entityID) {
@@ -41,6 +41,4 @@ public class EntityManager {
     public EntityManager() {
         this.entities = new ArrayList<>();
     }
-    
-    
 }

@@ -10,14 +10,13 @@ import de.sag.mazehunter.server.networkData.MovementSpeedRequest;
 import de.sag.mazehunter.server.networkData.PlayerLobby;
 import de.sag.mazehunter.server.networkData.StartGameRequest;
 import de.sag.mazehunter.server.networkData.StartGameResponse;
-import de.sag.mazehunter.server.networkData.abilities.entity.DisposeNonMoving;
 import de.sag.mazehunter.server.networkData.abilities.requests.AttackRequest;
 import de.sag.mazehunter.server.networkData.abilities.requests.MobilityRequest;
 import de.sag.mazehunter.server.networkData.abilities.responses.DashResponse;
 import de.sag.mazehunter.server.networkData.abilities.pickups.DisposePickup;
 import de.sag.mazehunter.server.networkData.abilities.pickups.EquipAbility;
 import de.sag.mazehunter.server.networkData.abilities.pickups.SpawnPickup;
-import de.sag.mazehunter.server.networkData.abilities.entity.DisposeProjectile;
+import de.sag.mazehunter.server.networkData.abilities.entity.DisposeEntity;
 import de.sag.mazehunter.server.networkData.abilities.responses.FireballResponse;
 import de.sag.mazehunter.server.networkData.abilities.responses.StandardHealResponse;
 import de.sag.mazehunter.server.networkData.abilities.requests.UtilityRequest;
@@ -93,8 +92,7 @@ public class GameServer extends Server{
         getKryo().register(TrapShootResponse.class);
         
         //Entity Stuff
-        getKryo().register(DisposeProjectile.class);
-        getKryo().register(DisposeNonMoving.class);
+        getKryo().register(DisposeEntity.class);
         
         //Pickups
         getKryo().register(SpawnPickup.class);

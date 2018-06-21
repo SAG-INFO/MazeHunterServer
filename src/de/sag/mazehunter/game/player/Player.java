@@ -11,6 +11,8 @@ import de.sag.mazehunter.game.Config;
 import de.sag.mazehunter.server.networkData.HealthUpdate;
 import de.sag.mazehunter.utils.MathUtils;
 import de.sag.mazehunter.utils.Vector2;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -26,6 +28,7 @@ public class Player {
     
     public float speed;
     public float movementSpeedFactor;
+    public float dashLength;
     
     public int connectionID;
     
@@ -84,6 +87,14 @@ public class Player {
     }
     
     public void update(float delta) {
+        
+        System.out.println(position.x+"   "+position.y);
+        
+        if(Math.random()*200 < 2){
+            dash();
+            //setPosition(new Vector2(274, 142));
+        }
+        
         updateMovement(delta);
     }
     
@@ -97,16 +108,39 @@ public class Player {
             velocity.x = 0;
             InputListener.sendMovementResponse(this);
         }
-    }
+    }    
     
     private boolean collides(Vector2 position){
         return !MAIN_SINGLETON.game.world.talktoTile(position).open;
     }
     
-    //public void setPosition(Vector2 p) {
-    //    updateMovement
+    private boolean playerInWall(){
+        return !MAIN_SINGLETON.game.world.talktoTile(position).open;
+    }
     
+    public void setPosition(Vector2 p) {
+        Vector2 dir = new Vector2(0,0);
+        dir.set(tmp.set(position).sub(p));
+        position.set(p);
+        dir.setLength(0.1f);
+        while(playerInWall()){
+            this.position.add(tmp.set(dir)); 
+        }
+        this.position.add(tmp.setAngle(dir.angle()).setLength(size/2)); 
+        InputListener.sendMovementResponse(this);
+    }
     
-    
-    //}
+    public void dash(){
+        Vector2 p = new Vector2(0,0);
+        p.set(position.add(tmp.set(velocity).setLength(dashLength)));
+        Vector2 dir = new Vector2(0,0);
+        dir.set(tmp.set(p).sub(position));
+        //position.set(p);
+        dir.setLength(0.1f);
+        while(!playerInWall()){
+            this.position.add(tmp.set(dir)); 
+        }
+        //this.position.add(tmp.setAngle(dir.angle()).setLength(size/2)); 
+        InputListener.sendMovementResponse(this);
+    }
 }

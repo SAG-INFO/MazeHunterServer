@@ -17,6 +17,7 @@ import de.sag.mazehunter.server.networkData.abilities.pickups.DisposePickup;
 import de.sag.mazehunter.server.networkData.abilities.pickups.EquipAbility;
 import de.sag.mazehunter.server.networkData.abilities.pickups.SpawnPickup;
 import de.sag.mazehunter.server.networkData.abilities.entity.DisposeEntity;
+import de.sag.mazehunter.server.networkData.abilities.requests.SlideRequest;
 import de.sag.mazehunter.server.networkData.abilities.responses.FireballResponse;
 import de.sag.mazehunter.server.networkData.abilities.responses.StandardHealResponse;
 import de.sag.mazehunter.server.networkData.abilities.requests.UtilityRequest;
@@ -80,6 +81,7 @@ public class GameServer extends Server{
         getKryo().register(AttackRequest.class);
         getKryo().register(UtilityRequest.class);
         getKryo().register(MobilityRequest.class);
+        getKryo().register(SlideRequest.class);
         
         //AbilityResponses
         getKryo().register(DashResponse.class);

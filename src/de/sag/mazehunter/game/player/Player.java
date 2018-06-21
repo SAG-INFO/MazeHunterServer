@@ -9,6 +9,7 @@ import de.sag.mazehunter.Main;
 import de.sag.mazehunter.game.Config;
 import de.sag.mazehunter.game.player.abilities.Ability;
 import de.sag.mazehunter.game.player.abilities.Mobility.Dash;
+import de.sag.mazehunter.game.player.abilities.SlideStuff.Slide;
 import de.sag.mazehunter.server.networkData.HealthUpdate;
 import de.sag.mazehunter.utils.Vector2;
 
@@ -29,6 +30,7 @@ public class Player {
     public Ability attackAbility;
     public Ability mobilityAbility;
     public Ability utilityAbility;
+    public Ability slideAbility;
     
     private final Vector2 tmp = new Vector2();
     
@@ -45,6 +47,7 @@ public class Player {
         attackAbility = null;
         utilityAbility = null;
         mobilityAbility = new Dash(); // maybe the player will be able to choose one at some point ..
+        slideAbility = new Slide();
     }
 
     public void move(int angle, boolean movement) {

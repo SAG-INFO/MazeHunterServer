@@ -26,6 +26,7 @@ public class Player {
     float movementSpeedFactor;
     int maxHealth;
     int currentHealth;
+    float CollisionDistance;
     
     public Ability attackAbility;
     public Ability mobilityAbility;
@@ -83,5 +84,9 @@ public class Player {
 
     public void update(float delta) {
         this.position.add(tmp.set(velocity).scl(delta));
+    }
+    
+    public void calcCD() {
+        System.out.println("gftrgtrgotrgjotrjogtrjiogpftrhjiogfthio");
     }
 }

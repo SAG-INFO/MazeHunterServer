@@ -14,9 +14,8 @@ public class Corner extends Tile {
     public static int width;
     public static int height;
 
-    public Corner(int xBlock, int yBlock, int xTile, int yTile) {
+    public Corner(Block block, int x, int y) {
+        super(block, x, y);
         open = false;
-        blockPositionX = xBlock;
-        blockPositionY = yBlock;
     }
 }

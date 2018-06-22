@@ -10,16 +10,13 @@ package de.sag.mazehunter.game.map;
  *
  * @author Admin
  */
-public class Centerclosed extends Tile{
-    
+public class Centerclosed extends Tile {
 
     public static int width;
     public static int height;
 
-
-    public Centerclosed(int xBlock, int yBlock, int xTile, int yTile) {
+    public Centerclosed(Block block, int x, int y) {
+        super(block, x, y);
         open = false;
-        blockPositionX = xBlock;
-        blockPositionY = yBlock;
     }
 }

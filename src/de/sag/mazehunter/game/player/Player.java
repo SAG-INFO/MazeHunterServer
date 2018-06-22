@@ -88,7 +88,7 @@ public class Player {
     }
     
     private boolean collides(Vector2 position){
-        return !MAIN_SINGLETON.game.world.talktoTile(position).open;
+        return !MAIN_SINGLETON.game.world.talktoTile(position.x, position.y).open;
     }
     
 //    public void calcCD() {

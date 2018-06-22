@@ -13,10 +13,9 @@ public class PathUp extends Tile {
 
     public static int width;
     public static int height;
-
-    public PathUp(boolean b, int xBlock, int yBlock, int xTile, int yTile) {
+    
+    public PathUp(Block block, int x, int y, boolean b) {
+        super(block, x, y);
         open = b;
-        blockPositionX = xBlock;
-        blockPositionY = yBlock;
     }
 }

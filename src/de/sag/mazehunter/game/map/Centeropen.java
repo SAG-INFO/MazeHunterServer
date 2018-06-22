@@ -14,10 +14,9 @@ public class Centeropen extends Tile {
     public static int width;
     public static int height;
 
-
-    public Centeropen(int xBlock, int yBlock, int xTile, int yTile) {
+    public Centeropen(Block block, int x, int y) {
+        super(block, x, y);
         open = true;
-        blockPositionX = xBlock;
-        blockPositionY = yBlock;
     }
+
 }

@@ -13,10 +13,9 @@ public class PathSide extends Tile {
 
     public static int width;
     public static int height;
-    
-    public PathSide(boolean b, int xBlock, int yBlock, int xTile, int yTile) {
+
+    public PathSide(Block block, int x, int y, boolean b) {
+        super(block, x, y);
         open = b;
-        blockPositionX = xBlock;
-        blockPositionY = yBlock;
     }
 }

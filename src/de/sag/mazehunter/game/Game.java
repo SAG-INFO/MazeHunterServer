@@ -69,10 +69,6 @@ public class Game {
         pickupManager.update();
         entityManager.entities.stream().forEach((entity) -> {entity.update(delta);});
     }
-    
-    public void getPlayer(int netID){
-        
-    }
         
     public void exit() {
     }

@@ -36,9 +36,6 @@ public class Player {
     public Ability utilityAbility;
     public Ability slideAbility;
     
-    public int maxHealth;
-    public int currentHealth;
-
     private final Vector2 tmp = new Vector2();
     
     public Player(int id) {
@@ -59,11 +56,6 @@ public class Player {
         } else {
             updateVelocity(angle);
         }
-    }
-
-    public void updateVelocity(int angle) {
-        velocity.set(speed, 0);
-        velocity.setAngle((float) angle);
     }
 
     /**

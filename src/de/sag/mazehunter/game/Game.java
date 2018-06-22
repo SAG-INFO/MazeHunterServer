@@ -5,9 +5,6 @@ import de.sag.mazehunter.game.player.Player;
 import de.sag.mazehunter.Main;
 
 import de.sag.mazehunter.game.map.World;
-import de.sag.mazehunter.game.player.movement.MovementSpeedListener;
-import de.sag.mazehunter.game.player.abilities.DashListener;
-import de.sag.mazehunter.game.player.abilities.StandardHealListener;
 
 import de.sag.mazehunter.game.player.movement.MovementSpeedListener;
 
@@ -69,11 +66,7 @@ public class Game {
         pickupManager.update();
         entityManager.entities.stream().forEach((entity) -> {entity.update(delta);});
     }
-    
-    public void getPlayer(int netID){
-        
-    }
-        
+     
     public void exit() {
     }
     

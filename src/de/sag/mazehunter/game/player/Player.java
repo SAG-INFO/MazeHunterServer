@@ -35,10 +35,6 @@ public class Player {
     public Ability mobilityAbility;
     public Ability utilityAbility;
     public Ability slideAbility;
-    
-    public int maxHealth;
-    public int currentHealth;
-
     private final Vector2 tmp = new Vector2();
     
     public Player(int id) {
@@ -81,12 +77,6 @@ public class Player {
         HealthUpdate hu = new HealthUpdate(amount, connectionID);
         Main.MAIN_SINGLETON.server.sendToAllTCP(hu);
     }
-    
-    public void updateVelocity(int angle) {
-        velocity.set(speed, 0);
-        velocity.setAngle((float) angle);
-    }
-
     public void update(float delta) {
         this.position.add(tmp.set(velocity).scl(delta));
     }

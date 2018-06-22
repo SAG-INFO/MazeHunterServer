@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.sag.mazehunter.game.player;
+package de.sag.mazehunter.game.player.movement;
 
 import com.esotericsoftware.kryonet.Connection;
 import de.sag.mazehunter.Main;
 import de.sag.mazehunter.game.Config;
+import de.sag.mazehunter.game.player.InputListener;
 import de.sag.mazehunter.server.networkData.MovementSpeedRequest;
 
 /**

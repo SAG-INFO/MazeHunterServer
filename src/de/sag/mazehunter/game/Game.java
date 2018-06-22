@@ -1,9 +1,9 @@
 package de.sag.mazehunter.game;
 
-import de.sag.mazehunter.game.player.MovementListener;
+import de.sag.mazehunter.game.player.movement.MovementListener;
 import de.sag.mazehunter.game.player.Player;
 import de.sag.mazehunter.Main;
-import de.sag.mazehunter.game.player.MovementSpeedListener;
+import de.sag.mazehunter.game.player.movement.MovementSpeedListener;
 
 import de.sag.mazehunter.game.player.abilities.Attack.AttackListener;
 import de.sag.mazehunter.game.player.abilities.Entity.EntityManager;

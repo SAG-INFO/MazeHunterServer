@@ -22,11 +22,11 @@ public class Player {
     public final Vector2 position;
     public final Vector2 velocity;
     public int connectionID;
-    float speed;
-    float movementSpeedFactor;
-    int maxHealth;
-    int currentHealth;
-    float CollisionDistance;
+    public float speed;
+    public float movementSpeedFactor;
+    public int maxHealth;
+    public int currentHealth;
+    public float CollisionDistance;
     
     public Ability attackAbility;
     public Ability mobilityAbility;

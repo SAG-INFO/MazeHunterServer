@@ -25,7 +25,11 @@ public class InputListener extends Listener {
         return -1;
     }
     
-    public void sendMovementResponse(Vector2 position, Vector2 velocity, int id) {
+    public static void sendMovementResponse(Player player){
+        sendMovementResponse(player.position, player.velocity, player.connectionID);
+    }
+    
+    public static void sendMovementResponse(Vector2 position, Vector2 velocity, int id) {
         MovementResponse mr = new MovementResponse(position, velocity, id);
         Main.MAIN_SINGLETON.server.sendToAllUDP(mr);
     }

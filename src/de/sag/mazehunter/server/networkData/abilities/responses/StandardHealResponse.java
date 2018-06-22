@@ -3,21 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.sag.mazehunter.server.networkData;
+package de.sag.mazehunter.server.networkData.abilities.responses;
 
 /**
  *
  * @author Karl Huber
  */
-public class HealthUpdate {
-    public int change;
-    public int id;
+public class StandardHealResponse {
+    int id;
 
-    public HealthUpdate(int change, int id) {
-        this.change = change;
+    public StandardHealResponse(int id) {
         this.id = id;
     }
 
-    public HealthUpdate() {
+    public StandardHealResponse() {
     }
 }

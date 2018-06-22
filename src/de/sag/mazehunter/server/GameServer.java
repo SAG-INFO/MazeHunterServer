@@ -10,10 +10,22 @@ import de.sag.mazehunter.server.networkData.MovementSpeedRequest;
 import de.sag.mazehunter.server.networkData.PlayerLobby;
 import de.sag.mazehunter.server.networkData.StartGameRequest;
 import de.sag.mazehunter.server.networkData.StartGameResponse;
-import de.sag.mazehunter.server.networkData.abilities.DashRequest;
-import de.sag.mazehunter.server.networkData.abilities.DashResponse;
-import de.sag.mazehunter.server.networkData.abilities.StandardHealRequest;
-import de.sag.mazehunter.server.networkData.abilities.StandardHealResponse;
+import de.sag.mazehunter.server.networkData.abilities.requests.AttackRequest;
+import de.sag.mazehunter.server.networkData.abilities.requests.MobilityRequest;
+import de.sag.mazehunter.server.networkData.abilities.responses.DashResponse;
+import de.sag.mazehunter.server.networkData.abilities.pickups.DisposePickup;
+import de.sag.mazehunter.server.networkData.abilities.pickups.EquipAbility;
+import de.sag.mazehunter.server.networkData.abilities.pickups.SpawnPickup;
+import de.sag.mazehunter.server.networkData.abilities.entity.DisposeEntity;
+import de.sag.mazehunter.server.networkData.abilities.requests.SlideRequest;
+import de.sag.mazehunter.server.networkData.abilities.responses.FireballResponse;
+import de.sag.mazehunter.server.networkData.abilities.responses.StandardHealResponse;
+import de.sag.mazehunter.server.networkData.abilities.requests.UtilityRequest;
+import de.sag.mazehunter.server.networkData.abilities.responses.FireballShootResponse;
+import de.sag.mazehunter.server.networkData.abilities.responses.StunArrowResponse;
+import de.sag.mazehunter.server.networkData.abilities.responses.StunArrowShootResponse;
+import de.sag.mazehunter.server.networkData.abilities.responses.TrapResponse;
+import de.sag.mazehunter.server.networkData.abilities.responses.TrapShootResponse;
 import de.sag.mazehunter.server.networkData.configs.PushConfig;
 import de.sag.mazehunter.utils.Vector2;
 import java.io.IOException;
@@ -65,14 +77,30 @@ public class GameServer extends Server{
         //Ability Stuff
         getKryo().register(HealthUpdate.class);
         
-        //Dash
-        getKryo().register(DashRequest.class);
-        getKryo().register(DashResponse.class);
-
-        //StandardHeal
-        getKryo().register(StandardHealRequest.class);
-        getKryo().register(StandardHealResponse.class);
+        //Ability Requests
+        getKryo().register(AttackRequest.class);
+        getKryo().register(UtilityRequest.class);
+        getKryo().register(MobilityRequest.class);
+        getKryo().register(SlideRequest.class);
         
-        //Blizzard
+        //AbilityResponses
+        getKryo().register(DashResponse.class);
+        getKryo().register(StandardHealResponse.class);
+        getKryo().register(FireballResponse.class);
+        getKryo().register(FireballShootResponse.class);
+        getKryo().register(StunArrowResponse.class);
+        getKryo().register(StunArrowShootResponse.class);
+        getKryo().register(TrapResponse.class);
+        getKryo().register(TrapShootResponse.class);
+        
+        //Entity Stuff
+        getKryo().register(DisposeEntity.class);
+        
+        //Pickups
+        getKryo().register(SpawnPickup.class);
+        getKryo().register(DisposePickup.class);
+        getKryo().register(EquipAbility.class);
+        
+
     }
 }

@@ -3,14 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.sag.mazehunter.server.networkData.abilities;
+package de.sag.mazehunter.server.networkData.abilities.requests;
 
 /**
  *
  * @author karl.huber
  */
-public class DashRequest {
+public class SlideRequest {
+    public char direction;
 
-    public DashRequest() {
+    public SlideRequest(char direction) {
+        this.direction = direction;
+    }
+
+    public SlideRequest() {
     }
 }

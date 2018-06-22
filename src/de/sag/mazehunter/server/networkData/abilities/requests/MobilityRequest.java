@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.sag.mazehunter.server.networkData.abilities;
+package de.sag.mazehunter.server.networkData.abilities.requests;
 
 /**
  *
- * @author Karl Huber
+ * @author karl.huber
  */
-public class StandardHealRequest {
+public class MobilityRequest {
 
-    public StandardHealRequest() {
+    public MobilityRequest() {
     }
 }

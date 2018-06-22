@@ -19,10 +19,15 @@ public class MovementSpeedListener extends InputListener {
     @Override
     public void received(Connection connection, Object object) {
         if(object instanceof MovementSpeedRequest) {
-            Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].movementSpeedFactor += ((MovementSpeedRequest) object).change; 
-            Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].speed = Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].movementSpeedFactor*Config.DEFAULT_SPEED;
-            Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].updateVelocity((int)Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].velocity.angle());
-            sendMovementResponse(Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].position, Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].velocity,connection.getID());
+            int id = connection.getID();
+            int index = getIndex(id);
+            
+            Main.MAIN_SINGLETON.game.player[index].movementSpeedFactor += ((MovementSpeedRequest) object).change; 
+            Main.MAIN_SINGLETON.game.player[index].speed = Main.MAIN_SINGLETON.game.player[index].movementSpeedFactor*Config.DEFAULT_SPEED;
+            Main.MAIN_SINGLETON.game.player[index].updateVelocity((int)Main.MAIN_SINGLETON.game.player[index].velocity.angle());
+            sendMovementResponse(Main.MAIN_SINGLETON.game.player[index].position, Main.MAIN_SINGLETON.game.player[index].velocity, id);
         }
     }
 }
+
+

@@ -17,15 +17,16 @@ import de.sag.mazehunter.server.networkData.MovementRequest;
 public class MovementListener extends InputListener{
     
     /*sending the configs from startGame() causes the client to disconnect.
-    This is an alternative where the first movement input also requests the configs.
+    This is an alternative where the first movement input triggers the server 
+    to send the configs to everyone.
     */
     boolean first = true;
 
     @Override
     public void received(Connection connection, Object object) {
         if(object instanceof MovementRequest) {
-            Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].move(((MovementRequest) object).angle, ((MovementRequest) object).movement);
-            sendMovementResponse(Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].position, Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].velocity,connection.getID());
+            Main.MAIN_SINGLETON.game.player[this.getIndex(connection.getID())].move(((MovementRequest) object).angle, ((MovementRequest) object).movement);
+            sendMovementResponse(Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].position, Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].velocity, connection.getID());
             if (first) {
                 Config.pushConfig();
                 first = false;

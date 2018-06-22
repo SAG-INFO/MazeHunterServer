@@ -3,19 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.sag.mazehunter.server.networkData.abilities;
+package de.sag.mazehunter.server.networkData.abilities.entity;
 
 /**
  *
  * @author Karl Huber
  */
-public class StandardHealResponse {
-    int id;
+public class DisposeEntity {
+    public int entityID;
 
-    public StandardHealResponse(int id) {
-        this.id = id;
+    public DisposeEntity(int entityID) {
+        this.entityID = entityID;
     }
 
-    public StandardHealResponse() {
+    public DisposeEntity() {
     }
 }

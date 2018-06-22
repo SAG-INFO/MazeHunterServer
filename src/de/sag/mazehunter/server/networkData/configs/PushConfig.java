@@ -17,25 +17,15 @@ package de.sag.mazehunter.server.networkData.configs;
  */
 public class PushConfig {
     
-    public int BLIZZARD_RADIUS;
     public float BLIZZARD_SLOW_DURATION; 
     public float BLIZZARD_SLOW_AMOUNT;
-    public int BLIZZARD_DAMAGE;
-    
-    public float DASH_COOLDOWN;
-    public int DASH_RANGE;
     
     public float STANDARDHEAL_DURATION ;
-    public int STANDARDHEAL_TOTALHEAL;
     
     public int DEFAULT_SPEED;
     
-    public int FIREBALL_DAMAGE;
-    public int FIREBALL_SPEED;
-    public int FIREBALL_SIZE;
-    public int FIREBALL_CHARGES;
-    public float FIREBALL_CD_BETWEEN_USES;
-
+    public float TRAP_ROOTDURATION;
+    
     public PushConfig() {
     }
 }

@@ -9,7 +9,6 @@ import de.sag.mazehunter.Main;
 import de.sag.mazehunter.game.Config;
 import de.sag.mazehunter.server.networkData.CanMoveUpdate;
 import de.sag.mazehunter.server.networkData.CanUseAbilitiesUpdate;
-import de.sag.mazehunter.server.networkData.MovementSpeedRequest;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -34,8 +33,8 @@ public class Status extends InputListener {
     }
     
     private void addCanUseAbilities(int connectionID) {
-        canMove++;
-        if (canMove == 1) {Main.MAIN_SINGLETON.server.sendToTCP(connectionID, new CanUseAbilitiesUpdate(false));}
+        canUseAbilities++;
+        if (canUseAbilities == 1) {Main.MAIN_SINGLETON.server.sendToTCP(connectionID, new CanUseAbilitiesUpdate(false));}
     }
     
     private void lowerCanUseAbilities(int connectionID) {

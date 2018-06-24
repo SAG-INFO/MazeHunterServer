@@ -1,6 +1,8 @@
 package de.sag.mazehunter.server;
 
 import com.esotericsoftware.kryonet.Server;
+import de.sag.mazehunter.server.networkData.CanMoveUpdate;
+import de.sag.mazehunter.server.networkData.CanUseAbilitiesUpdate;
 import de.sag.mazehunter.server.networkData.ConnectResponse;
 import de.sag.mazehunter.server.networkData.HealthUpdate;
 import de.sag.mazehunter.server.networkData.LobbyUpdate;
@@ -18,10 +20,13 @@ import de.sag.mazehunter.server.networkData.abilities.pickups.EquipAbility;
 import de.sag.mazehunter.server.networkData.abilities.pickups.SpawnPickup;
 import de.sag.mazehunter.server.networkData.abilities.entity.DisposeEntity;
 import de.sag.mazehunter.server.networkData.abilities.requests.SlideRequest;
-import de.sag.mazehunter.server.networkData.abilities.responses.FireballResponse;
+import de.sag.mazehunter.server.networkData.abilities.responses.FrostBoltResponse;
 import de.sag.mazehunter.server.networkData.abilities.responses.StandardHealResponse;
 import de.sag.mazehunter.server.networkData.abilities.requests.UtilityRequest;
+import de.sag.mazehunter.server.networkData.abilities.responses.FireballResponse;
 import de.sag.mazehunter.server.networkData.abilities.responses.FireballShootResponse;
+import de.sag.mazehunter.server.networkData.abilities.responses.FrostBoltShootResponse;
+import de.sag.mazehunter.server.networkData.abilities.responses.SlideResponse;
 import de.sag.mazehunter.server.networkData.abilities.responses.StunArrowResponse;
 import de.sag.mazehunter.server.networkData.abilities.responses.StunArrowShootResponse;
 import de.sag.mazehunter.server.networkData.abilities.responses.TrapResponse;
@@ -76,6 +81,8 @@ public class GameServer extends Server{
         
         //Ability Stuff
         getKryo().register(HealthUpdate.class);
+        getKryo().register(CanUseAbilitiesUpdate.class);
+        getKryo().register(CanMoveUpdate.class);
         
         //Ability Requests
         getKryo().register(AttackRequest.class);
@@ -86,12 +93,15 @@ public class GameServer extends Server{
         //AbilityResponses
         getKryo().register(DashResponse.class);
         getKryo().register(StandardHealResponse.class);
-        getKryo().register(FireballResponse.class);
-        getKryo().register(FireballShootResponse.class);
+        getKryo().register(FrostBoltResponse.class);
+        getKryo().register(FrostBoltShootResponse.class);
         getKryo().register(StunArrowResponse.class);
         getKryo().register(StunArrowShootResponse.class);
         getKryo().register(TrapResponse.class);
         getKryo().register(TrapShootResponse.class);
+        getKryo().register(SlideResponse.class);
+        getKryo().register(FireballResponse.class);
+        getKryo().register(FireballShootResponse.class);
         
         //Entity Stuff
         getKryo().register(DisposeEntity.class);

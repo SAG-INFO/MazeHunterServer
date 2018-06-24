@@ -20,7 +20,7 @@ import java.util.TimerTask;
  * 
  * SO NE GROSSE FEUERBALL JUNGE
  */
-public class Fireball extends Ability {
+public class FrostBolt extends Ability {
     
     public int charge;
     public boolean canUse;
@@ -59,7 +59,7 @@ public class Fireball extends Ability {
             }}, (long) (Config.FROSTBOLT_CD_BETWEEN_USES));
     }
 
-    public Fireball() {
+    public FrostBolt() {
         charge = Config.FROSTBOLT_CHARGES;
         canUse = true;
     }

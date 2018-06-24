@@ -7,6 +7,7 @@ package de.sag.mazehunter.game.player.abilities;
 
 import de.sag.mazehunter.Main;
 import de.sag.mazehunter.game.player.abilities.Attack.Fireball;
+import de.sag.mazehunter.game.player.abilities.Attack.FrostBolt;
 import de.sag.mazehunter.game.player.abilities.Utility.StandardHeal;
 import de.sag.mazehunter.game.player.abilities.Utility.StunArrow;
 import de.sag.mazehunter.game.player.abilities.Utility.Trap;
@@ -22,29 +23,32 @@ import de.sag.mazehunter.game.player.abilities.Utility.Trap;
 public class FACTORY extends Ability {
     
     public String getOldAttackName(int index) {
-        Ability attack = Main.MAIN_SINGLETON.game.player[index].attackAbility;
-        if (attack instanceof Fireball) {return "Fireball";}
+        Ability a = Main.MAIN_SINGLETON.game.player[index].attackAbility;
+        if (a instanceof FrostBolt) {return "FrostBolt";}
+        if (a instanceof Fireball) {return "Fireball";}
         
         return null;
     }
-
+    
     public String getOldUtilityName(int index) {
-        Ability utility = Main.MAIN_SINGLETON.game.player[index].utilityAbility;
-        if (utility instanceof StandardHeal) {return "StandardHeal";}
+        Ability a = Main.MAIN_SINGLETON.game.player[index].utilityAbility;
+        if (a instanceof StandardHeal) {return "StandardHeal";}
+        if (a instanceof StunArrow) {return "StunArrow";}
+        if (a instanceof Trap) {return "Trap";}
         
         return null;
     }
     
     public String collectFireball(int id) {
         int index = getIndex(id);
-        String tmp;
+        String old;
         if (Main.MAIN_SINGLETON.game.player[index].attackAbility != null) {
-            tmp = getOldAttackName(index);
-            Main.MAIN_SINGLETON.game.player[index].attackAbility = new Fireball();
-            System.out.println("ATTACK: Abilities swapped. " + tmp);
-            return tmp;
+            old = getOldAttackName(index);
+            Main.MAIN_SINGLETON.game.player[index].attackAbility = new FrostBolt();
+            System.out.println("ATTACK: Abilities swapped. " + old);
+            return old;
         } else {
-            Main.MAIN_SINGLETON.game.player[index].attackAbility = new Fireball();
+            Main.MAIN_SINGLETON.game.player[index].attackAbility = new FrostBolt();
             System.out.println("ATTACK: Fireball collected.");
             return null;
         }
@@ -52,12 +56,12 @@ public class FACTORY extends Ability {
     
     public String collectStandardHeal(int id) {
         int index = getIndex(id);
-        String tmp;
+        String old;
         if (Main.MAIN_SINGLETON.game.player[index].utilityAbility != null) {
-            tmp = getOldUtilityName(index);
+            old = getOldUtilityName(index);
             Main.MAIN_SINGLETON.game.player[index].utilityAbility = new StandardHeal();
-            System.out.println("UTILITY: Abilities swapped. " + tmp);
-            return tmp;
+            System.out.println("UTILITY: Abilities swapped. " + old);
+            return old;
         } else {
             Main.MAIN_SINGLETON.game.player[index].utilityAbility = new StandardHeal();
             System.out.println("UTILITY: StandardHeal collected.");
@@ -67,12 +71,12 @@ public class FACTORY extends Ability {
     
     public String collectStunArrow(int id) {
         int index = getIndex(id);
-        String tmp;
+        String old;
         if (Main.MAIN_SINGLETON.game.player[index].utilityAbility != null) {
-            tmp = getOldUtilityName(index);
+            old = getOldUtilityName(index);
             Main.MAIN_SINGLETON.game.player[index].utilityAbility = new StunArrow();
-            System.out.println("UTILITY: Abilities swapped. " + tmp);
-            return tmp;
+            System.out.println("UTILITY: Abilities swapped. " + old);
+            return old;
         } else {
             Main.MAIN_SINGLETON.game.player[index].utilityAbility = new StunArrow();
             System.out.println("UTILITY: StunArrow collected.");
@@ -82,12 +86,12 @@ public class FACTORY extends Ability {
     
     public String collectTrap(int id) {
         int index = getIndex(id);
-        String tmp;
+        String old;
         if (Main.MAIN_SINGLETON.game.player[index].utilityAbility != null) {
-            tmp = getOldUtilityName(index);
+            old = getOldUtilityName(index);
             Main.MAIN_SINGLETON.game.player[index].utilityAbility = new Trap();
-            System.out.println("UTILITY: Trap swapped. " + tmp);
-            return tmp;
+            System.out.println("UTILITY: Trap swapped. " + old);
+            return old;
         } else {
             Main.MAIN_SINGLETON.game.player[index].utilityAbility = new Trap();
             System.out.println("UTILITY: Trap collected.");

@@ -22,12 +22,14 @@ public class Slide extends Ability {
     
     @Override
     public void use(int connectionID, char direction) {
-        int row;
-        //TODO server map
-        if (direction == 'N' || direction == 'S') {row = (int)Main.MAIN_SINGLETON.game.player[getIndex(connectionID)].position.y;} 
-                
+        int row = 0;
         
-        Main.MAIN_SINGLETON.server.sendToAllTCP(new SlideResponse());
+        //TODO update the server map
+        
+        if (direction == 'N' || direction == 'S') {row = (int)Main.MAIN_SINGLETON.game.player[getIndex(connectionID)].position.y;} 
+        if (direction == 'O' || direction == 'W') {row = (int)Main.MAIN_SINGLETON.game.player[getIndex(connectionID)].position.x;} 
+        
+        Main.MAIN_SINGLETON.server.sendToAllTCP(new SlideResponse(direction, row));
     }
 
     @Override

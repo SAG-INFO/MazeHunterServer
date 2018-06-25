@@ -38,8 +38,6 @@ public class Trap extends Ability{
             System.out.println("Trap removed due to the player having more Traps then allowed. (not an error)");
         }
         
-        
-        
         charge--;
         if (charge <= 0) {
             Main.MAIN_SINGLETON.game.player[index].utilityAbility = null;

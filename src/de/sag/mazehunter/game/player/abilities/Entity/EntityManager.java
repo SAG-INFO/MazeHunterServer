@@ -20,8 +20,8 @@ public class EntityManager {
     public ArrayList<AbilityEntity> entities;
     
     public void disposeEntity(AbilityEntity e) {
-        entities.remove(e);
         Main.MAIN_SINGLETON.server.sendToAllTCP(new DisposeEntity(e.entityID));
+        entities.remove(e);
     }
 
     public void disposeEntity(int entityID) {

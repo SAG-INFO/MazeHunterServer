@@ -1,6 +1,6 @@
 package de.sag.mazehunter.game;
 
-import de.sag.mazehunter.game.player.movement.MovementListener;
+import de.sag.mazehunter.game.player.MovementListener;
 import de.sag.mazehunter.game.player.Player;
 import de.sag.mazehunter.Main;
 

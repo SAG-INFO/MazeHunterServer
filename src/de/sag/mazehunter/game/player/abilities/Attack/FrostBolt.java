@@ -20,7 +20,7 @@ import java.util.TimerTask;
  * 
  * SO NE GROSSE FEUERBALL JUNGE
  */
-public class Fireball extends Ability {
+public class FrostBolt extends Ability {
     
     public int charge;
     public boolean canUse;
@@ -33,12 +33,11 @@ public class Fireball extends Ability {
         }
         
         int index = getIndex(connectionID);
-        int projectileID = Main.MAIN_SINGLETON.game.world.entityManager.getNewEntityID();
+        int projectileID = Main.MAIN_SINGLETON.game.entityManager.getNewEntityID();
         
         Vector2 fVelocity = new Vector2(Config.FROSTBOLT_SPEED, 0);
         fVelocity.setAngle(angle);
         
-
         Main.MAIN_SINGLETON.game.entityManager.entities.add(new FrostBoltEntity(fVelocity, Main.MAIN_SINGLETON.game.player[index].position.cpy(), Config.FROSTBOLT_HITBOXRADIUS2, projectileID, connectionID));
         Main.MAIN_SINGLETON.server.sendToAllUDP(new FrostBoltResponse(projectileID, connectionID, fVelocity.cpy(), angle));
         
@@ -60,7 +59,7 @@ public class Fireball extends Ability {
             }}, (long) (Config.FROSTBOLT_CD_BETWEEN_USES));
     }
 
-    public Fireball() {
+    public FrostBolt() {
         charge = Config.FROSTBOLT_CHARGES;
         canUse = true;
     }

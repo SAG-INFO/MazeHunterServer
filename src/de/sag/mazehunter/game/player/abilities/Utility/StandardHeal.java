@@ -23,6 +23,7 @@ public class StandardHeal extends Ability {
     public void use(int id, float angle) {
         
         int index = getIndex(id);
+        Main.MAIN_SINGLETON.game.player[index].status.root(Config.STANDARDHEAL_DURATION, id);
         
         Timer t = new Timer();
         t.schedule(new TimerTask() {@Override
@@ -33,5 +34,5 @@ public class StandardHeal extends Ability {
         Main.MAIN_SINGLETON.server.sendToAllTCP(new StandardHealResponse(id));
         
         Main.MAIN_SINGLETON.game.player[index].utilityAbility = null;
-        }
     }
+}

@@ -6,11 +6,13 @@
 package de.sag.mazehunter.game.player;
 
 import de.sag.mazehunter.Main;
+import static de.sag.mazehunter.Main.MAIN_SINGLETON;
 import de.sag.mazehunter.game.Config;
 import de.sag.mazehunter.game.player.abilities.Ability;
 import de.sag.mazehunter.game.player.abilities.Mobility.Dash;
 import de.sag.mazehunter.game.player.abilities.SlideStuff.Slide;
 import de.sag.mazehunter.server.networkData.HealthUpdate;
+import de.sag.mazehunter.utils.MathUtils;
 import de.sag.mazehunter.utils.Vector2;
 
 /**
@@ -19,14 +21,15 @@ import de.sag.mazehunter.utils.Vector2;
  */
 public class Player {
 
-    public final Vector2 position;
-    public final Vector2 velocity;
+    private final float size = 6;
+    public final Vector2 position = new Vector2(35, 35);
+    public final Vector2 velocity = new Vector2(0, 0);
+    public float speed;
+    public float movementSpeedFactor;
+    
     public int connectionID;
-    float speed;
-    float movementSpeedFactor;
-    int maxHealth;
-    int currentHealth;
-    float CollisionDistance;
+    public int maxHealth;
+    public int currentHealth;
     
     public Ability attackAbility;
     public Ability mobilityAbility;
@@ -38,10 +41,6 @@ public class Player {
     private final Vector2 tmp = new Vector2();
     
     public Player(int id) {
-        position = new Vector2();
-        position.set(0f, 0f);
-        velocity = new Vector2();
-        velocity.set(0f, 0f);
         connectionID = id;
         speed = Config.DEFAULT_SPEED;
         movementSpeedFactor = 1.0f;
@@ -58,13 +57,11 @@ public class Player {
         if (!movement) {
             velocity.set(0f, 0f);
         } else {
-            //TODO: Collision
             updateVelocity(angle);
         }
     }
-    
+
     /**
-     * 
      * @param amount positive values for healing and negitve ones for damage
      */
     public void changeHealth(int amount) {
@@ -87,9 +84,5 @@ public class Player {
 
     public void update(float delta) {
         this.position.add(tmp.set(velocity).scl(delta));
-    }
-    
-    public void calcCD() {
-        System.out.println("gftrgtrgotrgjotrjogtrjiogpftrhjiogfthio");
     }
 }

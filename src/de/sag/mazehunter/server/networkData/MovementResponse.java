@@ -12,13 +12,13 @@ import de.sag.mazehunter.utils.Vector2;
  * @author g.duennweber
  */
 public class MovementResponse {
-    public Vector2 position;
-    public Vector2 velocity;
+    public final Vector2 position = new Vector2();
+    public final Vector2 velocity = new Vector2();
     public int id;
 
     public MovementResponse(Vector2 position, Vector2 velocity, int id) {
-        this.position = position;
-        this.velocity = velocity;
+        this.position.set(position);
+        this.velocity.set(velocity);
         this.id = id;
     }
 

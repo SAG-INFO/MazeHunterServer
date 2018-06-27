@@ -41,4 +41,10 @@ public class EntityManager {
     public EntityManager() {
         this.entities = new ArrayList<>();
     }
+    
+    public void update(float delta){
+        entities.forEach((entity) -> {
+            entity.update(delta);
+        });
+    }
 }

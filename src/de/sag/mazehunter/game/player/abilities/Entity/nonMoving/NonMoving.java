@@ -34,7 +34,7 @@ public abstract class NonMoving extends AbilityEntity {
             
             if (tmpVec.set(player.position).sub(position).len2() < radius2 + Config.PLAYER_HITBOXRADIUS2 && player.connectionID != connectionID) {
                 shoot(player, entityID);
-                Main.MAIN_SINGLETON.game.entityManager.disposeEntity(this);
+                Main.MAIN_SINGLETON.game.world.entityManager.disposeEntity(this);
             }
         }
     }

@@ -33,12 +33,12 @@ public class Fireball extends Ability {
         }
         
         int index = getIndex(connectionID);
-        int projectileID = Main.MAIN_SINGLETON.game.entityManager.getNewEntityID();
+        int projectileID = Main.MAIN_SINGLETON.game.world.entityManager.getNewEntityID();
         
         Vector2 fVelocity = new Vector2(Config.FIREBALL_SPEED, 0);
         fVelocity.setAngle(angle);
         
-        Main.MAIN_SINGLETON.game.entityManager.entities.add(new FireballEntity(fVelocity, Main.MAIN_SINGLETON.game.player[index].position.cpy(), Config.FIREBALL_HITBOXRADIUS2, projectileID, connectionID));
+        Main.MAIN_SINGLETON.game.world.entityManager.entities.add(new FireballEntity(fVelocity, Main.MAIN_SINGLETON.game.player[index].position.cpy(), Config.FIREBALL_HITBOXRADIUS2, projectileID, connectionID));
         Main.MAIN_SINGLETON.server.sendToAllUDP(new FireballResponse(projectileID, connectionID, fVelocity.cpy(), angle));
         
         startCooldown(index);

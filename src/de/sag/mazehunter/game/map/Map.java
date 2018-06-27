@@ -9,9 +9,9 @@ package de.sag.mazehunter.game.map;
  *
  * @author goilster.typ.euw
  */
-public class World {
+public class Map{
 
-    private Block[][] blocklist;
+    public Block[][] blocklist;
 
     public static int BlockWorldwidth;
     public static int TileWorldwidth;
@@ -21,7 +21,7 @@ public class World {
     public static int center;
     public static int blockbreite;
 
-    public World(int e, int c) {
+    public Map(int e, int c) {
         ecke = e;
         center = c;
         blockbreite = c + 2 * e;

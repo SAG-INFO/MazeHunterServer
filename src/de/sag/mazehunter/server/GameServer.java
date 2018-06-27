@@ -22,6 +22,7 @@ import de.sag.mazehunter.server.networkData.abilities.responses.FireballResponse
 import de.sag.mazehunter.server.networkData.abilities.responses.StandardHealResponse;
 import de.sag.mazehunter.server.networkData.abilities.requests.UtilityRequest;
 import de.sag.mazehunter.server.networkData.abilities.responses.FireballShootResponse;
+import de.sag.mazehunter.server.networkData.abilities.responses.SlideResponse;
 import de.sag.mazehunter.server.networkData.abilities.responses.StunArrowResponse;
 import de.sag.mazehunter.server.networkData.abilities.responses.StunArrowShootResponse;
 import de.sag.mazehunter.server.networkData.abilities.responses.TrapResponse;
@@ -90,6 +91,7 @@ public class GameServer extends Server{
         getKryo().register(FireballShootResponse.class);
         getKryo().register(StunArrowResponse.class);
         getKryo().register(StunArrowShootResponse.class);
+        getKryo().register(SlideResponse.class);
         getKryo().register(TrapResponse.class);
         getKryo().register(TrapShootResponse.class);
         

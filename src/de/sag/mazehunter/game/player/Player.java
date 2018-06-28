@@ -36,6 +36,8 @@ public class Player {
     public Ability utilityAbility;
     public Ability slideAbility;
     
+    public Status status;
+    
     private final Vector2 tmp = new Vector2();
     
     public Player(int id) {
@@ -48,6 +50,7 @@ public class Player {
         utilityAbility = null;
         mobilityAbility = new Dash(); // maybe the player will be able to choose one at some point ..
         slideAbility = new Slide();
+        status = new Status();
     }
 
     public void move(int angle, boolean movement) {

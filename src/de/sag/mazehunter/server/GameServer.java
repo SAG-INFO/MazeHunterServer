@@ -110,7 +110,5 @@ public class GameServer extends Server{
         getKryo().register(SpawnPickup.class);
         getKryo().register(DisposePickup.class);
         getKryo().register(EquipAbility.class);
-        
-
     }
 }

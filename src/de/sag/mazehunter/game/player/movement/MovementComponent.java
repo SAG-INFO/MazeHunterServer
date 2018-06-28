@@ -17,7 +17,7 @@ import de.sag.mazehunter.utils.Vector2;
  */
 public class MovementComponent {
 
-    public final Vector2 position = new Vector2(35, 35);
+    public final Vector2 position;
     public final Vector2 velocity = new Vector2();
     public final Vector2 requestedVelocity = new Vector2(0, 0);
 
@@ -37,6 +37,7 @@ public class MovementComponent {
         movementSpeedFactor = 1.0f;
         dashLength = 1.0f;
         speed = Config.DEFAULT_SPEED;
+        position = new Vector2((player.connectionID + 1)* 10, 35);
 
     }
 

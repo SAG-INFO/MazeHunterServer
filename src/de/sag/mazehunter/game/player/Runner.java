@@ -9,6 +9,10 @@ package de.sag.mazehunter.game.player;
  *
  * @author g.duennweber
  */
-public class Runner{
+public class Runner extends Player {
+    
+    public Runner(int id) {
+        super(id);
+    }
     
 }

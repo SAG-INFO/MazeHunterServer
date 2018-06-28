@@ -8,6 +8,7 @@ package de.sag.mazehunter.game.player;
 import de.sag.mazehunter.Main;
 import static de.sag.mazehunter.Main.MAIN_SINGLETON;
 import de.sag.mazehunter.game.Config;
+import de.sag.mazehunter.game.player.movement.MovementComponent;
 import de.sag.mazehunter.server.networkData.HealthUpdate;
 import de.sag.mazehunter.utils.MathUtils;
 import de.sag.mazehunter.utils.Vector2;
@@ -24,13 +25,13 @@ public class Player {
     public int maxHealth;
     public int currentHealth;
     
-    public final de.sag.mazehunter.game.player.movement.MovementComponent mc;
+    public final MovementComponent mc;
 
     public Player(int id) {
         connectionID = id;
         maxHealth = 100;
         currentHealth = maxHealth;
-        mc = new de.sag.mazehunter.game.player.movement.MovementComponent(this);
+        mc = new MovementComponent(this);
     }
 
     /**

@@ -25,8 +25,8 @@ public class Slide extends Ability {
         int row = 0;
         
         //TODO update the server map
-        if (direction == 'N' || direction == 'S') {row = (int)Main.MAIN_SINGLETON.game.player[getIndex(connectionID)].position.y;} 
-        if (direction == 'O' || direction == 'W') {row = (int)Main.MAIN_SINGLETON.game.player[getIndex(connectionID)].position.x;} 
+        if (direction == 'N' || direction == 'S') {row = (int)Main.MAIN_SINGLETON.game.player[getIndex(connectionID)].position.x;} 
+        if (direction == 'O' || direction == 'W') {row = (int)Main.MAIN_SINGLETON.game.player[getIndex(connectionID)].position.y;} 
         
         Main.MAIN_SINGLETON.server.sendToAllTCP(new SlideResponse(direction, row));
     }

@@ -39,7 +39,7 @@ public class Fireball extends Ability {
         fVelocity.setAngle(angle);
         
 
-        Main.MAIN_SINGLETON.game.entityManager.entities.add(new FrostBoltEntity(fVelocity, Main.MAIN_SINGLETON.game.player[index].position.cpy(), Config.FROSTBOLT_HITBOXRADIUS2, projectileID, connectionID));
+        Main.MAIN_SINGLETON.game.world.entityManager.entities.add(new FrostBoltEntity(fVelocity, Main.MAIN_SINGLETON.game.player[index].position.cpy(), Config.FROSTBOLT_HITBOXRADIUS2, projectileID, connectionID));
         Main.MAIN_SINGLETON.server.sendToAllUDP(new FrostBoltResponse(projectileID, connectionID, fVelocity.cpy(), angle));
         
         startCooldown(index);

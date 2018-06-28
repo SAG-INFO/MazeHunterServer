@@ -5,6 +5,10 @@
  */
 package de.sag.mazehunter.game.map;
 
+import de.sag.mazehunter.Main;
+import de.sag.mazehunter.game.player.InputListener;
+import de.sag.mazehunter.game.player.Player;
+
 /**
  *
  * @author goilster.typ.euw
@@ -165,6 +169,7 @@ public class Map{
     //direction: 1 moves row up, 2 moves row right, 3 moves row down, 4 moves row
     //row: what row to move; X coordinate when up or down, Y coordinate when left or right
     public void moveRow(int row, int direction) {
+        movePlayers(row, direction);
         switch (direction) {
             case 1:
                 moveRowUp(row);
@@ -181,4 +186,54 @@ public class Map{
         }
     }
 
+    public void movePlayers(int row, int direction) {
+        if (direction == 1 || direction == 3) {
+            doRowY(row, direction);
+        }
+        if (direction == 2 || direction == 4) {
+            doRowX(row, direction);
+        }
+    }
+    
+    private void doRowX(int row, int direction) {
+        for (Player p : Main.MAIN_SINGLETON.game.player) {
+            if (p == null) 
+                continue;
+            
+            if (translateCoordinateToBlock(p.position.y) == row) {
+                p.position.x = checkOutOfMap(p.position.x, direction);
+            }
+            InputListener.sendMovementResponse(p);
+        }
+    }
+    
+    private void doRowY(int row, int direction) {
+        for (Player p : Main.MAIN_SINGLETON.game.player) {
+            if (p == null) 
+                continue;
+            
+            if (translateCoordinateToBlock(p.position.x) == row) {
+                    p.position.y = checkOutOfMap(p.position.y, direction);
+            }
+            InputListener.sendMovementResponse(p);
+        }
+    }
+    
+    private float checkOutOfMap(float position, int dir) {
+        if (dir == 1 || dir == 2) {
+            if (position + blockbreite < CoordinateWorldwidth) {
+                return position + blockbreite;
+            } else {
+                return CoordinateWorldwidth - position;
+            }
+        } 
+        if (dir == 3 || dir == 4) {
+            if (position - blockbreite > 0) {
+                return position - blockbreite;
+            } else {
+                return CoordinateWorldwidth - position;
+            }
+        } 
+        throw new RuntimeException("direction is bullshit");
+    }
 }

@@ -21,15 +21,26 @@ public class Slide extends Ability {
     boolean canUse;
     
     @Override
-    public void use(int connectionID, char direction) {
+    public void use(int connectionID, int direction) {
         int row = 0;
         
-        //TODO update the server map
+        switch (direction) {
+            case 1:
+            case 3:
+                row = (int)Main.MAIN_SINGLETON.game.player[getIndex(connectionID)].position.x;
+                break;
+            case 2:
+            case 4:
+                row = (int)Main.MAIN_SINGLETON.game.player[getIndex(connectionID)].position.y;
+                break;
+            default:
+                throw new RuntimeException("direction is bullshit");
+        }
         
-        if (direction == 'N' || direction == 'S') {row = (int)Main.MAIN_SINGLETON.game.player[getIndex(connectionID)].position.y;} 
-        if (direction == 'O' || direction == 'W') {row = (int)Main.MAIN_SINGLETON.game.player[getIndex(connectionID)].position.x;} 
-        
+        row = Main.MAIN_SINGLETON.game.world.map.translateCoordinateToBlock(row);
+        Main.MAIN_SINGLETON.game.world.map.moveRow(row, direction);
         Main.MAIN_SINGLETON.server.sendToAllTCP(new SlideResponse(direction, row));
+        startCooldown();
     }
 
     @Override

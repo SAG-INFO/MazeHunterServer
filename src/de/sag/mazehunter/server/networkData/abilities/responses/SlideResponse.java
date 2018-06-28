@@ -10,10 +10,10 @@ package de.sag.mazehunter.server.networkData.abilities.responses;
  * @author karl.huber
  */
 public class SlideResponse {
-    public char direction;
+    public int direction;
     public int row;
 
-    public SlideResponse(char direction, int row) {
+    public SlideResponse(int direction, int row) {
         this.direction = direction;
         this.row = row;
     }

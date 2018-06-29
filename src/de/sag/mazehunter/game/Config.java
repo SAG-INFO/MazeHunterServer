@@ -30,7 +30,7 @@ public class Config {
     public static final float DASH_COOLDOWN = 4000;
     public static final int DASH_RANGE = 30;
     
-    public static final float SLIDE_COOLDOWN = 7;
+    public static final float SLIDE_COOLDOWN = 3;
     
     //pickups
     public static final int BLIZZARD_RADIUS = 100;

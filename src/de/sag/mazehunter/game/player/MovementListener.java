@@ -8,9 +8,6 @@ package de.sag.mazehunter.game.player;
 import com.esotericsoftware.kryonet.Connection;
 import de.sag.mazehunter.Main;
 import de.sag.mazehunter.game.Config;
-import de.sag.mazehunter.game.player.InputListener;
-import de.sag.mazehunter.game.player.InputListener;
-import de.sag.mazehunter.game.player.InputListener;
 import de.sag.mazehunter.server.networkData.MovementRequest;
 
 /**

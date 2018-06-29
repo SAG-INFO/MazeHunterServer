@@ -8,8 +8,8 @@ package de.sag.mazehunter.game.player.abilities.Attack;
 import de.sag.mazehunter.Main;
 import de.sag.mazehunter.game.Config;
 import de.sag.mazehunter.game.player.abilities.Ability;
-import de.sag.mazehunter.game.player.abilities.Entity.projectiles.FrostBoltEntity;
-import de.sag.mazehunter.server.networkData.abilities.responses.FrostBoltResponse;
+import de.sag.mazehunter.game.player.abilities.Entity.projectiles.FireballEntity;
+import de.sag.mazehunter.server.networkData.abilities.responses.FireballResponse;
 import de.sag.mazehunter.utils.Vector2;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -33,14 +33,13 @@ public class Fireball extends Ability {
         }
         
         int index = getIndex(connectionID);
-        int projectileID = Main.MAIN_SINGLETON.game.world.entityManager.getNewEntityID();
+        int projectileID = Main.MAIN_SINGLETON.game.entityManager.getNewEntityID();
         
-        Vector2 fVelocity = new Vector2(Config.FROSTBOLT_SPEED, 0);
+        Vector2 fVelocity = new Vector2(Config.FIREBALL_SPEED, 0);
         fVelocity.setAngle(angle);
         
-
-        Main.MAIN_SINGLETON.game.world.entityManager.entities.add(new FrostBoltEntity(fVelocity, Main.MAIN_SINGLETON.game.player[index].position.cpy(), Config.FROSTBOLT_HITBOXRADIUS2, projectileID, connectionID));
-        Main.MAIN_SINGLETON.server.sendToAllUDP(new FrostBoltResponse(projectileID, connectionID, fVelocity.cpy(), angle));
+        Main.MAIN_SINGLETON.game.entityManager.entities.add(new FireballEntity(fVelocity, Main.MAIN_SINGLETON.game.player[index].position.cpy(), Config.FIREBALL_HITBOXRADIUS2, projectileID, connectionID));
+        Main.MAIN_SINGLETON.server.sendToAllUDP(new FireballResponse(projectileID, connectionID, fVelocity.cpy(), angle));
         
         startCooldown(index);
         
@@ -57,11 +56,11 @@ public class Fireball extends Ability {
                 @Override
                 public void run() {
                 canUse = true;
-            }}, (long) (Config.FROSTBOLT_CD_BETWEEN_USES));
+            }}, (long) (Config.FIREBALL_CD_BETWEEN_USES));
     }
 
     public Fireball() {
-        charge = Config.FROSTBOLT_CHARGES;
+        charge = Config.FIREBALL_CHARGES;
         canUse = true;
     }
 }

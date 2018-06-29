@@ -9,15 +9,15 @@ package de.sag.mazehunter.server.networkData.abilities.responses;
  *
  * @author Karl Huber
  */
-public class StunArrowShootResponse {
+public class FrostBoltShootResponse {
     public int playerID;
     public int projectileID;
 
-    public StunArrowShootResponse(int playerID, int projectileID) {
+    public FrostBoltShootResponse(int playerID, int projectileID) {
         this.playerID = playerID;
         this.projectileID = projectileID;
     }
 
-    public StunArrowShootResponse() {
+    public FrostBoltShootResponse() {
     }
 }

@@ -2,10 +2,13 @@ package de.sag.mazehunter.game.player.abilities;
 
 import de.sag.mazehunter.Main;
 import de.sag.mazehunter.game.Config;
+import de.sag.mazehunter.game.map.Tile;
+import de.sag.mazehunter.game.map.Map;
 import de.sag.mazehunter.game.player.Player;
 import de.sag.mazehunter.server.networkData.abilities.pickups.DisposePickup;
 import de.sag.mazehunter.server.networkData.abilities.pickups.EquipAbility;
 import de.sag.mazehunter.server.networkData.abilities.pickups.SpawnPickup;
+import de.sag.mazehunter.utils.MathUtils;
 import de.sag.mazehunter.utils.Vector2;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -132,10 +135,19 @@ public class PickupManager {
             public void run() {
                 if (pickups.size() <= 5) {
                     String name = Math.random()<0.5f?"Trap":"Fireball";
-                    spawnPickup(new Vector2((float) Math.random() * 400, (float) Math.random() * 400), name);
+                    spawnPickup(calculateSpawnPosition(), name);
                 }
             }
-        }, 0, 5000);
+        }, 1000, 5000);
+    }
+    
+    private Vector2 calculateSpawnPosition(){
+        while (true) {
+            Tile tile = Main.MAIN_SINGLETON.game.world.map.blocklist[MathUtils.random(Map.BlockWorldwidth - 1)][MathUtils.random(Map.BlockWorldwidth - 1)].tilelist[1][1];
+                if(!tile.open)
+                    continue;
+            return tmpVec.set(tile.getX(), tile.getY()).add(Map.center*0.5f, Map.center*0.5f);
+        }
     }
 
     private void swapAttackCooldown() {

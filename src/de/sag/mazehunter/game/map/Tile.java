@@ -40,16 +40,17 @@ public abstract class Tile {
         WorldIndexY = parent.IndexY * 3 + IndexY;
     }
 
+    /**@return position of this Tiles left-lower corner in Pixels*/
     public int getX() {
         switch (IndexX) {
             case 0:
                 return parent.getX();
             case 1:
-                return parent.getX() + World.ecke;
+                return parent.getX() + Map.ecke;
             case 2:
-                return parent.getX() + World.ecke + World.center;
+                return parent.getX() + Map.ecke + Map.center;
             default:
-                throw new RuntimeException("getXvonTile");
+                throw new RuntimeException("there seems to be a Tile with an index > 3");
         }
     }
 
@@ -58,9 +59,9 @@ public abstract class Tile {
             case 0:
                 return parent.getY();
             case 1:
-                return parent.getY() + World.ecke;
+                return parent.getY() + Map.ecke;
             case 2:
-                return parent.getY() + World.ecke + World.center;
+                return parent.getY() + Map.ecke + Map.center;
             default:
                 throw new RuntimeException("getYvonTile");
         }

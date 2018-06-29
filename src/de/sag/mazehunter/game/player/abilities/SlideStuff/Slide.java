@@ -23,7 +23,7 @@ public class Slide extends Ability {
     @Override
     public void use(int connectionID, int direction) {
         int row = 0;
-        
+
         switch (direction) {
             case 1:
             case 3:

@@ -44,14 +44,14 @@ public class Block {
             tilelist[1][1] = new Centeropen(this, 1, 1);
         }
 
-        Corner.width = Map.ecke;
-        Corner.height = Map.ecke;
-        Centeropen.width = Map.center;
-        Centeropen.height = Map.center;
-        PathUp.height = Map.ecke;
-        PathUp.width = Map.center;
-        PathSide.height = Map.center;
-        PathSide.width = Map.ecke;
+        Corner.width = World.ecke;
+        Corner.height = World.ecke;
+        Centeropen.width = World.center;
+        Centeropen.height = World.center;
+        PathUp.height = World.ecke;
+        PathUp.width = World.center;
+        PathSide.height = World.center;
+        PathSide.width = World.ecke;
 
     }
 
@@ -64,10 +64,10 @@ public class Block {
     }
 
     public int getX() {
-        return IndexX * Map.blockbreite;
+        return IndexX * World.blockbreite;
     }
 
     public int getY() {
-        return IndexY * Map.blockbreite;
+        return IndexY * World.blockbreite;
     }
 }

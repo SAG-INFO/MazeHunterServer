@@ -10,9 +10,9 @@ package de.sag.mazehunter.server.networkData.abilities.requests;
  * @author karl.huber
  */
 public class SlideRequest {
-    public int direction;
+    public char direction;
 
-    public SlideRequest(int direction) {
+    public SlideRequest(char direction) {
         this.direction = direction;
     }
 

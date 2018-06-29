@@ -26,7 +26,7 @@ public class Ability {
     
     public void use(int id, float angle) {}
     public void use(int id) {}
-    public void use(int id, int dir) {}
+    public void use(int id, char dir) {}
     
     public void startCooldown() {}
 }

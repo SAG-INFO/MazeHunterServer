@@ -8,7 +8,7 @@ package de.sag.mazehunter.game.player.abilities.Entity.projectiles;
 import de.sag.mazehunter.Main;
 import de.sag.mazehunter.game.Config;
 import de.sag.mazehunter.game.player.Player;
-import de.sag.mazehunter.server.networkData.abilities.responses.FrostBoltShootResponse;
+import de.sag.mazehunter.server.networkData.abilities.responses.FireballShootResponse;
 import de.sag.mazehunter.utils.Vector2;
 
 
@@ -20,12 +20,12 @@ public class FireballEntity extends Projectile {
     
     @Override
     public void shoot(Player player, int projectileID) {
-        player.changeHealth(-Config.FROSTBOLT_DAMAGE);
+        player.changeHealth(-Config.FIREBALL_DAMAGE);
         
-        Main.MAIN_SINGLETON.server.sendToAllUDP(new FrostBoltShootResponse(player.connectionID, projectileID));
+        Main.MAIN_SINGLETON.server.sendToAllUDP(new FireballShootResponse(player.connectionID, projectileID));
     }
     
     public FireballEntity(Vector2 velocity, Vector2 position, float radius, int id, int connectionID) {
-        super(velocity, position, radius, id, connectionID, Config.FROSTBOLT_MAXRANGE2);
+        super(velocity, position, radius, id, connectionID, Config.FIREBALL_MAXRANGE2);
     }
 }

@@ -4,7 +4,7 @@ import de.sag.mazehunter.game.player.movement.MovementListener;
 import de.sag.mazehunter.game.player.Player;
 import de.sag.mazehunter.Main;
 
-import de.sag.mazehunter.game.map.World;
+import de.sag.mazehunter.game.map.Map;
 
 import de.sag.mazehunter.game.player.movement.MovementSpeedListener;
 
@@ -28,7 +28,7 @@ public class Game {
 
     public Player player[];
     
-    public World world;
+    public Map world;
 
     public FACTORY abilityFACTORY;
 
@@ -40,7 +40,7 @@ public class Game {
         Main.MAIN_SINGLETON.server.addListener(new MovementSpeedListener());
         
 
-        world = new World(25, 50);
+        world = new Map(25, 50);
         world.makeMap(true, false, false, true, true, true, false, true, true, false, false, true, true, true, true, true, false, true, true, true, true, false, true, false, false, true, true, false, true, true, false, true, false, true, true, true);
 
         Main.MAIN_SINGLETON.server.addListener(new MobilityListener());

@@ -9,6 +9,7 @@ import de.sag.mazehunter.utils.Vector2;
  */
 public class SpawnPickup {
     public int id;
-    public final Vector2 position = new Vector2();
+    public int blockX;
+    public int blockY;
     public String abilityName;
 }

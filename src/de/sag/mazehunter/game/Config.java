@@ -30,7 +30,7 @@ public class Config {
     public static final float DASH_COOLDOWN = 4000;
     public static final int DASH_RANGE = 30;
     
-    public static final float SLIDE_COOLDOWN = 7;
+    public static final float SLIDE_COOLDOWN = 3;
     
     //pickups
     public static final int BLIZZARD_RADIUS = 100;
@@ -43,13 +43,22 @@ public class Config {
     public static final float STANDARDHEAL_SPAWNRATE = 1.0f;
     public static final int STANDARDHEAL_TOTALHEAL = 100;
     
+    public static final int FROSTBOLT_DAMAGE = 10;
+    public static final int FROSTBOLT_SPEED = 1000;
+    public static final float FROSTBOLT_HITBOXRADIUS2 = 60;
+    public static final int FROSTBOLT_CHARGES = 3;
+    public static final float FROSTBOLT_SPAWNRATE = 1.0f;
+    public static final float FROSTBOLT_CD_BETWEEN_USES = 1;
+    public static final float FROSTBOLT_MAXRANGE2 = 100000;
+    public static final float FROSTBOLT_SLOW_AMOUNT = 0.3f;
+    
     public static final int FIREBALL_DAMAGE = 25;
     public static final int FIREBALL_SPEED = 1000;
     public static final float FIREBALL_HITBOXRADIUS2 = 60;
-    public static final int FIREBALL_CHARGES = 100;
+    public static final int FIREBALL_CHARGES = 1;
     public static final float FIREBALL_SPAWNRATE = 1.0f;
     public static final float FIREBALL_CD_BETWEEN_USES = 1;
-    public static final float FIREBALL_MAXRANGE2 = 100000;
+    public static final float FIREBALL_MAXRANGE2 = 10000;
     
     public static final float STUNARROW_BASE_STUN_DURATION = 0.3f;
     public static final float STUNARROW_GAIN_PER_PIXEL = 0.003f;

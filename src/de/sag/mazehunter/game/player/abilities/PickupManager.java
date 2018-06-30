@@ -2,10 +2,15 @@ package de.sag.mazehunter.game.player.abilities;
 
 import de.sag.mazehunter.Main;
 import de.sag.mazehunter.game.Config;
+import de.sag.mazehunter.game.map.Block;
+import de.sag.mazehunter.game.map.Centeropen;
+import de.sag.mazehunter.game.map.Tile;
+import de.sag.mazehunter.game.map.Map;
 import de.sag.mazehunter.game.player.Player;
 import de.sag.mazehunter.server.networkData.abilities.pickups.DisposePickup;
 import de.sag.mazehunter.server.networkData.abilities.pickups.EquipAbility;
 import de.sag.mazehunter.server.networkData.abilities.pickups.SpawnPickup;
+import de.sag.mazehunter.utils.MathUtils;
 import de.sag.mazehunter.utils.Vector2;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -27,27 +32,33 @@ public class PickupManager {
     private boolean canCollectUtility = true;
     private boolean canCollectAttack = true;
     
+    private float timeSinceLastSpawn;
+    private float spawnRate = 1;
+    
     public PickupManager() {
-        this.spawnRandomPickupsOnRandomPositionsAtAlmostRandomTimesBoii();
     }
     
     /**
      *@param position the position in Pixels where the pickup is goining to be placed
      *@param name the name of the Ability the Pickup represents. All lowercase, dont mess with spelling
      */
-    public void spawnPickup(Vector2 position, String name) {
-        AbilityPickup pickup = new AbilityPickup(position, idr++, name);
+    public void spawnPickup(Block block, String name) {
+        AbilityPickup pickup = new AbilityPickup(block, idr++, name);
         pickups.add(pickup);
         SpawnPickup sp = new SpawnPickup();
         sp.abilityName = name;
         sp.id = pickup.id;
-        sp.position.set(position);
+        sp.blockX = block.getX();
+        sp.blockY = block.getY();
 
+        ((Centeropen)block.tilelist[1][1]).pickup = pickup;
+        
         Main.MAIN_SINGLETON.server.sendToAllTCP(sp);
     }
 
-    public void update() {
-        for (Player player : Main.MAIN_SINGLETON.game.player) {
+    public void update(float delta) {
+        
+        for (Player player : Main.MAIN_SINGLETON.game.players) {
             if(player == null)
                 continue;
             
@@ -56,6 +67,15 @@ public class PickupManager {
             if(pickup.isPresent())
                 equipAbility(player, pickup.get());
         }
+        
+        timeSinceLastSpawn += delta;
+        
+        if(timeSinceLastSpawn < spawnRate || pickups.size()>=5)
+            return;
+
+        timeSinceLastSpawn = 0;
+        String name = Math.random()<0.5f?"Trap":"Fireball";
+        spawnPickup(calculateSpawnPosition(), name);
     }
     
     private void equipAbility(Player player, AbilityPickup pickup) {
@@ -73,7 +93,6 @@ public class PickupManager {
         ea.id = player.connectionID;
         Main.MAIN_SINGLETON.server.sendToAllTCP(ea);
     }
-
     private boolean equipAttackAbility(Player player, AbilityPickup pickup) {
         if (!canCollectAttack) {return false;}
         String name = pickup.abilityName;
@@ -89,10 +108,9 @@ public class PickupManager {
         
         swapAttackCooldown();
         
-        if (oldName != null) {spawnPickup(pickup.position, oldName);}
+        if (oldName != null) {spawnPickup(pickup.block, oldName);}
         return didthings;
     }
-    
     private boolean equipUtilityAbility(Player player, AbilityPickup pickup) {
         if (!canCollectUtility) {return false;}
         String name = pickup.abilityName;
@@ -112,7 +130,7 @@ public class PickupManager {
         
         swapUtilityCooldown();
         
-        if (oldName != null) {spawnPickup(pickup.position, oldName);}
+        if (oldName != null) {spawnPickup(pickup.block, oldName);}
         return true;
     }
     
@@ -123,19 +141,15 @@ public class PickupManager {
         dp.id = pickup.id;
         Main.MAIN_SINGLETON.server.sendToAllTCP(dp);
     }
-    
-    /** This is just a placehoder. Will be later replaced by a propper System that spawns stuff where it belongs*/
-    private void spawnRandomPickupsOnRandomPositionsAtAlmostRandomTimesBoii(){
-        Timer t = new Timer();
-        t.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                if (pickups.size() <= 5) {
-                    String name = Math.random()<0.5f?"Trap":"Fireball";
-                    spawnPickup(new Vector2((float) Math.random() * 400, (float) Math.random() * 400), name);
-                }
-            }
-        }, 0, 5000);
+
+    private Block calculateSpawnPosition(){
+        while (true) {
+            Block random = Main.MAIN_SINGLETON.game.world.map.blocklist[MathUtils.random(Map.blockWorldwidth - 1)][MathUtils.random(Map.blockWorldwidth - 1)];
+            System.out.println(random.getX()+"   "+random.getY());
+            if(!random.tilelist[1][1].open)
+                continue;
+            return random;
+        }
     }
 
     private void swapAttackCooldown() {
@@ -147,7 +161,6 @@ public class PickupManager {
                 canCollectAttack = true;
             }}, 1000);
     }
-    
     private void swapUtilityCooldown() {
         canCollectUtility = false;
         Timer t = new Timer();

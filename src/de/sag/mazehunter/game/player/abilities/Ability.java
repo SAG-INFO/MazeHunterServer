@@ -12,7 +12,7 @@ import de.sag.mazehunter.game.player.Player;
  *
  * @author Karl Huber
  */
-public class Ability {
+public abstract class Ability {
     
     public int getIndex (int id){
         for (int i = 0; i < 4; i++) {

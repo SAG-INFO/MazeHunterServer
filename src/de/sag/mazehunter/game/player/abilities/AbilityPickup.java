@@ -1,5 +1,6 @@
 package de.sag.mazehunter.game.player.abilities;
 
+import de.sag.mazehunter.game.map.Block;
 import de.sag.mazehunter.utils.Vector2;
 
 /**
@@ -11,8 +12,11 @@ public class AbilityPickup {
     public final int id;
     public final String abilityName;
 
-    public AbilityPickup(Vector2 position, int id, String name) {
-        this.position = new Vector2(position);
+    final Block block;
+    
+    public AbilityPickup(Block block, int id, String name) {
+        this.block = block;
+        this.position = new Vector2();
         this.id = id;
         this.abilityName = name;
     }

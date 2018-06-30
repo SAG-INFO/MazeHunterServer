@@ -4,9 +4,12 @@ import de.sag.mazehunter.server.GameServer;
 import de.sag.mazehunter.game.Game;
 import de.sag.mazehunter.game.player.Player;
 import de.sag.mazehunter.lobby.Lobby;
+import de.sag.mazehunter.server.networkData.Gameover;
 import de.sag.mazehunter.server.networkData.PlayerLobby;
 import de.sag.mazehunter.server.networkData.StartGameResponse;
 import de.sag.mazehunter.server.networkData.configs.PushConfig;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -73,17 +76,17 @@ public class Main {
         StartGameResponse startInfo = new StartGameResponse();
         this.server.sendToAllUDP(startInfo);
 
-        int i = 0;
-        for (PlayerLobby player : lobby.players) {
-            game.player[i] = new Player(player.id);
-            i++;
-        }
-        
-        
+        game = new Game();
         game.start();
+        
+        for (PlayerLobby player : lobby.players) {
+            game.players.add(new Player(player.id));
+        }
     }
 
     public void exitGame() {
+        Gameover msg = new Gameover();
+        server.sendToAllTCP(msg);
         game.exit();
         state = STATE_LOBBY;
     }

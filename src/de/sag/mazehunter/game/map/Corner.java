@@ -11,11 +11,8 @@ package de.sag.mazehunter.game.map;
  */
 public class Corner extends Tile {
 
-    public static int width;
-    public static int height;
-
     public Corner(Block block, int x, int y) {
-        super(block, x, y);
+        super(block, x, y, false);
         open = false;
     }
 }

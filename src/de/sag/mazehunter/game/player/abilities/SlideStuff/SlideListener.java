@@ -18,7 +18,8 @@ public class SlideListener extends InputListener {
     @Override
     public void received(Connection connection, Object object) {
         if(object instanceof SlideRequest) {
-            Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].slideAbility.use(connection.getID(), ((SlideRequest) object).direction);
+            System.out.println(((SlideRequest) object).direction);
+            Main.MAIN_SINGLETON.game.getPlayer(connection.getID()).slideAbility.use(connection.getID(), ((SlideRequest) object).direction);
         }
     }
 

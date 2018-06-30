@@ -3,12 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.sag.mazehunter.game.player.movement;
+package de.sag.mazehunter.game.player;
 
 import com.esotericsoftware.kryonet.Connection;
 import de.sag.mazehunter.Main;
 import de.sag.mazehunter.game.Config;
-import de.sag.mazehunter.game.player.InputListener;
 import de.sag.mazehunter.server.networkData.MovementRequest;
 
 /**
@@ -26,8 +25,10 @@ public class MovementListener extends InputListener{
     @Override
     public void received(Connection connection, Object object) {
         if(object instanceof MovementRequest) {
-            Main.MAIN_SINGLETON.game.player[this.getIndex(connection.getID())].move(((MovementRequest) object).angle, ((MovementRequest) object).movement);
-            sendMovementResponse(Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].position, Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].velocity, connection.getID());
+            Player player = Main.MAIN_SINGLETON.game.getPlayer(connection.getID());
+            
+            player.move(((MovementRequest) object).angle, ((MovementRequest) object).movement);
+            sendMovementResponse(player.position, player.velocity, connection.getID());
 
             if (first) {
                 Config.pushConfig();

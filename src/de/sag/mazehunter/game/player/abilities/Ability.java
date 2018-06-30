@@ -5,28 +5,15 @@
  */
 package de.sag.mazehunter.game.player.abilities;
 
-import de.sag.mazehunter.Main;
-import de.sag.mazehunter.game.player.Player;
-
 /**
  *
  * @author Karl Huber
  */
 public abstract class Ability {
     
-    public int getIndex (int id){
-        for (int i = 0; i < 4; i++) {
-            Player p = Main.MAIN_SINGLETON.game.player[i];
-            if (p!=null && p.connectionID == id) {
-                return i;
-            }
-        }
-        return -1;
-    }
-    
     public void use(int id, float angle) {}
     public void use(int id) {}
-    public void use(int id, char dir) {}
+    public void use(int id, int dir) {}
     
     public void startCooldown() {}
 }

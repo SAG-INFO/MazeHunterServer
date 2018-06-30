@@ -18,9 +18,9 @@ import de.sag.mazehunter.utils.Vector2;
 public class StunArrowEntity extends Projectile {
     
     @Override
-    public void shoot(Player player, int projectileID) {
-        float stunDuration = (new Vector2(startPosition.sub(position)).len())*Config.STUNARROW_GAIN_PER_PIXEL + Config.STUNARROW_BASE_STUN_DURATION;
-        Main.MAIN_SINGLETON.server.sendToAllUDP(new StunArrowShootResponse(player.connectionID, projectileID, stunDuration));
+    public void shoot(Player player, int entityID) {
+        player.status.stun((new Vector2(startPosition.sub(position)).len())*Config.STUNARROW_GAIN_PER_PIXEL + Config.STUNARROW_BASE_STUN_DURATION, player.connectionID);
+        Main.MAIN_SINGLETON.server.sendToAllUDP(new StunArrowShootResponse(player.connectionID, entityID));
     }
     
     public StunArrowEntity(Vector2 velocity, Vector2 position, float radius, int id, int connectionID) {

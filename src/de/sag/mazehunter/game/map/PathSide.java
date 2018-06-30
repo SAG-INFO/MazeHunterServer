@@ -10,12 +10,8 @@ package de.sag.mazehunter.game.map;
  * @author paul.kuschfeldt
  */
 public class PathSide extends Tile {
-
-    public static int width;
-    public static int height;
-
     public PathSide(Block block, int x, int y, boolean b) {
-        super(block, x, y);
+        super(block, x, y, b);
         open = b;
     }
 }

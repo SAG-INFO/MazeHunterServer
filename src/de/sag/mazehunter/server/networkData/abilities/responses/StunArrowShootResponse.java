@@ -12,10 +12,12 @@ package de.sag.mazehunter.server.networkData.abilities.responses;
 public class StunArrowShootResponse {
     public int playerID;
     public int projectileID;
+    public float stunDuration;
 
-    public StunArrowShootResponse(int playerID, int projectileID) {
+    public StunArrowShootResponse(int playerID, int projectileID, float stunDuration) {
         this.playerID = playerID;
         this.projectileID = projectileID;
+        this.stunDuration = stunDuration;
     }
 
     public StunArrowShootResponse() {

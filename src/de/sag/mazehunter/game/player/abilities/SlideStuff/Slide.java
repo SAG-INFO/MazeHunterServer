@@ -7,8 +7,15 @@ package de.sag.mazehunter.game.player.abilities.SlideStuff;
 
 import de.sag.mazehunter.Main;
 import de.sag.mazehunter.game.Config;
+import de.sag.mazehunter.game.map.Block;
+import de.sag.mazehunter.game.map.Map;
+import static de.sag.mazehunter.game.map.Map.blockWorldwidth;
+import de.sag.mazehunter.game.player.InputListener;
+import de.sag.mazehunter.game.player.MovementListener;
+import de.sag.mazehunter.game.player.Player;
 import de.sag.mazehunter.game.player.abilities.Ability;
 import de.sag.mazehunter.server.networkData.abilities.responses.SlideResponse;
+import de.sag.mazehunter.utils.Vector2;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -17,38 +24,146 @@ import java.util.TimerTask;
  * @author karl.huber
  */
 public class Slide extends Ability {
-    
-    boolean canUse;
-    
+
+    protected boolean canUse;
+    private Map map;
+
+    public Slide() {
+        canUse = true;
+        map = Main.MAIN_SINGLETON.game.world.map;
+    }
+
     @Override
     public void use(int connectionID, int direction) {
         int row = 0;
 
-        if(direction == 1 || direction==3)
-            row = (int)Main.MAIN_SINGLETON.game.player[getIndex(connectionID)].position.x;
-        else if(direction == 2 || direction==4)
-            row = (int)Main.MAIN_SINGLETON.game.player[getIndex(connectionID)].position.y;
-            
-        row = Main.MAIN_SINGLETON.game.world.map.translateCoordinateToBlock(row);
-        
-        Main.MAIN_SINGLETON.game.world.map.moveRow(row, direction);
+        Vector2 playerPosition = Main.MAIN_SINGLETON.game.getPlayer(connectionID).position;
+
+        switch (direction) {
+            case 1:
+                row = map.translateCoordinateToBlock(playerPosition.x);
+                moveRowUp(row);
+                doRowY(row, direction);
+                break;
+            case 3:
+                row = map.translateCoordinateToBlock(playerPosition.x);
+                moveRowDown(row);
+                doRowY(row, direction);
+                break;
+            case 2:
+                row = map.translateCoordinateToBlock(playerPosition.y);
+                moveRowLeft(row);
+                doRowX(row, direction);
+                break;
+            case 4:
+                row = map.translateCoordinateToBlock(playerPosition.y);
+                moveRowRight(row);
+                doRowX(row, direction);
+                break;
+            default:
+                throw new RuntimeException("direction is bullshit");
+        }
+
         Main.MAIN_SINGLETON.server.sendToAllTCP(new SlideResponse(direction, row));
         startCooldown();
     }
-    
+
     @Override
     public void startCooldown() {
-        
+
         canUse = false;
-        
+
         Timer t = new Timer();
-        t.schedule(new TimerTask() {@Override
+        t.schedule(new TimerTask() {
+            @Override
             public void run() {
-            canUse = true;
-        }}, (long) Config.SLIDE_COOLDOWN);
+                canUse = true;
+            }
+        }, (long) Config.SLIDE_COOLDOWN);
+    }
+
+    private void moveRowRight(int k) {
+        Block tmp = map.blocklist[blockWorldwidth - 1][k];
+        tmp.setPosition(0, tmp.getY());
+
+        for (int i = blockWorldwidth - 2; i >= 0; i--) {
+            Block block = map.blocklist[i][k];
+            block.setPosition(block.getX() + 1, block.getY());
+            map.blocklist[i + 1][k] = map.blocklist[i][k];
+        }
+
+        map.blocklist[0][k] = tmp;
+    }
+
+    private void moveRowLeft(int k) {
+        Block tmp = map.blocklist[0][k];
+        tmp.setPosition(-1, tmp.getY());
+
+        for (int i = 1; i < blockWorldwidth; i++) {
+            Block block = map.blocklist[i][k];
+            block.setPosition(block.getX() - 1, block.getY());
+            map.blocklist[i - 1][k] = map.blocklist[i][k];
+        }
+        map.blocklist[blockWorldwidth - 1][k] = tmp;
+    }
+
+    private void moveRowUp(int k) {
+        Block tmp = map.blocklist[k][blockWorldwidth - 1];
+        tmp.setPosition(tmp.getX(), blockWorldwidth);
+
+        for (int i = blockWorldwidth - 2; i >= 0; i--) {
+            Block block = map.blocklist[k][i];
+            block.setPosition(block.getX(), block.getY() + 1);
+            map.blocklist[k][i + 1] = block;
+        }
+        map.blocklist[k][0] = tmp;
+    }
+
+    private void moveRowDown(int k) {
+        Block tmp = map.blocklist[k][0];
+        tmp.setPosition(tmp.getX(), -1);
+
+        for (int i = 1; i < blockWorldwidth; i++) {
+            Block block = map.blocklist[k][i];
+            block.setPosition(block.getX(), block.getY() - 1);
+            map.blocklist[k][i - 1] = block;
+        }
+        map.blocklist[k][blockWorldwidth - 1] = tmp;
+    }
+
+    private void doRowX(int row, int direction) {
+        for (Player p : Main.MAIN_SINGLETON.game.players) {
+            if (map.translateCoordinateToBlock(p.position.y) == row) {
+                stopMovement(p);
+                p.position.x = map.boundPosition(p.position.x+(Map.blockbreite*(direction==2?1:-1)));
+            }
+        }
+    }
+
+    private void doRowY(int row, int direction) {
+        for (Player p : Main.MAIN_SINGLETON.game.players) {
+            if (map.translateCoordinateToBlock(p.position.x) == row) {
+                stopMovement(p);
+                p.position.y = map.boundPosition(p.position.y+(Map.blockbreite*(direction==1?1:-1)));
+            }
+        }
     }
     
-    public Slide() {
-        canUse = true;
+    private final Vector2 tmpVec = new Vector2();
+    /** TODO: Replace by Stun, when we have an actual CC-System*/
+    private void stopMovement(Player player){
+        tmpVec.set(player.velocity);
+        
+        player.velocity.set(Vector2.Zero);
+        MovementListener.sendMovementResponse(player);
+        
+        Timer t = new Timer();
+        t.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                player.velocity.set(tmpVec);
+                MovementListener.sendMovementResponse(player);
+            }
+        }, 1000);
     }
 }

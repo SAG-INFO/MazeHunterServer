@@ -15,16 +15,6 @@ import de.sag.mazehunter.utils.Vector2;
  */
 public class InputListener extends Listener {
 
-    public int getIndex (int id){
-        for (int i = 0; i < 4; i++) {
-            Player p = Main.MAIN_SINGLETON.game.player[i];
-            if (p!=null && p.connectionID == id) {
-                return i;
-            }
-        }
-        return -1;
-    }
-    
     public static void sendMovementResponse(Player player){
         sendMovementResponse(player.position, player.velocity, player.connectionID);
     }

@@ -4,7 +4,6 @@ import de.sag.mazehunter.game.player.MovementListener;
 import de.sag.mazehunter.game.player.Player;
 import de.sag.mazehunter.Main;
 
-import de.sag.mazehunter.game.map.World;
 
 
 import de.sag.mazehunter.game.player.movement.MovementSpeedListener;

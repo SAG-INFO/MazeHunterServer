@@ -35,6 +35,7 @@ public class Game {
 
     public void start(){
         world = new World();
+        System.out.println("gthtr");
         
         Main.MAIN_SINGLETON.server.addListener(new DisconnectListener());
         Main.MAIN_SINGLETON.server.addListener(new MovementListener());

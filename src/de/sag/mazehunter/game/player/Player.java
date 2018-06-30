@@ -26,11 +26,11 @@ public class Player {
     public final Vector2 velocity = new Vector2(0, 0);
     public float speed;
     public float movementSpeedFactor;
-    
+
     public int connectionID;
     public int maxHealth;
     public int currentHealth;
-    
+
     public Ability attackAbility;
     public Ability mobilityAbility;
     public Ability utilityAbility;
@@ -39,7 +39,7 @@ public class Player {
     public Status status;
 
     private final Vector2 tmp = new Vector2();
-    
+
     public Player(int id) {
         connectionID = id;
         speed = Config.DEFAULT_SPEED;
@@ -61,6 +61,11 @@ public class Player {
         }
     }
 
+    public void updateVelocity(int angle) {
+        velocity.set(speed, 0);
+        velocity.setAngle((float) angle);
+    }
+
     /**
      * @param amount positive values for healing and negitve ones for damage
      */
@@ -72,10 +77,11 @@ public class Player {
         } else {
             currentHealth += amount;
         }
-        
+
         HealthUpdate hu = new HealthUpdate(amount, connectionID);
         Main.MAIN_SINGLETON.server.sendToAllTCP(hu);
     }
+
     public void update(float delta) {
         this.position.add(tmp.set(velocity).scl(delta));
     }

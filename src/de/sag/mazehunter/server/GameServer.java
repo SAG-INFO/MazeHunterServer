@@ -78,13 +78,13 @@ public class GameServer extends Server{
         
         //Config Stuff
         getKryo().register(PushConfig.class);
-        
+
         //Ability Stuff
         getKryo().register(HealthUpdate.class);
         getKryo().register(CanUseAbilitiesUpdate.class);
         getKryo().register(CanMoveUpdate.class);
         
-        //Ability Requests
+        //AbilityRequests
         getKryo().register(AttackRequest.class);
         getKryo().register(UtilityRequest.class);
         getKryo().register(MobilityRequest.class);
@@ -105,7 +105,7 @@ public class GameServer extends Server{
         
         //Entity Stuff
         getKryo().register(DisposeEntity.class);
-        
+
         //Pickups
         getKryo().register(SpawnPickup.class);
         getKryo().register(DisposePickup.class);

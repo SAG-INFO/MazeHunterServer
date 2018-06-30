@@ -25,9 +25,10 @@ public class MovementListener extends InputListener{
     @Override
     public void received(Connection connection, Object object) {
         if(object instanceof MovementRequest) {
-            System.out.println(object);
-            Main.MAIN_SINGLETON.game.player[this.getIndex(connection.getID())].move(((MovementRequest) object).angle, ((MovementRequest) object).movement);
-            sendMovementResponse(Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].position, Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].velocity, connection.getID());
+            Player player = Main.MAIN_SINGLETON.game.getPlayer(connection.getID());
+            
+            player.move(((MovementRequest) object).angle, ((MovementRequest) object).movement);
+            sendMovementResponse(player.position, player.velocity, connection.getID());
 
             if (first) {
                 Config.pushConfig();

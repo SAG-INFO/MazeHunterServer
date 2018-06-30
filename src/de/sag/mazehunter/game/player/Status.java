@@ -95,7 +95,7 @@ public class Status extends InputListener {
      * @param connectionID connectionID of the affected player.
      */
     public void changeMovementSpeed(float duration, float change, int connectionID) {
-        Player player = Main.MAIN_SINGLETON.game.player[getIndex(connectionID)];
+        Player player = Main.MAIN_SINGLETON.game.getPlayer(connectionID);
         updateMovementSpeed(player, change);
         Timer t = new java.util.Timer();
         t.schedule(new TimerTask() {@Override
@@ -113,6 +113,6 @@ public class Status extends InputListener {
     }
     
     public void stopMovement(int connectionID){
-        Main.MAIN_SINGLETON.game.player[getIndex(connectionID)].move(0, false);
+        Main.MAIN_SINGLETON.game.getPlayer(connectionID).move(0, false);
     }
 }

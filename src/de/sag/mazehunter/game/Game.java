@@ -14,6 +14,8 @@ import de.sag.mazehunter.game.player.abilities.FACTORY;
 import de.sag.mazehunter.game.player.abilities.Mobility.MobilityListener;
 import de.sag.mazehunter.game.player.abilities.SlideStuff.SlideListener;
 import de.sag.mazehunter.game.player.abilities.Utility.UtilityListener;
+import java.util.ArrayList;
+import java.util.Optional;
 
 
 /**
@@ -22,14 +24,14 @@ import de.sag.mazehunter.game.player.abilities.Utility.UtilityListener;
  */
 public class Game {
 
-    public Player player[];
+    public ArrayList<Player> players;
     
     public World world;
 
     public FACTORY abilityFACTORY;
 
     public Game() {
-        player = new Player[4];
+        players = new ArrayList<>();
     }
 
     public void start(){
@@ -47,24 +49,22 @@ public class Game {
     }
     
     public void update(float delta){
-        for (Player p : player) {
-            if(p == null)
-                continue;
+        for (Player p : players) {
             p.update(delta);
         }
-
+        if(world != null)
+            world.update(delta);
     }
         
 
     public void exit() {
+        world = null;
+        players.clear();
     }
     
     public Player getPlayer(int connectionID){
-        for (Player player : player) {
-            if(player != null && player.connectionID == connectionID)
-                return player;
-        }
-        
-        throw new RuntimeException("Player with ConnectionID "+connectionID+" not found :/");
+        Optional<Player> player = players.stream().filter((Player p) -> {return p.connectionID == connectionID;}).findAny();
+        if(!player.isPresent()) throw new RuntimeException("Player not found: "+connectionID);
+        return player.get();
     }
 }

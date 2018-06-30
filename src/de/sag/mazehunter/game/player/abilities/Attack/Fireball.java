@@ -7,6 +7,7 @@ package de.sag.mazehunter.game.player.abilities.Attack;
 
 import de.sag.mazehunter.Main;
 import de.sag.mazehunter.game.Config;
+import de.sag.mazehunter.game.player.Player;
 import de.sag.mazehunter.game.player.abilities.Ability;
 import de.sag.mazehunter.game.player.abilities.Entity.projectiles.FrostBoltEntity;
 import de.sag.mazehunter.server.networkData.abilities.responses.FrostBoltResponse;
@@ -32,25 +33,25 @@ public class Fireball extends Ability {
             return;
         }
         
-        int index = getIndex(connectionID);
+        Player player = Main.MAIN_SINGLETON.game.getPlayer(connectionID);
         int projectileID = Main.MAIN_SINGLETON.game.world.entityManager.getNewEntityID();
         
         Vector2 fVelocity = new Vector2(Config.FROSTBOLT_SPEED, 0);
         fVelocity.setAngle(angle);
         
 
-        Main.MAIN_SINGLETON.game.world.entityManager.entities.add(new FrostBoltEntity(fVelocity, Main.MAIN_SINGLETON.game.player[index].position.cpy(), Config.FROSTBOLT_HITBOXRADIUS2, projectileID, connectionID));
+        Main.MAIN_SINGLETON.game.world.entityManager.entities.add(new FrostBoltEntity(fVelocity, player.position.cpy(), Config.FROSTBOLT_HITBOXRADIUS2, projectileID, connectionID));
         Main.MAIN_SINGLETON.server.sendToAllUDP(new FrostBoltResponse(projectileID, connectionID, fVelocity.cpy(), angle));
         
-        startCooldown(index);
+        startCooldown();
         
         charge--;
         if (charge == 0) {
-            Main.MAIN_SINGLETON.game.player[index].attackAbility = null;
+            player.attackAbility = null;
         }
     }
         
-    public void startCooldown(int index) {
+    public void startCooldown() {
         canUse = false;
         Timer t = new Timer();
             t.schedule(new TimerTask() {

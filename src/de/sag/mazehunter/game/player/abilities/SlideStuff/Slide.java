@@ -81,10 +81,16 @@ public class Slide extends Ability {
             }
         }, (long) Config.SLIDE_COOLDOWN);
     }
+    
+        private void moveRowRight(int k) {
+        Block in = map.blocklist[blockWorldwidth - 1][k];
+        Block out = in.clone();
 
-    private void moveRowRight(int k) {
-        Block tmp = map.blocklist[blockWorldwidth - 1][k];
-        tmp.setPosition(0, tmp.getY());
+        in.setPosition(-1, in.getY());
+        in.setPosition(0, in.getY());
+
+        out.setPosition(blockWorldwidth - 1, out.getY());
+        out.setPosition(blockWorldwidth, out.getY());
 
         for (int i = blockWorldwidth - 2; i >= 0; i--) {
             Block block = map.blocklist[i][k];
@@ -92,43 +98,61 @@ public class Slide extends Ability {
             map.blocklist[i + 1][k] = map.blocklist[i][k];
         }
 
-        map.blocklist[0][k] = tmp;
+        map.blocklist[0][k] = in;
     }
 
     private void moveRowLeft(int k) {
-        Block tmp = map.blocklist[0][k];
-        tmp.setPosition(-1, tmp.getY());
+        Block in = map.blocklist[0][k];
+        Block out = in.clone();
+        
+        in.setPosition(blockWorldwidth, k);
+        in.setPosition(blockWorldwidth-1, in.getY());
+
+        out.setPosition(0, out.getY());
+        out.setPosition(- 1, out.getY());
 
         for (int i = 1; i < blockWorldwidth; i++) {
             Block block = map.blocklist[i][k];
             block.setPosition(block.getX() - 1, block.getY());
             map.blocklist[i - 1][k] = map.blocklist[i][k];
         }
-        map.blocklist[blockWorldwidth - 1][k] = tmp;
+        map.blocklist[blockWorldwidth - 1][k] = in;
     }
 
     private void moveRowUp(int k) {
-        Block tmp = map.blocklist[k][blockWorldwidth - 1];
-        tmp.setPosition(tmp.getX(), blockWorldwidth);
+        Block in = map.blocklist[k][blockWorldwidth - 1];
+        Block out = in.clone();
+        
+        in.setPosition(k, -1);
+        in.setPosition(in.getX(), 0);
+
+        out.setPosition(out.getX(), blockWorldwidth-1);
+        out.setPosition(out.getX(), blockWorldwidth);
 
         for (int i = blockWorldwidth - 2; i >= 0; i--) {
             Block block = map.blocklist[k][i];
             block.setPosition(block.getX(), block.getY() + 1);
             map.blocklist[k][i + 1] = block;
         }
-        map.blocklist[k][0] = tmp;
+        map.blocklist[k][0] = in;
     }
 
     private void moveRowDown(int k) {
-        Block tmp = map.blocklist[k][0];
-        tmp.setPosition(tmp.getX(), -1);
+        Block in = map.blocklist[k][0];
+        Block out = in.clone();
+        
+        in.setPosition(k, blockWorldwidth);
+        in.setPosition(in.getX(), blockWorldwidth-1);
+
+        out.setPosition(out.getX(), 0);
+        out.setPosition(out.getX(), - 1);
 
         for (int i = 1; i < blockWorldwidth; i++) {
             Block block = map.blocklist[k][i];
             block.setPosition(block.getX(), block.getY() - 1);
             map.blocklist[k][i - 1] = block;
         }
-        map.blocklist[k][blockWorldwidth - 1] = tmp;
+        map.blocklist[k][blockWorldwidth - 1] = in;
     }
 
     private void doRowX(int row, int direction) {

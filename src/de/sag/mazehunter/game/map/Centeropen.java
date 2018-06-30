@@ -5,25 +5,18 @@
  */
 package de.sag.mazehunter.game.map;
 
-import de.sag.mazehunter.game.player.abilities.AbilityPickup;
-
 /**
  *
  * @author paul.kuschfeldt
  */
 public class Centeropen extends Tile {
 
-    public AbilityPickup pickup;
-    
+    public static int width;
+    public static int height;
+
     public Centeropen(Block block, int x, int y) {
-        super(block, x, y, true);
+        super(block, x, y);
         open = true;
     }
 
-    @Override
-    public void setPosition() {
-        super.setPosition();
-        if(pickup != null)
-            pickup.position.set(getPixelX()*Map.center/2, getPixelY()+Map.center/2);
-    }
 }

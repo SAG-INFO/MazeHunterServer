@@ -2,8 +2,6 @@ package de.sag.mazehunter.game.player.abilities;
 
 import de.sag.mazehunter.Main;
 import de.sag.mazehunter.game.Config;
-import de.sag.mazehunter.game.map.Block;
-import de.sag.mazehunter.game.map.Centeropen;
 import de.sag.mazehunter.game.map.Tile;
 import de.sag.mazehunter.game.map.Map;
 import de.sag.mazehunter.game.player.Player;
@@ -32,33 +30,27 @@ public class PickupManager {
     private boolean canCollectUtility = true;
     private boolean canCollectAttack = true;
     
-    private float timeSinceLastSpawn;
-    private float spawnRate = 1;
-    
     public PickupManager() {
+        this.spawnRandomPickupsOnRandomPositionsAtAlmostRandomTimesBoii();
     }
     
     /**
      *@param position the position in Pixels where the pickup is goining to be placed
      *@param name the name of the Ability the Pickup represents. All lowercase, dont mess with spelling
      */
-    public void spawnPickup(Block block, String name) {
-        AbilityPickup pickup = new AbilityPickup(block, idr++, name);
+    public void spawnPickup(Vector2 position, String name) {
+        AbilityPickup pickup = new AbilityPickup(position, idr++, name);
         pickups.add(pickup);
         SpawnPickup sp = new SpawnPickup();
         sp.abilityName = name;
         sp.id = pickup.id;
-        sp.blockX = block.getX();
-        sp.blockY = block.getY();
+        sp.position.set(position);
 
-        ((Centeropen)block.tilelist[1][1]).pickup = pickup;
-        
         Main.MAIN_SINGLETON.server.sendToAllTCP(sp);
     }
 
-    public void update(float delta) {
-        
-        for (Player player : Main.MAIN_SINGLETON.game.players) {
+    public void update() {
+        for (Player player : Main.MAIN_SINGLETON.game.player) {
             if(player == null)
                 continue;
             
@@ -67,15 +59,6 @@ public class PickupManager {
             if(pickup.isPresent())
                 equipAbility(player, pickup.get());
         }
-        
-        timeSinceLastSpawn += delta;
-        
-        if(timeSinceLastSpawn < spawnRate || pickups.size()>=5)
-            return;
-
-        timeSinceLastSpawn = 0;
-        String name = Math.random()<0.5f?"Trap":"Fireball";
-        spawnPickup(calculateSpawnPosition(), name);
     }
     
     private void equipAbility(Player player, AbilityPickup pickup) {
@@ -93,6 +76,7 @@ public class PickupManager {
         ea.id = player.connectionID;
         Main.MAIN_SINGLETON.server.sendToAllTCP(ea);
     }
+
     private boolean equipAttackAbility(Player player, AbilityPickup pickup) {
         if (!canCollectAttack) {return false;}
         String name = pickup.abilityName;
@@ -108,9 +92,10 @@ public class PickupManager {
         
         swapAttackCooldown();
         
-        if (oldName != null) {spawnPickup(pickup.block, oldName);}
+        if (oldName != null) {spawnPickup(pickup.position, oldName);}
         return didthings;
     }
+    
     private boolean equipUtilityAbility(Player player, AbilityPickup pickup) {
         if (!canCollectUtility) {return false;}
         String name = pickup.abilityName;
@@ -130,7 +115,7 @@ public class PickupManager {
         
         swapUtilityCooldown();
         
-        if (oldName != null) {spawnPickup(pickup.block, oldName);}
+        if (oldName != null) {spawnPickup(pickup.position, oldName);}
         return true;
     }
     
@@ -141,14 +126,27 @@ public class PickupManager {
         dp.id = pickup.id;
         Main.MAIN_SINGLETON.server.sendToAllTCP(dp);
     }
-
-    private Block calculateSpawnPosition(){
+    
+    /** This is just a placehoder. Will be later replaced by a propper System that spawns stuff where it belongs*/
+    private void spawnRandomPickupsOnRandomPositionsAtAlmostRandomTimesBoii(){
+        Timer t = new Timer();
+        t.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                if (pickups.size() <= 5) {
+                    String name = Math.random()<0.5f?"Trap":"Fireball";
+                    spawnPickup(calculateSpawnPosition(), name);
+                }
+            }
+        }, 1000, 5000);
+    }
+    
+    private Vector2 calculateSpawnPosition(){
         while (true) {
-            Block random = Main.MAIN_SINGLETON.game.world.map.blocklist[MathUtils.random(Map.blockWorldwidth - 1)][MathUtils.random(Map.blockWorldwidth - 1)];
-            System.out.println(random.getX()+"   "+random.getY());
-            if(!random.tilelist[1][1].open)
-                continue;
-            return random;
+            Tile tile = Main.MAIN_SINGLETON.game.world.map.blocklist[MathUtils.random(Map.BlockWorldwidth - 1)][MathUtils.random(Map.BlockWorldwidth - 1)].tilelist[1][1];
+                if(!tile.open)
+                    continue;
+            return tmpVec.set(tile.getX(), tile.getY()).add(Map.center*0.5f, Map.center*0.5f);
         }
     }
 
@@ -161,6 +159,7 @@ public class PickupManager {
                 canCollectAttack = true;
             }}, 1000);
     }
+    
     private void swapUtilityCooldown() {
         canCollectUtility = false;
         Timer t = new Timer();

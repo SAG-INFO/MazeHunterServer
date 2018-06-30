@@ -5,8 +5,6 @@
  */
 package de.sag.mazehunter.game.map;
 
-import java.awt.Color;
-
 /**
  *
  * @author julian.mittermeier
@@ -14,75 +12,58 @@ import java.awt.Color;
 public abstract class Tile {
 
     public boolean open;
-    private boolean visible;
+    public int IndexX;
+    public int IndexY;
+    int WorldIndexX;
+    int WorldIndexY;
     public Block parent;
 
-    private int blockIndexX;
-    private int blockIndexY;
-    private int worldIndexX;
-    private int worldIndexY;
+    public Tile() {
 
-    public Tile(Block block, int x, int y, boolean open) {
-        this.parent = block;
-        this.open = open;
-        this.blockIndexX = x;
-        this.worldIndexX = parent.getX() * 3 + x;
-        this.blockIndexY = y;
-        this.worldIndexY = parent.getY() * 3 + y;
     }
 
-    public void setPosition() {
-        this.worldIndexX = parent.getX() * 3 + blockIndexX;
-        this.worldIndexY = parent.getY() * 3 + blockIndexY;
+    public Tile(Block block, int x, int y) {
+        parent = block;
+        IndexX = x;
+        WorldIndexX = parent.IndexX * 3 + x;
+        IndexY = y;
+        WorldIndexY = parent.IndexY * 3 + y;
     }
 
-    public int getBlockIndexX() {
-        return blockIndexX;
+    public Tile(boolean o) {
+        open = o;
     }
 
-    public int getBlockIndexY() {
-        return blockIndexY;
+    public void update() {
+        //TODO: Effizienz steigern
+        WorldIndexX = parent.IndexX * 3 + IndexX;
+        WorldIndexY = parent.IndexY * 3 + IndexY;
     }
 
-    public int getWorldIndexX() {
-        return worldIndexX;
-    }
-
-    public int getWorldIndexY() {
-        return worldIndexY;
-    }
-
-    public int getPixelX() {
-        switch (blockIndexX) {
+    /**@return position of this Tiles left-lower corner in Pixels*/
+    public int getX() {
+        switch (IndexX) {
             case 0:
-                return parent.getPixelX();
+                return parent.getX();
             case 1:
-                return parent.getPixelX() + Map.ecke;
+                return parent.getX() + Map.ecke;
             case 2:
-                return parent.getPixelX() + Map.ecke + Map.center;
+                return parent.getX() + Map.ecke + Map.center;
             default:
-                throw new RuntimeException("getXvonTile");
+                throw new RuntimeException("there seems to be a Tile with an index > 3");
         }
     }
 
-    public int getPixelY() {
-        switch (blockIndexY) {
+    public int getY() {
+        switch (IndexY) {
             case 0:
-                return parent.getPixelY();
+                return parent.getY();
             case 1:
-                return parent.getPixelY() + Map.ecke;
+                return parent.getY() + Map.ecke;
             case 2:
-                return parent.getPixelY() + Map.ecke + Map.center;
+                return parent.getY() + Map.ecke + Map.center;
             default:
                 throw new RuntimeException("getYvonTile");
         }
-    }
-
-    public void setVisible(boolean visible) {
-        this.visible = visible;
-    }
-
-    public boolean isVisible() {
-        return visible;
     }
 }

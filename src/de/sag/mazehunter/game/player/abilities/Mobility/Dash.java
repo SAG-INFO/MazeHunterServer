@@ -7,7 +7,6 @@ package de.sag.mazehunter.game.player.abilities.Mobility;
 
 import de.sag.mazehunter.Main;
 import de.sag.mazehunter.game.Config;
-import de.sag.mazehunter.game.player.Player;
 import de.sag.mazehunter.game.player.abilities.Ability;
 import de.sag.mazehunter.server.networkData.abilities.responses.DashResponse;
 import de.sag.mazehunter.utils.Vector2;
@@ -27,12 +26,12 @@ public class Dash extends Ability {
         if (canUse) {
             startCooldown();
         
-            Player player = Main.MAIN_SINGLETON.game.getPlayer(id);
+            int index = getIndex(id);
         
-            Vector2 tempVelocity = player.velocity.cpy();
-            player.position.add(tempVelocity.setLength(Config.DASH_RANGE));
+            Vector2 tempVelocity = Main.MAIN_SINGLETON.game.player[index].velocity.cpy();
+            Main.MAIN_SINGLETON.game.player[index].position.add(tempVelocity.setLength(Config.DASH_RANGE));
         
-            DashResponse dr = new DashResponse(player.position, player.velocity, id);
+            DashResponse dr = new DashResponse(Main.MAIN_SINGLETON.game.player[index].position, Main.MAIN_SINGLETON.game.player[index].velocity, id);
             Main.MAIN_SINGLETON.server.sendToAllUDP(dr);
         }
     }

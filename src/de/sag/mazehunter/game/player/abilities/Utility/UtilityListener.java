@@ -15,12 +15,13 @@ import de.sag.mazehunter.server.networkData.abilities.requests.UtilityRequest;
  * @author Karl Huber
  */
 public class UtilityListener extends InputListener {
-
+    
     @Override
     public void received(Connection connection, Object object) {
-        if (object instanceof UtilityRequest) {
-            if (Main.MAIN_SINGLETON.game.getPlayer(connection.getID()).utilityAbility != null) {
-                Main.MAIN_SINGLETON.game.getPlayer(connection.getID()).utilityAbility.use(connection.getID(), ((UtilityRequest) object).angle);
+        if(object instanceof UtilityRequest) {
+            System.out.println("utility request received");
+            if(Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].utilityAbility != null) {
+            Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].utilityAbility.use(connection.getID(), ((UtilityRequest) object).angle);
             } else {
                 System.out.println("no utility ability :(");
             }

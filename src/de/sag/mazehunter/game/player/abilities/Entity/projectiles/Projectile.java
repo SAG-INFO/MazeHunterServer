@@ -40,7 +40,7 @@ public abstract class Projectile extends AbilityEntity {
         
         this.position.add(tmp1.set(velocity).scl(delta));
 
-        for (Player player : Main.MAIN_SINGLETON.game.player) {
+        for (Player player : Main.MAIN_SINGLETON.game.players) {
             if(player == null)
                 continue;
             

@@ -5,6 +5,9 @@
  */
 package de.sag.mazehunter.game.map;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 /**
  *
  * @author heftigster.guy.na
@@ -16,8 +19,8 @@ public class Block {
     boolean right;
     boolean down;
     boolean left;
-    int IndexX;
-    int IndexY;
+    private int indexX;
+    private int indexY;
 
     public Block(boolean u, boolean r, boolean d, boolean l, int x, int y) {
         up = u;
@@ -25,8 +28,8 @@ public class Block {
         down = d;
         left = l;
 
-        IndexX = x;
-        IndexY = y;
+        indexX = x;
+        indexY = y;
 
         tilelist = new Tile[3][3];
         tilelist[0][0] = new Corner(this, 0, 0);
@@ -43,31 +46,36 @@ public class Block {
         } else {
             tilelist[1][1] = new Centeropen(this, 1, 1);
         }
-
-        Corner.width = Map.ecke;
-        Corner.height = Map.ecke;
-        Centeropen.width = Map.center;
-        Centeropen.height = Map.center;
-        PathUp.height = Map.ecke;
-        PathUp.width = Map.center;
-        PathSide.height = Map.center;
-        PathSide.width = Map.ecke;
-
     }
 
-    public void update() {
+    public int getPixelX() {
+        return indexX * Map.blockbreite;
+    }
+    
+    public int getPixelY() {
+        return indexY * Map.blockbreite;
+    }
+
+    public int getX() {
+        return indexX;
+    }
+    
+    public int getY() {
+        return indexY;
+    }
+    
+    public void setPosition(int x, int y) {
+        this.indexX = x;
+        this.indexY = y;
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                        tilelist[i][j].update();
+                tilelist[i][j].setPosition();
             }
         }
     }
 
-    public int getX() {
-        return IndexX * Map.blockbreite;
-    }
-
-    public int getY() {
-        return IndexY * Map.blockbreite;
+    public Block clone() {
+        Block b = new Block(this.up, this.right, this.down, this.left, this.indexX, this.indexY);
+        return b;
     }
 }

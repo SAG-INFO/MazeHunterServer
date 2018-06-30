@@ -4,7 +4,6 @@ import com.esotericsoftware.kryonet.Server;
 import de.sag.mazehunter.server.networkData.CanMoveUpdate;
 import de.sag.mazehunter.server.networkData.CanUseAbilitiesUpdate;
 import de.sag.mazehunter.server.networkData.ConnectResponse;
-import de.sag.mazehunter.server.networkData.Gameover;
 import de.sag.mazehunter.server.networkData.HealthUpdate;
 import de.sag.mazehunter.server.networkData.LobbyUpdate;
 import de.sag.mazehunter.server.networkData.MovementRequest;
@@ -70,7 +69,6 @@ public class GameServer extends Server{
         getKryo().register(LobbyUpdate.class);
         getKryo().register(StartGameRequest.class);
         getKryo().register(StartGameResponse.class);
-        getKryo().register(Gameover.class);
         
         //Movement Stuff
         getKryo().register(MovementRequest.class);

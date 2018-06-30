@@ -19,7 +19,7 @@ public class MobilityListener extends InputListener{
     @Override
     public void received(Connection connection, Object object) {
         if(object instanceof MobilityRequest) {
-            Main.MAIN_SINGLETON.game.getPlayer(connection.getID()).mobilityAbility.use(connection.getID());
+            Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].mobilityAbility.use(connection.getID());
         }
     }
 }

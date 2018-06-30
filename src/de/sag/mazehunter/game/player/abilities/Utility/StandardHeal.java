@@ -7,7 +7,6 @@ package de.sag.mazehunter.game.player.abilities.Utility;
 
 import de.sag.mazehunter.Main;
 import de.sag.mazehunter.game.Config;
-import de.sag.mazehunter.game.player.Player;
 import de.sag.mazehunter.game.player.abilities.Ability;
 import de.sag.mazehunter.server.networkData.abilities.responses.StandardHealResponse;
 import java.util.Timer;
@@ -23,17 +22,17 @@ public class StandardHeal extends Ability {
     @Override
     public void use(int id, float angle) {
         
-        Player player = Main.MAIN_SINGLETON.game.getPlayer(id);
-        player.status.root(Config.STANDARDHEAL_DURATION, id);
+        int index = getIndex(id);
+        Main.MAIN_SINGLETON.game.player[index].status.root(Config.STANDARDHEAL_DURATION, id);
         
         Timer t = new Timer();
         t.schedule(new TimerTask() {@Override
             public void run() {
-            player.changeHealth(Config.STANDARDHEAL_TOTALHEAL);
+            Main.MAIN_SINGLETON.game.player[index].changeHealth(Config.STANDARDHEAL_TOTALHEAL);
         }}, (long) Config.STANDARDHEAL_DURATION*1000);
         
         Main.MAIN_SINGLETON.server.sendToAllTCP(new StandardHealResponse(id));
         
-        player.utilityAbility = null;
+        Main.MAIN_SINGLETON.game.player[index].utilityAbility = null;
     }
 }

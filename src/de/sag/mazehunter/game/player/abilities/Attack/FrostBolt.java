@@ -7,7 +7,6 @@ package de.sag.mazehunter.game.player.abilities.Attack;
 
 import de.sag.mazehunter.Main;
 import de.sag.mazehunter.game.Config;
-import de.sag.mazehunter.game.player.Player;
 import de.sag.mazehunter.game.player.abilities.Ability;
 import de.sag.mazehunter.game.player.abilities.Entity.projectiles.FrostBoltEntity;
 import de.sag.mazehunter.server.networkData.abilities.responses.FrostBoltResponse;
@@ -33,20 +32,20 @@ public class FrostBolt extends Ability {
             return;
         }
         
-        Player player = Main.MAIN_SINGLETON.game.getPlayer(connectionID);
+        int index = getIndex(connectionID);
         int projectileID = Main.MAIN_SINGLETON.game.world.entityManager.getNewEntityID();
         
         Vector2 fVelocity = new Vector2(Config.FROSTBOLT_SPEED, 0);
         fVelocity.setAngle(angle);
         
-        Main.MAIN_SINGLETON.game.world.entityManager.entities.add(new FrostBoltEntity(fVelocity, player.position.cpy(), Config.FROSTBOLT_HITBOXRADIUS2, projectileID, connectionID));
+        Main.MAIN_SINGLETON.game.world.entityManager.entities.add(new FrostBoltEntity(fVelocity, Main.MAIN_SINGLETON.game.player[index].position.cpy(), Config.FROSTBOLT_HITBOXRADIUS2, projectileID, connectionID));
         Main.MAIN_SINGLETON.server.sendToAllUDP(new FrostBoltResponse(projectileID, connectionID, fVelocity.cpy(), angle));
         
-        startCooldown();
+        startCooldown(index);
         
         charge--;
         if (charge == 0) {
-            player.attackAbility = null;
+            Main.MAIN_SINGLETON.game.player[index].attackAbility = null;
         }
     }
         

@@ -28,7 +28,7 @@ public abstract class NonMoving extends AbilityEntity {
     @Override
     public void update(float delta) {
         
-        for (Player player : Main.MAIN_SINGLETON.game.players) {
+        for (Player player : Main.MAIN_SINGLETON.game.player) {
             if(player == null)
                 continue;
             

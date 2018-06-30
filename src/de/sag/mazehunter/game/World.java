@@ -24,6 +24,7 @@ public class World {
 
     public void update(float delta) {
         entityManager.update(delta);
-        pickupManager.update(delta);
+        pickupManager.update();
+        map.update();
     }
 }

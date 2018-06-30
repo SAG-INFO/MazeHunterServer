@@ -12,7 +12,7 @@ import de.sag.mazehunter.game.player.Player;
  *
  * @author Karl Huber
  */
-public class Ability {
+public abstract class Ability {
     
     public int getIndex (int id){
         for (int i = 0; i < 4; i++) {
@@ -26,7 +26,7 @@ public class Ability {
     
     public void use(int id, float angle) {}
     public void use(int id) {}
-    public void use(int id, int dir) {}
+    public void use(int id, char dir) {}
     
     public void startCooldown() {}
 }

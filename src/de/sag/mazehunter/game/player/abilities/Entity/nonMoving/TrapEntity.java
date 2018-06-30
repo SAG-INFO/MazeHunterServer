@@ -6,7 +6,6 @@
 package de.sag.mazehunter.game.player.abilities.Entity.nonMoving;
 
 import de.sag.mazehunter.Main;
-import de.sag.mazehunter.game.Config;
 import de.sag.mazehunter.game.player.Player;
 import de.sag.mazehunter.server.networkData.abilities.responses.TrapShootResponse;
 import de.sag.mazehunter.utils.Vector2;
@@ -20,7 +19,7 @@ public class TrapEntity extends NonMoving {
     @Override
     public void shoot(Player player, int entityID) {
         Main.MAIN_SINGLETON.server.sendToAllTCP(new TrapShootResponse(player.connectionID, entityID));
-        player.status.root(Config.TRAP_ROOTDURATION, player.connectionID);
+        System.out.println("TSR triggered.");
     }
     
     public TrapEntity(Vector2 position, int entityID, int connectionID, int radius2) {

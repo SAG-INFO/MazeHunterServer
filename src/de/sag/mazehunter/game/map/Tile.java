@@ -40,7 +40,6 @@ public abstract class Tile {
         WorldIndexY = parent.IndexY * 3 + IndexY;
     }
 
-    /**@return position of this Tiles left-lower corner in Pixels*/
     public int getX() {
         switch (IndexX) {
             case 0:
@@ -50,7 +49,7 @@ public abstract class Tile {
             case 2:
                 return parent.getX() + Map.ecke + Map.center;
             default:
-                throw new RuntimeException("there seems to be a Tile with an index > 3");
+                throw new RuntimeException("getXvonTile");
         }
     }
 

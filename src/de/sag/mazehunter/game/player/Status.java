@@ -108,7 +108,7 @@ public class Status extends Listener {
     }
     
     private void updateMovementSpeed(Player player, float change) {
-        player.mc.movementSpeedFactor *= change; 
+        player.mc.movementSpeedFactor *= change;
     }
     
     public void stopMovement(int connectionID){

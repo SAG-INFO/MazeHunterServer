@@ -5,7 +5,7 @@
  */
 package de.sag.mazehunter.game.map;
 
-import de.sag.mazehunter.game.player.abilities.AbilityPickup;
+import de.sag.mazehunter.game.player.ability.AbilityPickup;
 
 /**
  *

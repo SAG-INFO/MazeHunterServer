@@ -5,8 +5,8 @@
  */
 package de.sag.mazehunter.game.player;
 
+import com.esotericsoftware.kryonet.Listener;
 import de.sag.mazehunter.Main;
-import de.sag.mazehunter.game.Config;
 import de.sag.mazehunter.server.networkData.CanMoveUpdate;
 import de.sag.mazehunter.server.networkData.CanUseAbilitiesUpdate;
 import java.util.Timer;
@@ -16,7 +16,7 @@ import java.util.TimerTask;
  *
  * @author Karl Huber
  */
-public class Status extends InputListener {
+public class Status extends Listener {
     
     // "mobility" type Abilities are also affected by canMove
     private int canMove = 0; // 0 == true
@@ -96,23 +96,22 @@ public class Status extends InputListener {
      */
     public void changeMovementSpeed(float duration, float change, int connectionID) {
         Player player = Main.MAIN_SINGLETON.game.getPlayer(connectionID);
+        
         updateMovementSpeed(player, change);
+        
         Timer t = new java.util.Timer();
         t.schedule(new TimerTask() {@Override
             public void run() {
-               updateMovementSpeed(player, change);
+               updateMovementSpeed(player, 1/change);
             }
         }, (long) duration);
     }
     
     private void updateMovementSpeed(Player player, float change) {
-        player.movementSpeedFactor += change; 
-        player.speed = player.movementSpeedFactor*Config.DEFAULT_SPEED;
-        player.updateVelocity((int)player.velocity.angle());
-        sendMovementResponse(player.position, player.velocity, player.connectionID);
+        player.mc.movementSpeedFactor *= change; 
     }
     
     public void stopMovement(int connectionID){
-        Main.MAIN_SINGLETON.game.getPlayer(connectionID).move(0, false);
+        Main.MAIN_SINGLETON.game.getPlayer(connectionID).mc.setVelocity(0, false);
     }
 }

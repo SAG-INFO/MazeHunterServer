@@ -5,10 +5,6 @@
  */
 package de.sag.mazehunter.game.map;
 
-import de.sag.mazehunter.Main;
-import de.sag.mazehunter.game.player.InputListener;
-import de.sag.mazehunter.game.player.Player;
-
 /**
  *
  * @author goilster.typ.euw

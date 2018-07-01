@@ -1,8 +1,8 @@
 package de.sag.mazehunter.game;
 
 import de.sag.mazehunter.game.map.Map;
-import de.sag.mazehunter.game.player.abilities.Entity.EntityManager;
-import de.sag.mazehunter.game.player.abilities.PickupManager;
+import de.sag.mazehunter.game.player.ability.entities.EntityManager;
+import de.sag.mazehunter.game.player.ability.PickupManager;
 
 /**
  *

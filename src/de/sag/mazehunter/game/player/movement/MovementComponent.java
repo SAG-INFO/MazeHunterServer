@@ -18,7 +18,7 @@ import de.sag.mazehunter.utils.Vector2;
  */
 public class MovementComponent {
 
-    public final Vector2 position = new Vector2(35, 35);
+    public final Vector2 position = new Vector2(50, 50);
     
     public final Vector2 velocity = new Vector2();
     private final Vector2 lastVelocity = new Vector2();

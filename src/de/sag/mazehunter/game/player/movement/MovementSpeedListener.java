@@ -6,9 +6,8 @@
 package de.sag.mazehunter.game.player.movement;
 
 import com.esotericsoftware.kryonet.Connection;
+import com.esotericsoftware.kryonet.Listener;
 import de.sag.mazehunter.Main;
-import de.sag.mazehunter.game.Config;
-import de.sag.mazehunter.game.player.InputListener;
 import de.sag.mazehunter.game.player.Player;
 import de.sag.mazehunter.server.networkData.MovementSpeedRequest;
 
@@ -16,7 +15,7 @@ import de.sag.mazehunter.server.networkData.MovementSpeedRequest;
  *
  * @author Karl Huber
  */
-public class MovementSpeedListener extends InputListener {
+public class MovementSpeedListener extends Listener {
 
     @Override
     public void received(Connection connection, Object object) {
@@ -25,10 +24,7 @@ public class MovementSpeedListener extends InputListener {
             
             Player player = Main.MAIN_SINGLETON.game.getPlayer(id);
             
-            player.movementSpeedFactor += ((MovementSpeedRequest) object).change; 
-            player.speed = player.movementSpeedFactor*Config.DEFAULT_SPEED;
-            player.updateVelocity((int)player.velocity.angle());
-            sendMovementResponse(player.position, player.velocity, id);
+            player.mc.movementSpeedFactor *= ((MovementSpeedRequest) object).change; 
         }
     }
 }

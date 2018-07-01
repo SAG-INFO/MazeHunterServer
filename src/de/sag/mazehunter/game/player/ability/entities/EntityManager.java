@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.sag.mazehunter.game.player.abilities.Entity;
+package de.sag.mazehunter.game.player.ability.entities;
 
 import de.sag.mazehunter.Main;
 import de.sag.mazehunter.server.networkData.abilities.entity.DisposeEntity;

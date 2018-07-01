@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.sag.mazehunter.game.player.abilities.Mobility;
+package de.sag.mazehunter.game.player.ability.abilities;
 
 import de.sag.mazehunter.Main;
 import de.sag.mazehunter.game.Config;
 import de.sag.mazehunter.game.player.Player;
-import de.sag.mazehunter.game.player.abilities.Ability;
+import de.sag.mazehunter.game.player.ability.Ability;
 import de.sag.mazehunter.server.networkData.abilities.responses.DashResponse;
 import de.sag.mazehunter.utils.Vector2;
 import java.util.Timer;
@@ -29,10 +29,10 @@ public class Dash extends Ability {
         
             Player player = Main.MAIN_SINGLETON.game.getPlayer(id);
         
-            Vector2 tempVelocity = player.velocity.cpy();
-            player.position.add(tempVelocity.setLength(Config.DASH_RANGE));
+            Vector2 tempVelocity = new Vector2(player.mc.velocity);
+            player.mc.position.add(tempVelocity.setLength(Config.DASH_RANGE));
         
-            DashResponse dr = new DashResponse(player.position, player.velocity, id);
+            DashResponse dr = new DashResponse(player.mc.position, player.mc.velocity, id);
             Main.MAIN_SINGLETON.server.sendToAllUDP(dr);
         }
     }

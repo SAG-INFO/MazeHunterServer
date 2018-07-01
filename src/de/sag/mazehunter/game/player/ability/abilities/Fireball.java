@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.sag.mazehunter.game.player.abilities.Attack;
+package de.sag.mazehunter.game.player.ability.abilities;
 
 import de.sag.mazehunter.Main;
 import de.sag.mazehunter.game.Config;
 import de.sag.mazehunter.game.player.Player;
-import de.sag.mazehunter.game.player.abilities.Ability;
-import de.sag.mazehunter.game.player.abilities.Entity.projectiles.FrostBoltEntity;
+import de.sag.mazehunter.game.player.ability.Ability;
+import de.sag.mazehunter.game.player.ability.entities.projectiles.FrostBoltEntity;
 import de.sag.mazehunter.server.networkData.abilities.responses.FrostBoltResponse;
 import de.sag.mazehunter.utils.Vector2;
 import java.util.Timer;
@@ -21,7 +21,7 @@ import java.util.TimerTask;
  * 
  * SO NE GROSSE FEUERBALL JUNGE
  */
-public class FrostBolt extends Ability {
+public class Fireball extends Ability {
     
     public int charge;
     public boolean canUse;
@@ -39,18 +39,19 @@ public class FrostBolt extends Ability {
         Vector2 fVelocity = new Vector2(Config.FROSTBOLT_SPEED, 0);
         fVelocity.setAngle(angle);
         
-        Main.MAIN_SINGLETON.game.world.entityManager.entities.add(new FrostBoltEntity(fVelocity, player.position.cpy(), Config.FROSTBOLT_HITBOXRADIUS2, projectileID, connectionID));
+
+        Main.MAIN_SINGLETON.game.world.entityManager.entities.add(new FrostBoltEntity(fVelocity, player.mc.position.cpy(), Config.FROSTBOLT_HITBOXRADIUS2, projectileID, connectionID));
         Main.MAIN_SINGLETON.server.sendToAllUDP(new FrostBoltResponse(projectileID, connectionID, fVelocity.cpy(), angle));
         
         startCooldown();
         
         charge--;
         if (charge == 0) {
-            player.attackAbility = null;
+            player.ability = new NoAbility();
         }
     }
         
-    public void startCooldown(int index) {
+    public void startCooldown() {
         canUse = false;
         Timer t = new Timer();
             t.schedule(new TimerTask() {
@@ -60,7 +61,7 @@ public class FrostBolt extends Ability {
             }}, (long) (Config.FROSTBOLT_CD_BETWEEN_USES));
     }
 
-    public FrostBolt() {
+    public Fireball() {
         charge = Config.FROSTBOLT_CHARGES;
         canUse = true;
     }

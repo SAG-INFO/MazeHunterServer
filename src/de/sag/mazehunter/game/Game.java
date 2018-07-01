@@ -1,18 +1,15 @@
 package de.sag.mazehunter.game;
 
-import de.sag.mazehunter.game.player.MovementListener;
+import de.sag.mazehunter.game.player.movement.MovementListener;
 import de.sag.mazehunter.game.player.Player;
 import de.sag.mazehunter.Main;
+import de.sag.mazehunter.game.player.ability.AbilityListener;
 
 
 
 import de.sag.mazehunter.game.player.movement.MovementSpeedListener;
 
-import de.sag.mazehunter.game.player.abilities.Attack.AttackListener;
-import de.sag.mazehunter.game.player.abilities.FACTORY;
-import de.sag.mazehunter.game.player.abilities.Mobility.MobilityListener;
-import de.sag.mazehunter.game.player.abilities.SlideStuff.SlideListener;
-import de.sag.mazehunter.game.player.abilities.Utility.UtilityListener;
+import de.sag.mazehunter.game.player.ability.FACTORY;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -40,10 +37,7 @@ public class Game {
         Main.MAIN_SINGLETON.server.addListener(new DisconnectListener());
         Main.MAIN_SINGLETON.server.addListener(new MovementListener());
         Main.MAIN_SINGLETON.server.addListener(new MovementSpeedListener());
-        Main.MAIN_SINGLETON.server.addListener(new MobilityListener());
-        Main.MAIN_SINGLETON.server.addListener(new UtilityListener());
-        Main.MAIN_SINGLETON.server.addListener(new AttackListener());
-        Main.MAIN_SINGLETON.server.addListener(new SlideListener());
+        Main.MAIN_SINGLETON.server.addListener(new AbilityListener());
         
         abilityFACTORY = new FACTORY();
     }

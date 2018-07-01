@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.sag.mazehunter.game.player.abilities.Entity.projectiles;
+package de.sag.mazehunter.game.player.ability.entities.projectiles;
 
 import de.sag.mazehunter.Main;
 import de.sag.mazehunter.game.Config;
@@ -16,16 +16,14 @@ import de.sag.mazehunter.utils.Vector2;
  *
  * @author Karl Huber
  */
-public class FrostBoltEntity extends Projectile {
+public class FireballEntity extends Projectile {
     
     @Override
     public void shoot(Player player, int projectileID) {
-        player.changeHealth(-Config.FROSTBOLT_DAMAGE);
-        
         Main.MAIN_SINGLETON.server.sendToAllUDP(new FrostBoltShootResponse(player.connectionID, projectileID));
     }
     
-    public FrostBoltEntity(Vector2 velocity, Vector2 position, float radius, int id, int connectionID) {
+    public FireballEntity(Vector2 velocity, Vector2 position, float radius, int id, int connectionID) {
         super(velocity, position, radius, id, connectionID, Config.FROSTBOLT_MAXRANGE2);
     }
 }

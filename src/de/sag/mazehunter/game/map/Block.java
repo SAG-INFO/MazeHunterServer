@@ -5,9 +5,6 @@
  */
 package de.sag.mazehunter.game.map;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 /**
  *
  * @author heftigster.guy.na

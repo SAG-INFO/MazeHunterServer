@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.sag.mazehunter.game.player.abilities.Utility;
+package de.sag.mazehunter.game.player.ability.abilities;
 
-import de.sag.mazehunter.game.player.abilities.Ability;
+import de.sag.mazehunter.game.player.ability.Ability;
 
 /**
  *

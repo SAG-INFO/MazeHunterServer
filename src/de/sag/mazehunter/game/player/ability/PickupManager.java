@@ -1,10 +1,9 @@
-package de.sag.mazehunter.game.player.abilities;
+package de.sag.mazehunter.game.player.ability;
 
 import de.sag.mazehunter.Main;
 import de.sag.mazehunter.game.Config;
 import de.sag.mazehunter.game.map.Block;
 import de.sag.mazehunter.game.map.Centeropen;
-import de.sag.mazehunter.game.map.Tile;
 import de.sag.mazehunter.game.map.Map;
 import de.sag.mazehunter.game.player.Player;
 import de.sag.mazehunter.server.networkData.abilities.pickups.DisposePickup;
@@ -63,7 +62,7 @@ public class PickupManager {
                 continue;
             
             //Is it a boy or a girl? Its a Lambda-Expression! I <3 Java8
-            Optional<AbilityPickup> pickup = pickups.stream().filter((p) -> (tmpVec.set(player.position).sub(p.position).len2() < Config.PICKUP_HITBOXRADIUS2)).findFirst();
+            Optional<AbilityPickup> pickup = pickups.stream().filter((p) -> (tmpVec.set(player.mc.position).sub(p.position).len2() < Config.PICKUP_HITBOXRADIUS2)).findFirst();
             if(pickup.isPresent())
                 equipAbility(player, pickup.get());
         }
@@ -117,8 +116,6 @@ public class PickupManager {
         String oldName;
         
         switch (name) {
-            case "StandardHeal":    oldName = Main.MAIN_SINGLETON.game.abilityFACTORY.collectStandardHeal(player.connectionID);
-                                    break;
             case "StunArrow":       oldName = Main.MAIN_SINGLETON.game.abilityFACTORY.collectStunArrow(player.connectionID);
                                     System.out.println("StunArrow detected.");
                                     break;
@@ -145,7 +142,6 @@ public class PickupManager {
     private Block calculateSpawnPosition(){
         while (true) {
             Block random = Main.MAIN_SINGLETON.game.world.map.blocklist[MathUtils.random(Map.blockWorldwidth - 1)][MathUtils.random(Map.blockWorldwidth - 1)];
-            System.out.println(random.getX()+"   "+random.getY());
             if(!random.tilelist[1][1].open)
                 continue;
             return random;

@@ -1,4 +1,4 @@
-package de.sag.mazehunter.game.player.abilities;
+package de.sag.mazehunter.game.player.ability;
 
 import de.sag.mazehunter.game.map.Block;
 import de.sag.mazehunter.utils.Vector2;

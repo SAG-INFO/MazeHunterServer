@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.sag.mazehunter.game.player.abilities.Entity.projectiles;
+package de.sag.mazehunter.game.player.ability.entities.projectiles;
 
 import de.sag.mazehunter.Main;
 import de.sag.mazehunter.game.Config;
 import de.sag.mazehunter.game.player.Player;
-import de.sag.mazehunter.game.player.abilities.Entity.AbilityEntity;
+import de.sag.mazehunter.game.player.ability.entities.AbilityEntity;
 import de.sag.mazehunter.utils.Vector2;
 
 /**
@@ -45,12 +45,12 @@ public abstract class Projectile extends AbilityEntity {
                 continue;
             
             //collide with player
-            if (tmp2.set(player.position).sub(position).len2() < radius2 + Config.PLAYER_HITBOXRADIUS2 && player.connectionID != connectionID) {
+            if (tmp2.set(player.mc.position).sub(position).len2() < radius2 + Config.PLAYER_HITBOXRADIUS2 && player.connectionID != connectionID) {
                 shoot(player, entityID);
             }
             
             //maxrange reached
-            if (tmp2.set(player.position).sub(position).len2() < radius2 + Config.PLAYER_HITBOXRADIUS2 && player.connectionID != connectionID) {
+            if (tmp2.set(player.mc.position).sub(position).len2() < radius2 + Config.PLAYER_HITBOXRADIUS2 && player.connectionID != connectionID) {
                 Main.MAIN_SINGLETON.game.world.entityManager.disposeEntity(this);
             }
             

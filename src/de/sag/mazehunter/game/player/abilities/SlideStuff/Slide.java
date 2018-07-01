@@ -22,6 +22,7 @@ public class Slide extends Ability {
     
     @Override
     public void use(int connectionID, int direction) {
+        if (!canUse) {return;}
         int row = 0;
         
         switch (direction) {
@@ -38,7 +39,7 @@ public class Slide extends Ability {
         }
         
         row = Main.MAIN_SINGLETON.game.world.map.translateCoordinateToBlock(row);
-        Main.MAIN_SINGLETON.game.world.map.moveRow(row, direction);
+        Main.MAIN_SINGLETON.game.world.moveRow.moveRow(row, direction);
         Main.MAIN_SINGLETON.server.sendToAllTCP(new SlideResponse(direction, row));
         startCooldown();
     }

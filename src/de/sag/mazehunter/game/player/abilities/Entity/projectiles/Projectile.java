@@ -36,6 +36,7 @@ public abstract class Projectile extends AbilityEntity {
     
     private final Vector2 tmp1 = new Vector2();
     private final Vector2 tmp2 = new Vector2();
+    @Override
     public void update(float delta) {
         
         this.position.add(tmp1.set(velocity).scl(delta));

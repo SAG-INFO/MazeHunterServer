@@ -1,6 +1,13 @@
 package de.sag.mazehunter.server;
 
 import com.esotericsoftware.kryonet.Server;
+import de.sag.mazehunter.game.map.Block;
+import de.sag.mazehunter.game.map.Centerclosed;
+import de.sag.mazehunter.game.map.Centeropen;
+import de.sag.mazehunter.game.map.Corner;
+import de.sag.mazehunter.game.map.PathSide;
+import de.sag.mazehunter.game.map.PathUp;
+import de.sag.mazehunter.game.map.Tile;
 import de.sag.mazehunter.server.networkData.CanMoveUpdate;
 import de.sag.mazehunter.server.networkData.CanUseAbilitiesUpdate;
 import de.sag.mazehunter.server.networkData.ConnectResponse;
@@ -9,6 +16,7 @@ import de.sag.mazehunter.server.networkData.LobbyUpdate;
 import de.sag.mazehunter.server.networkData.MovementRequest;
 import de.sag.mazehunter.server.networkData.MovementResponse;
 import de.sag.mazehunter.server.networkData.PlayerLobby;
+import de.sag.mazehunter.server.networkData.PushMap;
 import de.sag.mazehunter.server.networkData.StartGameRequest;
 import de.sag.mazehunter.server.networkData.StartGameResponse;
 import de.sag.mazehunter.server.networkData.abilities.requests.AttackRequest;
@@ -62,6 +70,7 @@ public class GameServer extends Server{
         //general Stuff
         getKryo().register(Vector2.class);
         getKryo().register(ArrayList.class);
+        getKryo().register(boolean[].class);
         
         //Lobby Stuff
         getKryo().register(ConnectResponse.class);
@@ -69,6 +78,9 @@ public class GameServer extends Server{
         getKryo().register(LobbyUpdate.class);
         getKryo().register(StartGameRequest.class);
         getKryo().register(StartGameResponse.class);
+        
+        //World Stuff
+        getKryo().register(PushMap.class);
         
         //Movement Stuff
         getKryo().register(MovementRequest.class);

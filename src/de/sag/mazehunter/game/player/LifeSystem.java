@@ -23,14 +23,15 @@ public class LifeSystem {
         for(a = 0; a<4; a++) {
         if(player[a] == null)
             break;
-       
-        
         }
         
-        for(int i = 0; i<a; i++) {
+        
+        Vector2 tmp = new Vector2();
+        for(int i = 0; i < a; i++) {
             if (player[i] instanceof Player) {
                 for(int j = 0; j<a ; j++) {
-                    if (i!=j && player[j].mc.position.sub(player[i].mc.position).len() <= player[0].mc.size)
+                    tmp.set(player[j].mc.position);
+                    if (i!=j && tmp.sub(player[i].mc.position).len() <= player[0].mc.size)
                         return true;
                 }
             }

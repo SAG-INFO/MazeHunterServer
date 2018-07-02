@@ -6,14 +6,8 @@
 package de.sag.mazehunter.game.player;
 
 import de.sag.mazehunter.Main;
-import static de.sag.mazehunter.Main.MAIN_SINGLETON;
-import de.sag.mazehunter.game.Config;
 import de.sag.mazehunter.game.player.movement.MovementComponent;
 import de.sag.mazehunter.server.networkData.HealthUpdate;
-import de.sag.mazehunter.utils.MathUtils;
-import de.sag.mazehunter.utils.Vector2;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -52,7 +46,7 @@ public class Player {
     }
 
     public void update(float delta) {
-        System.out.println(mc.position.x + "   " + mc.position.y);
+        System.out.println("update: " + mc.position.x + "   " + mc.position.y);
         mc.updateMovement(delta);
     }
 }

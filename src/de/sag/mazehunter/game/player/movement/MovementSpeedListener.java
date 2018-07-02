@@ -20,6 +20,7 @@ public class MovementSpeedListener extends InputListener {
     @Override
     public void received(Connection connection, Object object) {
         if (object instanceof MovementSpeedRequest) {
+            System.out.println("movementspeedrequest");
             Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].mc.movementSpeedFactor += ((MovementSpeedRequest) object).change;
             Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].mc.speed = Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].mc.movementSpeedFactor * Config.DEFAULT_SPEED;
             Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].mc.setVelocity((int) Main.MAIN_SINGLETON.game.player[getIndex(connection.getID())].mc.requestedVelocity.angle(), true);

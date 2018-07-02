@@ -22,6 +22,7 @@ public class LobbySystem extends Listener{
         
         if(canJoin)
             joinPlayer(connection.getID());
+            System.out.println(connection.getID());
     }
     
     /**

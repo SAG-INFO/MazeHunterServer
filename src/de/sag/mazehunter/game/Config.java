@@ -22,7 +22,7 @@ import de.sag.mazehunter.server.networkData.configs.PushConfig;
 public class Config {
     
     //Player Stuff
-    public static int DEFAULT_SPEED = 50;
+    public static final int DEFAULT_SPEED = 50;
     
     //permanent ability Stuff
     public static final float DASH_COOLDOWN = 6f;

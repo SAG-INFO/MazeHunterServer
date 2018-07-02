@@ -37,7 +37,8 @@ public class MovementComponent {
         movementSpeedFactor = 1.0f;
         dashLength = 1.0f;
         speed = Config.DEFAULT_SPEED;
-        position = new Vector2((player.connectionID + 1)* 10, 35);
+        System.out.println(player.connectionID);
+        position = new Vector2((Math.abs(player.connectionID))*10, 35);
 
     }
 
@@ -58,6 +59,7 @@ public class MovementComponent {
         this.position.add(tmp.set(velocity).scl(delta));
         if (backupVelocity != this.velocity) {
             this.position.set(backupPosition);
+            System.out.println("velocity: " + velocity.toString());
             this.position.add(tmp.set(velocity).scl(delta));
         }
     }

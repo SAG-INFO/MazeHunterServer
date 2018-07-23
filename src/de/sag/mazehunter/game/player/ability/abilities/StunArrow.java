@@ -25,18 +25,18 @@ public class StunArrow extends ActiveAbility {
 
     @Override
     public void fire(Vector2 target) {
-        Player player = Main.MAIN_SINGLETON.game.getPlayer(playerId);
+        Player player = Main.MAIN_SINGLETON.game.getPlayer(connectionID);
 
         for (int i = -2; i < 3; i++) {
             int projectileID = Main.MAIN_SINGLETON.game.world.entityManager.getNewEntityID();
             float angle = calcAngle(target)+i*20;
             Vector2 velocity = new Vector2(Config.FIREBALL_SPEED, 0).setAngle(angle);
 
-            StunArrowEntity fireball = new StunArrowEntity(player.mc.position, playerId, projectileID);
+            StunArrowEntity fireball = new StunArrowEntity(player.mc.position, connectionID, projectileID);
             fireball.shoot(velocity);
             Main.MAIN_SINGLETON.game.world.entityManager.entities.add(fireball);
             
-            Main.MAIN_SINGLETON.server.sendToAllUDP(new StunArrowResponse(projectileID, playerId, velocity));
+            Main.MAIN_SINGLETON.server.sendToAllUDP(new StunArrowResponse(projectileID, connectionID, velocity));
         }
     }
 }

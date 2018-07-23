@@ -20,8 +20,11 @@ public class TrapEntity extends AbilityEntity{
 
     @Override
     protected void playerCollision(Player player) {
+        System.out.println("gegrgtrggtrgtr");
         Main.MAIN_SINGLETON.server.sendToAllTCP(new TrapShootResponse(player.connectionID, entityID));
         player.mc.slow(0, Config.TRAP_ROOTDURATION);
+        
+        Main.MAIN_SINGLETON.game.world.entityManager.disposeEntity(this);
     }
     
     public TrapEntity(Vector2 position, int entityID, int connectionID, int radius2) {

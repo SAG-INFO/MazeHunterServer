@@ -12,6 +12,7 @@ import de.sag.mazehunter.game.player.ability.abilities.Fireball;
 import de.sag.mazehunter.game.player.ability.abilities.SpeedBoost;
 import de.sag.mazehunter.game.player.ability.abilities.StunArrow;
 import de.sag.mazehunter.game.player.ability.abilities.Teleport;
+import de.sag.mazehunter.game.player.ability.abilities.Trap;
 
 /**
  *
@@ -38,6 +39,9 @@ public class FACTORY{
                 break;
             case "teleport":
                 nuAbility = new Teleport(id);
+                break;
+            case "trap":
+                nuAbility = new Trap(id);
                 break;
             default:
                 System.err.println("ability does not exist");

@@ -22,7 +22,7 @@ public class Teleport extends ActiveAbility{
 
     @Override
     protected void fire(Vector2 targetPosition) {
-        Player player = Main.MAIN_SINGLETON.game.getPlayer(playerId);
+        Player player = Main.MAIN_SINGLETON.game.getPlayer(connectionID);
         player.mc.setPosition(targetPosition);
         player.mc.forceMovementUpdate();
     }

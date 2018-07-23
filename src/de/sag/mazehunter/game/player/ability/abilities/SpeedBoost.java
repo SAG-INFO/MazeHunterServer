@@ -18,12 +18,12 @@ public class SpeedBoost extends ActiveAbility{
 
     @Override
     protected void fire(Vector2 targetPosition) {
-        Player p = Main.MAIN_SINGLETON.game.getPlayer(playerId);
+        Player p = Main.MAIN_SINGLETON.game.getPlayer(connectionID);
         p.mc.slow(1.6f, 10);
         p.mc.forceMovementUpdate();
         
         SpeedBoostResponse data = new SpeedBoostResponse();
-        data.playerId = playerId;
+        data.playerId = connectionID;
         Main.MAIN_SINGLETON.server.sendToAllTCP(data);
     }
 }

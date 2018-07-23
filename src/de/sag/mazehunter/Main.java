@@ -16,57 +16,63 @@ import java.util.logging.Logger;
 
 /**
  * Branch Test
+ *
  * @author sreis
  */
 public class Main {
 
     public static Main MAIN_SINGLETON;
-    
-    /**maximum framerate. -1 for unlimited FPS.*/
+
+    /**
+     * maximum framerate. -1 for unlimited FPS.
+     */
     private static float FPS_CAP = 60;
-    
+
     public final GameServer server;
-    public Game game; 
-    public Lobby lobby; 
+    public Game game;
+    public Lobby lobby;
     public PushConfig abilityConfig;
-    
+
     public int state = STATE_LOBBY;
     public static final int STATE_LOBBY = 1;
     public static final int STATE_INGAME = 2;
-    
+
     public Main() {
         MAIN_SINGLETON = this;
-        
+
         server = new GameServer();
-        
+
         lobby = new Lobby();
         game = new Game();
     }
-    
-    public void start(){
+
+    public void start() {
         server.startServer();
-        
+
         long last_time = System.nanoTime();
 
         while (true) {
             long time = System.nanoTime();
             float delta_time = ((time - last_time) / 1000000000f);
-            
-            if(FPS_CAP != -1 && delta_time < 1f/FPS_CAP)
+
+            if (FPS_CAP != -1 && delta_time < 1f / FPS_CAP) {
                 continue;
-            
+            }
+
             last_time = time;
             update(delta_time);
         }
     }
-    
-    public void update(float delta){
-        if(state == STATE_LOBBY)
+
+    public void update(float delta) {
+        if (state == STATE_LOBBY) {
             lobby.update(delta);
-        if(state == STATE_INGAME)
+        }
+        if (state == STATE_INGAME) {
             game.update(delta);
+        }
     }
-    
+
     public static void main(String[] args) {
         Main main = new Main();
         main.start();
@@ -74,24 +80,29 @@ public class Main {
 
     public void startGame() {
         this.state = STATE_INGAME;
-        StartGameResponse startInfo = new StartGameResponse();
-        this.server.sendToAllUDP(startInfo);
 
         game = new Game();
         game.start();
-        
-        
+
         Timer t = new Timer();
-        t.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                for (PlayerLobby player : lobby.players) {
-                    game.spawnPlayer(player.id, player.name, player.slot==0);
+        for (PlayerLobby player : lobby.players) {
+            game.spawnPlayer(player.id, player.name, player.slot == 0);
+            t.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    SpawnPlayer data = new SpawnPlayer();
+                    data.name = player.name;
+                    data.id = player.id;
+                    data.hunter = player.slot==0;
+                    data.position.set(70, 70);
+                    Main.MAIN_SINGLETON.server.sendToAllTCP(data);
                 }
-                lobby.players.clear();
-            }
-        }, 1000);
-        
+            }, 500);
+        }
+        lobby.players.clear();
+
+        StartGameResponse startInfo = new StartGameResponse();
+        this.server.sendToAllUDP(startInfo);
     }
 
     public void exitGame() {

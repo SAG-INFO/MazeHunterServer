@@ -25,11 +25,11 @@ public class Satan extends ActiveAbility{
     protected void fire(Vector2 targetPosition) {
         SatanResponse data = new SatanResponse();
         
-        SatanEntity entity = new SatanEntity(targetPosition, Main.MAIN_SINGLETON.game.world.entityManager.getNewEntityID(), playerId);
+        SatanEntity entity = new SatanEntity(targetPosition, Main.MAIN_SINGLETON.game.world.entityManager.getNewEntityID(), connectionID);
         Main.MAIN_SINGLETON.game.world.entityManager.entities.add(entity);
         
         data.position.set(targetPosition);
-        data.playerId = playerId;
+        data.playerId = connectionID;
         Main.MAIN_SINGLETON.server.sendToAllTCP(data);
     }
     

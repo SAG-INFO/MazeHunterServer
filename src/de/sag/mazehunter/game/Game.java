@@ -11,6 +11,8 @@ import de.sag.mazehunter.game.player.movement.MovementSpeedListener;
 
 import de.sag.mazehunter.server.networkData.SpawnPlayer;
 import java.util.Optional;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
@@ -28,15 +30,8 @@ public class Game {
     }
 
     public void spawnPlayer(int id, String name, boolean hunter) {
-        Player player = hunter?new Hunter(name, id):new Runner(name, id);
+        Player player = hunter ? new Hunter(name, id) : new Runner(name, id);
         players.add(player);
-        
-        SpawnPlayer data = new SpawnPlayer();
-        data.name = name;
-        data.id = id;
-        data.hunter = hunter;
-        data.position.set(70, 70);
-        Main.MAIN_SINGLETON.server.sendToAllTCP(data);
     }
 
     public void start() {

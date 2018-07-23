@@ -42,13 +42,13 @@ public abstract class ActiveAbility extends CooldownAbility{
     protected abstract void fire(Vector2 targetPosition);
     
     protected void dequip(){
-        Main.MAIN_SINGLETON.game.getPlayer(playerId).activeAbility = new NoAbility(playerId);
+        Main.MAIN_SINGLETON.game.getPlayer(connectionID).activeAbility = new NoAbility(connectionID);
     }
     
     private final Vector2 tmp = new Vector2();
     protected float calcAngle(Vector2 target){
         tmp.set(target);
-        tmp.sub(Main.MAIN_SINGLETON.game.getPlayer(playerId).mc.position);
+        tmp.sub(Main.MAIN_SINGLETON.game.getPlayer(connectionID).mc.position);
         return tmp.angle();
     }
 }

@@ -39,7 +39,7 @@ public class PickupManager {
     }
 
     /**
-     * @param position the position in Pixels where the pickup is goining to be
+     * @param position the position in Pixels where the pickup is going to be
      * placed
      * @param name the name of the Ability the Pickup represents. All lowercase,
      * dont mess with spelling
@@ -55,7 +55,6 @@ public class PickupManager {
         sp.blockX = block.getX();
         sp.blockY = block.getY();
 
-
         Main.MAIN_SINGLETON.server.sendToAllTCP(sp);
     }
 
@@ -64,7 +63,7 @@ public class PickupManager {
         checkSpawn(delta);
     }
 
-    private final String[] ailities = new String[]{"teleport", "fireball", "stunarrow", "speedboost"};
+    private final String[] ailities = new String[]{"trap"};
     public void checkSpawn(float delta) {
         timeSinceLastSpawn += delta;
         if (timeSinceLastSpawn < spawnRate || pickups.size() > 20) {

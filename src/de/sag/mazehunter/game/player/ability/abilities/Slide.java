@@ -38,7 +38,7 @@ public class Slide extends CooldownAbility{
     }
 
     private void moveStuff(int direction){
-        Vector2 playerPosition = Main.MAIN_SINGLETON.game.getPlayer(playerId).mc.position;
+        Vector2 playerPosition = Main.MAIN_SINGLETON.game.getPlayer(connectionID).mc.position;
 
         int row = 0;
         switch (direction) {

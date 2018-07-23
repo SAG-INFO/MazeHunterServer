@@ -13,10 +13,10 @@ public abstract class CooldownAbility {
     protected final float cooldown;
     protected float cooldownLeft;
 
-    public final int playerId;
+    public final int connectionID;
     
     public CooldownAbility(int playerId, float cooldown) {
-        this.playerId = playerId;
+        this.connectionID = playerId;
         this.cooldown = cooldown;
     }
     

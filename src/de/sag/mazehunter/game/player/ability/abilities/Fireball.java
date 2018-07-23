@@ -27,16 +27,16 @@ public class Fireball extends ActiveAbility {
     
     @Override
     public void fire(Vector2 target) {
-        Player player = Main.MAIN_SINGLETON.game.getPlayer(playerId);
+        Player player = Main.MAIN_SINGLETON.game.getPlayer(connectionID);
 
         int projectileID = Main.MAIN_SINGLETON.game.world.entityManager.getNewEntityID();
         float angle = calcAngle(target);
         Vector2 velocity = new Vector2(Config.FIREBALL_SPEED, 0).setAngle(angle);
 
-        FireballEntity fireball = new FireballEntity(player.mc.position, playerId, projectileID);
+        FireballEntity fireball = new FireballEntity(player.mc.position, connectionID, projectileID);
         fireball.shoot(velocity);
         Main.MAIN_SINGLETON.game.world.entityManager.entities.add(fireball);
 
-        Main.MAIN_SINGLETON.server.sendToAllUDP(new FireballResponse(projectileID, playerId, velocity));
+        Main.MAIN_SINGLETON.server.sendToAllUDP(new FireballResponse(projectileID, connectionID, velocity));
     }
 }

@@ -11,6 +11,8 @@ import de.sag.mazehunter.game.Config;
 import de.sag.mazehunter.game.player.Player;
 import de.sag.mazehunter.server.networkData.MovementResponse;
 import de.sag.mazehunter.utils.Vector2;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  *
@@ -25,10 +27,10 @@ public class MovementComponent {
     private final Vector2 backupVelocity = new Vector2();
     private final Vector2 requestedVelocity = new Vector2(0, 0);
 
+    public final float size = 12;
+    
     public float speed;
-    public final float size = 5;
-    public float movementSpeedFactor;
-    public float dashLength;
+    private float movementSpeedFactor;
 
     public final Vector2 tmp = new Vector2();
     public final Vector2 backupPosition = new Vector2();
@@ -38,7 +40,6 @@ public class MovementComponent {
     public MovementComponent(Player p) {
         this.player = p;
         movementSpeedFactor = 1.0f;
-        dashLength = 1.0f;
         speed = Config.DEFAULT_SPEED;
 
     }
@@ -59,7 +60,7 @@ public class MovementComponent {
         //send MovementUpdate id velocity has changed
         if(!lastVelocity.equals(velocity)){
             lastVelocity.set(velocity);
-            sendMovementUpdate();
+            forceMovementUpdate();
         }
     }
 
@@ -77,6 +78,18 @@ public class MovementComponent {
         return !MAIN_SINGLETON.game.world.map.talktoTile(p.x, p.y).open;
     }
 
+    Timer t = new Timer();
+    public void slow(float factor, float duration){
+        float previousMSF = movementSpeedFactor;
+        movementSpeedFactor = factor;
+        t.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                movementSpeedFactor = previousMSF;
+            }
+        }, (int)(duration*1000));
+    }
+    
     public void checkCollision() {
         int signX = Integer.signum((int) this.velocity.x);
         int signY = Integer.signum((int) this.velocity.y);
@@ -92,29 +105,29 @@ public class MovementComponent {
         Vector2 dir = new Vector2(0, 0);
         dir.set(requestedVelocity);
         dir.setLength(this.size);
-        for (int i = 0; i < 300; i++) {
+        for (int i = 0; i < 100; i++) {
             if (collides(position)) {
                 this.position.sub(dir);
                 break;
             }
             this.position.add(dir);
         }
-        sendMovementUpdate();
+        forceMovementUpdate();
     }
     
     public void setPosition(Vector2 p) {
         Vector2 dir = new Vector2(0, 0);
         dir.set(tmp.set(this.position).sub(p));
         this.position.set(p);
-        dir.setLength(dashLength);
+        dir.setLength(4);
         while (collides(position)) {
             this.position.add(tmp.set(dir));
         }
         this.position.add(tmp.setAngle(dir.angle()).setLength(this.size / 2));
-        sendMovementUpdate();
+        forceMovementUpdate();
     }
     
-    private void sendMovementUpdate(){
+    public void forceMovementUpdate(){
         MovementResponse mr = new MovementResponse(position, velocity, player.connectionID);
         Main.MAIN_SINGLETON.server.sendToAllUDP(mr);
     }

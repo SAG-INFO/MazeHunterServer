@@ -7,15 +7,8 @@ package de.sag.mazehunter.server.networkData.abilities.responses;
 
 /**
  *
- * @author Karl Huber
+ * @author arein
  */
-public class StandardHealResponse {
-    int id;
-
-    public StandardHealResponse(int id) {
-        this.id = id;
-    }
-
-    public StandardHealResponse() {
-    }
+public class SpeedBoostResponse {
+    public int playerId;
 }

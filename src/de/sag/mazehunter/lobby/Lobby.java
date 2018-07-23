@@ -1,7 +1,7 @@
 package de.sag.mazehunter.lobby;
 
 import de.sag.mazehunter.Main;
-import de.sag.mazehunter.server.networkData.PlayerLobby;
+import de.sag.mazehunter.server.networkData.lobby.PlayerLobby;
 import java.util.ArrayList;
 
 /**

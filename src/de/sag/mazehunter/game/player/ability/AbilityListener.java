@@ -20,11 +20,11 @@ public class AbilityListener extends Listener{
     @Override
     public void received(Connection connection, Object object) {
         if (object instanceof AttackRequest) {
-            Main.MAIN_SINGLETON.game.getPlayer(connection.getID()).ability.use(connection.getID(), ((AttackRequest) object).angle);
+            Main.MAIN_SINGLETON.game.getPlayer(connection.getID()).activeAbility.use(((AttackRequest) object).targetPosition);
         }else if(object instanceof MobilityRequest) {
-            Main.MAIN_SINGLETON.game.getPlayer(connection.getID()).dash.use(connection.getID());
+            Main.MAIN_SINGLETON.game.getPlayer(connection.getID()).dash.use();
         }else if(object instanceof SlideRequest) {
-            Main.MAIN_SINGLETON.game.getPlayer(connection.getID()).slide.use(connection.getID(), ((SlideRequest) object).direction);
+            Main.MAIN_SINGLETON.game.getPlayer(connection.getID()).slide.use(((SlideRequest) object).direction);
         }
     }
 }

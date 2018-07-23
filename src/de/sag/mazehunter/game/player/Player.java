@@ -5,13 +5,16 @@
  */
 package de.sag.mazehunter.game.player;
 
-import de.sag.mazehunter.Main;
-import de.sag.mazehunter.game.player.ability.Ability;
+import de.sag.mazehunter.game.player.ability.ActiveAbility;
 import de.sag.mazehunter.game.player.ability.abilities.Dash;
 import de.sag.mazehunter.game.player.ability.abilities.Fireball;
+import de.sag.mazehunter.game.player.ability.abilities.NoAbility;
+import de.sag.mazehunter.game.player.ability.abilities.Satan;
 import de.sag.mazehunter.game.player.ability.abilities.Slide;
+import de.sag.mazehunter.game.player.ability.abilities.SpeedBoost;
+import de.sag.mazehunter.game.player.ability.abilities.StunArrow;
+import de.sag.mazehunter.game.player.ability.abilities.Teleport;
 import de.sag.mazehunter.game.player.movement.MovementComponent;
-import de.sag.mazehunter.server.networkData.HealthUpdate;
 
 /**
  *
@@ -19,22 +22,31 @@ import de.sag.mazehunter.server.networkData.HealthUpdate;
  */
 public class Player {
 
+    public final String name;
     public int connectionID;
     
     public final MovementComponent mc;
     
-    public Ability ability = new Fireball(); 
-    public Ability slide = new Slide(); 
-    public Ability dash = new Dash(); 
+    public ActiveAbility activeAbility; 
+    public Slide slide; 
+    public Dash dash;
     
-    public Status status = new Status();
-
-    public Player(int id) {
-        connectionID = id;
+    public Player(String name, int id) {
+        this.name = name;
+        this.connectionID = id;
+        
+        activeAbility = new NoAbility(id);
+        slide = new Slide(id);
+        dash = new Dash(id);
+        
         mc = new MovementComponent(this);
     }
 
     public void update(float delta) {
         mc.update(delta);
+        
+        activeAbility.update(delta);
+        slide.update(delta);
+        dash.update(delta);
     }
 }

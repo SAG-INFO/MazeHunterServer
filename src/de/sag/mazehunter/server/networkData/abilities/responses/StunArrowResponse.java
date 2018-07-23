@@ -15,13 +15,11 @@ public class StunArrowResponse {
     public int projectileID;
     public int connectionID;
     public Vector2 velocity;
-    public float rotation;
 
-    public StunArrowResponse(int projectileID, int connectionID, Vector2 velocity, float rotation) {
+    public StunArrowResponse(int projectileID, int connectionID, Vector2 velocity) {
         this.projectileID = projectileID;
         this.connectionID = connectionID;
         this.velocity = velocity;
-        this.rotation = rotation;
     }
 
     public StunArrowResponse() {

@@ -8,61 +8,35 @@ package de.sag.mazehunter.game.player.ability.abilities;
 import de.sag.mazehunter.Main;
 import de.sag.mazehunter.game.Config;
 import de.sag.mazehunter.game.player.Player;
-import de.sag.mazehunter.game.player.ability.Ability;
-import de.sag.mazehunter.game.player.ability.entities.projectiles.FrostBoltEntity;
-import de.sag.mazehunter.server.networkData.abilities.responses.FrostBoltResponse;
+import de.sag.mazehunter.game.player.ability.ActiveAbility;
+import de.sag.mazehunter.game.player.ability.entities.projectiles.FireballEntity;
+import de.sag.mazehunter.server.networkData.abilities.responses.FireballResponse;
 import de.sag.mazehunter.utils.Vector2;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  *
- * @author Karl Huber 
- * 
+ * @author Karl Huber
+ *
  * SO NE GROSSE FEUERBALL JUNGE
  */
-public class Fireball extends Ability {
-    
-    public int charge;
-    public boolean canUse;
+public class Fireball extends ActiveAbility {
+
+    public Fireball(int playerID) {
+        super(playerID, 3, 2);
+    }
     
     @Override
-    public void use(int connectionID, float angle) {
-        
-        if (!canUse) {
-            return;
-        }
-        
-        Player player = Main.MAIN_SINGLETON.game.getPlayer(connectionID);
+    public void fire(Vector2 target) {
+        Player player = Main.MAIN_SINGLETON.game.getPlayer(playerId);
+
         int projectileID = Main.MAIN_SINGLETON.game.world.entityManager.getNewEntityID();
-        
-        Vector2 fVelocity = new Vector2(Config.FROSTBOLT_SPEED, 0);
-        fVelocity.setAngle(angle);
-        
+        float angle = calcAngle(target);
+        Vector2 velocity = new Vector2(Config.FIREBALL_SPEED, 0).setAngle(angle);
 
-        Main.MAIN_SINGLETON.game.world.entityManager.entities.add(new FrostBoltEntity(fVelocity, player.mc.position.cpy(), Config.FROSTBOLT_HITBOXRADIUS2, projectileID, connectionID));
-        Main.MAIN_SINGLETON.server.sendToAllUDP(new FrostBoltResponse(projectileID, connectionID, fVelocity.cpy(), angle));
-        
-        startCooldown();
-        
-        charge--;
-        if (charge == 0) {
-            player.ability = new NoAbility();
-        }
-    }
-        
-    public void startCooldown() {
-        canUse = false;
-        Timer t = new Timer();
-            t.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                canUse = true;
-            }}, (long) (Config.FROSTBOLT_CD_BETWEEN_USES));
-    }
+        FireballEntity fireball = new FireballEntity(player.mc.position, playerId, projectileID);
+        fireball.shoot(velocity);
+        Main.MAIN_SINGLETON.game.world.entityManager.entities.add(fireball);
 
-    public Fireball() {
-        charge = Config.FROSTBOLT_CHARGES;
-        canUse = true;
+        Main.MAIN_SINGLETON.server.sendToAllUDP(new FireballResponse(projectileID, playerId, velocity));
     }
 }

@@ -23,8 +23,6 @@ public class MovementSpeedListener extends Listener {
             int id = connection.getID();
             
             Player player = Main.MAIN_SINGLETON.game.getPlayer(id);
-            
-            player.mc.movementSpeedFactor *= ((MovementSpeedRequest) object).change; 
         }
     }
 }

@@ -7,7 +7,7 @@ package de.sag.mazehunter.game.player.ability.entities;
 
 import de.sag.mazehunter.Main;
 import de.sag.mazehunter.server.networkData.abilities.entity.DisposeEntity;
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  *
@@ -16,8 +16,7 @@ import java.util.ArrayList;
 public class EntityManager {
     
     private int entityID;
-    
-    public ArrayList<AbilityEntity> entities;
+    public CopyOnWriteArrayList<AbilityEntity> entities;
     
     public void disposeEntity(AbilityEntity e) {
         Main.MAIN_SINGLETON.server.sendToAllTCP(new DisposeEntity(e.entityID));
@@ -39,7 +38,7 @@ public class EntityManager {
     }
 
     public EntityManager() {
-        this.entities = new ArrayList<>();
+        this.entities = new CopyOnWriteArrayList <>();
     }
     
     public void update(float delta){

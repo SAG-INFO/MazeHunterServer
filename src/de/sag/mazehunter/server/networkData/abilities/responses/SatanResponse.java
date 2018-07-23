@@ -3,14 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.sag.mazehunter.server.networkData.abilities.requests;
+package de.sag.mazehunter.server.networkData.abilities.responses;
 
 import de.sag.mazehunter.utils.Vector2;
 
 /**
  *
- * @author Karl Huber
+ * @author arein
  */
-public class AttackRequest {
-    public final Vector2 targetPosition = new Vector2();
+public class SatanResponse {
+    public final Vector2 position = new Vector2();
+    public int playerId;
 }

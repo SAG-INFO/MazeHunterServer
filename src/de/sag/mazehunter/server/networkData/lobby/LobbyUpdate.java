@@ -1,4 +1,4 @@
-package de.sag.mazehunter.server.networkData;
+package de.sag.mazehunter.server.networkData.lobby;
 
 import java.util.ArrayList;
 
@@ -7,5 +7,5 @@ import java.util.ArrayList;
  * @author sreis
  */
 public class LobbyUpdate {
-    public ArrayList<PlayerLobby> players;
+    public ArrayList<PlayerLobby> nutten;
 }

@@ -8,7 +8,6 @@ package de.sag.mazehunter.game.player.ability.entities.projectiles;
 import de.sag.mazehunter.Main;
 import de.sag.mazehunter.game.Config;
 import de.sag.mazehunter.game.player.Player;
-import de.sag.mazehunter.server.networkData.abilities.responses.StunArrowShootResponse;
 import de.sag.mazehunter.utils.Vector2;
 
 /**
@@ -17,13 +16,13 @@ import de.sag.mazehunter.utils.Vector2;
  */
 public class StunArrowEntity extends Projectile {
     
-    @Override
-    public void shoot(Player player, int entityID) {
-        player.status.stun((new Vector2(startPosition.sub(position)).len())*Config.STUNARROW_GAIN_PER_PIXEL + Config.STUNARROW_BASE_STUN_DURATION, player.connectionID);
-        Main.MAIN_SINGLETON.server.sendToAllUDP(new StunArrowShootResponse(player.connectionID, entityID));
+    public StunArrowEntity(Vector2 position, int playerId, int connectionID) {
+        super(position, playerId, connectionID, Config.FIREBALL_HITBOXRADIUS2, Config.FIREBALL_MAXRANGE2);
     }
     
-    public StunArrowEntity(Vector2 velocity, Vector2 position, float radius, int id, int connectionID) {
-        super(velocity, position, radius, id, connectionID, Config.STUNARROW_MAXRANGE2);
+    @Override
+    protected void playerCollision(Player player) {
+        player.mc.slow(0.5f, 4);
+        Main.MAIN_SINGLETON.game.world.entityManager.disposeEntity(this);
     }
 }

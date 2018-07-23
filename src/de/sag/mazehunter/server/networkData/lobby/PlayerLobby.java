@@ -1,4 +1,4 @@
-package de.sag.mazehunter.server.networkData;
+package de.sag.mazehunter.server.networkData.lobby;
 
 /**
  *
@@ -8,6 +8,7 @@ public class PlayerLobby {
 
     public int id;
     public String name;
+    public int slot = -1;
     //TODO Fänger|läufer zeug hier rein!
     
     public PlayerLobby() {

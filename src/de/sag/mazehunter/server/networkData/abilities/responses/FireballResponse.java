@@ -15,13 +15,11 @@ public class FireballResponse {
     public int projectileID;
     public int connectionID;
     public Vector2 velocity;
-    public float rotation;
 
-    public FireballResponse(int projectileID, int connectionID, Vector2 velocity, float rotation) {
+    public FireballResponse(int projectileID, int connectionID, Vector2 velocity) {
         this.projectileID = projectileID;
         this.connectionID = connectionID;
         this.velocity = velocity;
-        this.rotation = rotation;
     }
 
     public FireballResponse() {

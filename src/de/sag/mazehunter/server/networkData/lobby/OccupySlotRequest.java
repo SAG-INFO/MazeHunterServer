@@ -3,16 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.sag.mazehunter.game.player;
+package de.sag.mazehunter.server.networkData.lobby;
 
 /**
  *
- * @author g.duennweber
+ * @author arein
  */
-public class Runner extends Player{
-    
-    public Runner(String name, int id) {
-        super(name, id);
-    }
-    
+public class OccupySlotRequest {
+    public int index;
 }

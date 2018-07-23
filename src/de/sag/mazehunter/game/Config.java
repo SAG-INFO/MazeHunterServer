@@ -20,15 +20,15 @@ import de.sag.mazehunter.server.networkData.configs.PushConfig;
 public class Config {
     
     //Game stuff
-    public static float PICKUP_HITBOXRADIUS2 = 100;
+    public static float PICKUP_HITBOXRADIUS2 = 1000;
     
     //Player Stuff
     public static int DEFAULT_SPEED = 150;
     public static float PLAYER_HITBOXRADIUS2 = 200;
     
     //permanent ability Stuff
-    public static final float DASH_COOLDOWN = 4000;
-    public static final int DASH_RANGE = 30;
+    public static final float DASH_COOLDOWN = 2;
+    public static final int DASH_RANGE = 90;
     
     public static final float SLIDE_COOLDOWN = 3;
     
@@ -43,22 +43,13 @@ public class Config {
     public static final float STANDARDHEAL_SPAWNRATE = 1.0f;
     public static final int STANDARDHEAL_TOTALHEAL = 100;
     
-    public static final int FROSTBOLT_DAMAGE = 10;
-    public static final int FROSTBOLT_SPEED = 1000;
-    public static final float FROSTBOLT_HITBOXRADIUS2 = 60;
-    public static final int FROSTBOLT_CHARGES = 3;
-    public static final float FROSTBOLT_SPAWNRATE = 1.0f;
-    public static final float FROSTBOLT_CD_BETWEEN_USES = 1;
-    public static final float FROSTBOLT_MAXRANGE2 = 100000;
-    public static final float FROSTBOLT_SLOW_AMOUNT = 0.3f;
-    
     public static final int FIREBALL_DAMAGE = 25;
-    public static final int FIREBALL_SPEED = 1000;
+    public static final int FIREBALL_SPEED = 300;
     public static final float FIREBALL_HITBOXRADIUS2 = 60;
     public static final int FIREBALL_CHARGES = 1;
     public static final float FIREBALL_SPAWNRATE = 1.0f;
     public static final float FIREBALL_CD_BETWEEN_USES = 1;
-    public static final float FIREBALL_MAXRANGE2 = 10000;
+    public static final int FIREBALL_MAXRANGE2 = 100000;
     
     public static final float STUNARROW_BASE_STUN_DURATION = 0.3f;
     public static final float STUNARROW_GAIN_PER_PIXEL = 0.003f;

@@ -6,184 +6,62 @@
 package de.sag.mazehunter.game.player.ability.abilities;
 
 import de.sag.mazehunter.Main;
+import static de.sag.mazehunter.Main.MAIN_SINGLETON;
 import de.sag.mazehunter.game.Config;
-import de.sag.mazehunter.game.map.Block;
 import de.sag.mazehunter.game.map.Map;
-import static de.sag.mazehunter.game.map.Map.blockWorldwidth;
-import de.sag.mazehunter.game.player.Player;
-import de.sag.mazehunter.game.player.ability.Ability;
+import de.sag.mazehunter.game.player.ability.CooldownAbility;
 import de.sag.mazehunter.server.networkData.abilities.responses.SlideResponse;
 import de.sag.mazehunter.utils.Vector2;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  *
  * @author karl.huber
  */
-public class Slide extends Ability {
+public class Slide extends CooldownAbility{
 
     protected boolean canUse;
-    private Map map;
-
-    public Slide() {
+    private final Map map;
+    
+    private static boolean slideInProgress;
+    
+    public Slide(int playerId) {
+        super(playerId, Config.SLIDE_COOLDOWN);
         canUse = true;
         map = Main.MAIN_SINGLETON.game.world.map;
     }
 
-    @Override
-    public void use(int connectionID, int direction) {
-        //only move Stuff after all clients showed the slide Animation
-        Timer t = new Timer();
-        t.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                moveStuff(connectionID, direction);
-            }
-        }, 1);
+    public void use(Integer direction) {
+        if(ready() && MAIN_SINGLETON.game.world.slideManager.canSlide()){
+            startCooldown();
+            moveStuff(direction);
+        }
     }
 
-    private void moveStuff(int connectionID, int direction){
-        int row = 0;
-        Vector2 playerPosition = Main.MAIN_SINGLETON.game.getPlayer(connectionID).mc.position;
+    private void moveStuff(int direction){
+        Vector2 playerPosition = Main.MAIN_SINGLETON.game.getPlayer(playerId).mc.position;
 
+        int row = 0;
         switch (direction) {
             case 1:
                 row = map.translateCoordinateToBlock(playerPosition.x);
-                moveRowUp(row);
-                doRowY(row, direction);
+                MAIN_SINGLETON.game.world.slideManager.moveRowUp(row);
                 break;
             case 2:
                 row = map.translateCoordinateToBlock(playerPosition.y);
-                moveRowRight(row);
-                doRowX(row, direction);
+                MAIN_SINGLETON.game.world.slideManager.moveRowRight(row);
                 break;
             case 3:
                 row = map.translateCoordinateToBlock(playerPosition.x);
-                moveRowDown(row);
-                doRowY(row, direction);
+                MAIN_SINGLETON.game.world.slideManager.moveRowDown(row);
                 break;
             case 4:
                 row = map.translateCoordinateToBlock(playerPosition.y);
-                moveRowLeft(row);
-                doRowX(row, direction);
+                MAIN_SINGLETON.game.world.slideManager.moveRowLeft(row);
                 break;
             default:
                 throw new RuntimeException("direction is bullshit");
         }
 
         Main.MAIN_SINGLETON.server.sendToAllTCP(new SlideResponse(direction, row));
-        startCooldown();
-    }
-    
-    @Override
-    public void startCooldown() {
-
-        canUse = false;
-
-        Timer t = new Timer();
-        t.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                canUse = true;
-            }
-        }, (long) Config.SLIDE_COOLDOWN);
-    }
-
-    private void moveRowRight(int k) {
-        Block in = map.blocklist[blockWorldwidth - 1][k];
-        Block out = in.clone();
-
-        in.setPosition(-1, in.getY());
-        in.setPosition(0, in.getY());
-
-        out.setPosition(blockWorldwidth - 1, out.getY());
-        out.setPosition(blockWorldwidth, out.getY());
-
-        for (int i = blockWorldwidth - 2; i >= 0; i--) {
-            Block block = map.blocklist[i][k];
-            block.setPosition(block.getX() + 1, block.getY());
-            map.blocklist[i + 1][k] = map.blocklist[i][k];
-        }
-
-        map.blocklist[0][k] = in;
-    }
-
-    private void moveRowLeft(int k) {
-        Block in = map.blocklist[0][k];
-        Block out = in.clone();
-
-        in.setPosition(blockWorldwidth, k);
-        in.setPosition(blockWorldwidth - 1, in.getY());
-
-        out.setPosition(0, out.getY());
-        out.setPosition(- 1, out.getY());
-
-        for (int i = 1; i < blockWorldwidth; i++) {
-            Block block = map.blocklist[i][k];
-            block.setPosition(block.getX() - 1, block.getY());
-            map.blocklist[i - 1][k] = map.blocklist[i][k];
-        }
-        map.blocklist[blockWorldwidth - 1][k] = in;
-    }
-
-    private void moveRowUp(int k) {
-        Block in = map.blocklist[k][blockWorldwidth - 1];
-        Block out = in.clone();
-
-        in.setPosition(k, -1);
-        in.setPosition(in.getX(), 0);
-
-        out.setPosition(out.getX(), blockWorldwidth - 1);
-        out.setPosition(out.getX(), blockWorldwidth);
-
-        for (int i = blockWorldwidth - 2; i >= 0; i--) {
-            Block block = map.blocklist[k][i];
-            block.setPosition(block.getX(), block.getY() + 1);
-            map.blocklist[k][i + 1] = block;
-        }
-        map.blocklist[k][0] = in;
-    }
-
-    private void moveRowDown(int k) {
-        Block in = map.blocklist[k][0];
-        Block out = in.clone();
-
-        in.setPosition(k, blockWorldwidth);
-        in.setPosition(in.getX(), blockWorldwidth - 1);
-
-        out.setPosition(out.getX(), 0);
-        out.setPosition(out.getX(), - 1);
-
-        for (int i = 1; i < blockWorldwidth; i++) {
-            Block block = map.blocklist[k][i];
-            block.setPosition(block.getX(), block.getY() - 1);
-            map.blocklist[k][i - 1] = block;
-        }
-        map.blocklist[k][blockWorldwidth - 1] = in;
-    }
-
-    private void doRowX(int row, int direction) {
-        for (Player p : Main.MAIN_SINGLETON.game.players) {
-            if (map.translateCoordinateToBlock(p.mc.position.y) == row) {
-                stopMovement(p);
-                p.mc.position.x = map.boundPosition(p.mc.position.x + (Map.blockbreite * (direction == 2 ? 1 : -1)));
-            }
-        }
-    }
-    private void doRowY(int row, int direction) {
-        for (Player p : Main.MAIN_SINGLETON.game.players) {
-            if (map.translateCoordinateToBlock(p.mc.position.x) == row) {
-                stopMovement(p);
-                p.mc.position.y = map.boundPosition(p.mc.position.y + (Map.blockbreite * (direction == 1 ? 1 : -1)));
-            }
-        }
-    }
-
-    /**
-     * TODO: Replace by Stun, when we have an actual CC-System
-     */
-    private void stopMovement(Player player) {
-//        player.status.stun(1, player.connectionID);
     }
 }

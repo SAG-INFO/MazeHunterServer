@@ -5,7 +5,8 @@ import de.sag.mazehunter.game.Game;
 import de.sag.mazehunter.game.player.Player;
 import de.sag.mazehunter.lobby.Lobby;
 import de.sag.mazehunter.server.networkData.Gameover;
-import de.sag.mazehunter.server.networkData.PlayerLobby;
+import de.sag.mazehunter.server.networkData.SpawnPlayer;
+import de.sag.mazehunter.server.networkData.lobby.PlayerLobby;
 import de.sag.mazehunter.server.networkData.StartGameResponse;
 import de.sag.mazehunter.server.networkData.configs.PushConfig;
 import java.util.Timer;
@@ -79,9 +80,18 @@ public class Main {
         game = new Game();
         game.start();
         
-        for (PlayerLobby player : lobby.players) {
-            game.players.add(new Player(player.id));
-        }
+        
+        Timer t = new Timer();
+        t.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                for (PlayerLobby player : lobby.players) {
+                    game.spawnPlayer(player.id, player.name, player.slot==0);
+                }
+                lobby.players.clear();
+            }
+        }, 1000);
+        
     }
 
     public void exitGame() {

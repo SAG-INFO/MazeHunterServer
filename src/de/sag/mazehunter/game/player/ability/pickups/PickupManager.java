@@ -14,8 +14,6 @@ import de.sag.mazehunter.utils.MathUtils;
 import de.sag.mazehunter.utils.Vector2;
 import java.util.ArrayList;
 import java.util.Optional;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  *
@@ -31,7 +29,7 @@ public class PickupManager {
 
     private float timeSinceLastSpawn;
     private float spawnRate = 1;
-    
+
     private final FACTORY abilityFactory;
 
     public PickupManager() {
@@ -55,7 +53,6 @@ public class PickupManager {
         sp.blockX = block.getX();
         sp.blockY = block.getY();
 
-
         Main.MAIN_SINGLETON.server.sendToAllTCP(sp);
     }
 
@@ -65,6 +62,7 @@ public class PickupManager {
     }
 
     private final String[] ailities = new String[]{"teleport", "fireball", "stunarrow", "speedboost"};
+
     public void checkSpawn(float delta) {
         timeSinceLastSpawn += delta;
         if (timeSinceLastSpawn < spawnRate || pickups.size() > 20) {
@@ -73,24 +71,34 @@ public class PickupManager {
 
         timeSinceLastSpawn = 0;
 
-        String name = ailities[(int)MathUtils.random(0, ailities.length-1)];
+        String name = ailities[(int) MathUtils.random(0, ailities.length - 1)];
         spawnPickup(getRandomBlock(), name);
     }
 
     public void checkCollision() {
         for (Player player : Main.MAIN_SINGLETON.game.players) {
-            Optional<AbilityPickup> pickup = pickups.stream().filter((p) -> (tmpVec.set(player.mc.position).sub(p.position).len2() < Config.PICKUP_HITBOXRADIUS2)).findFirst();
-            if (pickup.isPresent()) {
-                equipAbility(player, pickup.get());
+//            Optional<AbilityPickup> pickup = pickups.stream().filter((p) -> (tmpVec.set(player.mc.position).sub(p.position).len2() < Config.PICKUP_HITBOXRADIUS2)).findFirst();
+//            if (pickup.isPresent()) {
+//                equipAbility(player, pickup.get());
+//            }
+            AbilityPickup p = null;
+            for (AbilityPickup pickup : pickups) {
+                if (tmpVec.set(player.mc.position).sub(pickup.position).len2() < Config.PICKUP_HITBOXRADIUS2) {
+                    p = pickup;
+                }
+            }
+            if (p != null) {
+                equipAbility(player, p);
             }
         }
     }
 
     private void equipAbility(Player player, AbilityPickup pickup) {
-        if(!(player.activeAbility instanceof NoAbility))
+        if (!(player.activeAbility instanceof NoAbility)) {
             return;
-        
-        System.out.println("equip:"+pickup.abilityName);
+        }
+
+        System.out.println("equip:" + pickup.abilityName);
         disposePickup(pickup);
         abilityFactory.equipAbility(pickup.abilityName, player.connectionID);
 
@@ -102,7 +110,6 @@ public class PickupManager {
 
     private void disposePickup(AbilityPickup pickup) {
         pickups.remove(pickup);
-
 
         DisposePickup dp = new DisposePickup();
         dp.id = pickup.id;

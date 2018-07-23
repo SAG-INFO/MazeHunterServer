@@ -5,6 +5,8 @@
  */
 package de.sag.mazehunter.game.map;
 
+import de.sag.mazehunter.game.player.ability.pickups.AbilityPickup;
+
 /**
  *
  * @author heftigster.guy.na
@@ -48,7 +50,7 @@ public class Block {
     public int getPixelX() {
         return indexX * Map.blockbreite;
     }
-    
+
     public int getPixelY() {
         return indexY * Map.blockbreite;
     }
@@ -56,11 +58,11 @@ public class Block {
     public int getX() {
         return indexX;
     }
-    
+
     public int getY() {
         return indexY;
     }
-    
+
     public void setPosition(int x, int y) {
         this.indexX = x;
         this.indexY = y;
@@ -68,6 +70,10 @@ public class Block {
             for (int j = 0; j < 3; j++) {
                 tilelist[i][j].setPosition();
             }
+        }
+        AbilityPickup p = ((Centeropen) tilelist[1][1]).pickup;
+        if (p != null) {
+            p.position.set(tilelist[1][1].getPixelX() + Map.center / 2, tilelist[1][1].getPixelY() + Map.center / 2);
         }
     }
 

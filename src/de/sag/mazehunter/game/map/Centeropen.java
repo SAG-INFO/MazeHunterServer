@@ -23,7 +23,9 @@ public class Centeropen extends Tile {
     @Override
     public void setPosition() {
         super.setPosition();
-        if(pickup != null)
-            pickup.position.set(getPixelX()*Map.center/2, getPixelY()+Map.center/2);
+//        if(pickup != null){
+//            pickup.position.set(getPixelX()*Map.center/2, getPixelY()+Map.center/2);
+//            System.out.println("moveed to"+pickup.position);
+//        }
     }
 }

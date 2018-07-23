@@ -75,7 +75,12 @@ public class MovementComponent {
     }
 
     private boolean collides(Vector2 p) {
-        return !MAIN_SINGLETON.game.world.map.talktoTile(p.x, p.y).open;
+        if(!MAIN_SINGLETON.game.world.map.talktoTile(p.x, p.y).open || p.x > MAIN_SINGLETON.game.world.map.coordinateWorldwidth || p.y > MAIN_SINGLETON.game.world.map.coordinateWorldwidth || p.x < 0 || p.y < 0)
+        {
+        return true;
+        }
+        else
+            return false;
     }
 
     Timer t = new Timer();
